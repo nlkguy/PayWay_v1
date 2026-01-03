@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Update – UniBank</title>
+
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+<div class="form-wrapper">
+
+    <h2>Customer Details Update</h2>
+    <p class="subtitle">Search and modify existing customer record</p>
+
+    <!-- 🔍 SEARCH SECTION -->
+    <div class="search-row">
+
+    <input class="input-field" id="searchCustId" placeholder="C123456" style="max-width:300px;">
+
+    <button onclick="searchCustomer()">Search</button>
+
+</div>
+
+
+    <hr style="margin:18px 0; opacity:.3;">
+
+    <!-- ✍️ UPDATE FORM -->
+    <div id="updateSection" style="display:none;">
+
+        <div class="grid-2">
+
+            <div>
+                <label>First Name</label>
+                <input class="input-field" id="upFname">
+            </div>
+
+            <div>
+                <label>Last Name</label>
+                <input class="input-field" id="upLname">
+            </div>
+
+            <div>
+                <label>Email</label>
+                <input class="input-field" id="upEmail">
+            </div>
+
+            <div>
+                <label>Contact Number</label>
+                <input class="input-field" id="upPhone">
+            </div>
+
+            <div class="full">
+                <label>Address</label>
+                <input class="input-field" id="upAddress">
+            </div>
+
+        </div>
+
+        <div class="center">
+            <button onclick="updateCustomer()">Update Customer</button>
+        </div>
+
+        <div id="updateMsg" class="success">
+            🎉 Customer Update Successful
+        </div>
+
+    </div>
+
+    <p class="center" style="margin-top:10px;">
+        <a href="dashboard.html">⬅ Back to Dashboard</a>
+    </p>
+
+</div>
+
+<script src="assets/script.js"></script>
+
+</body>
+</html>

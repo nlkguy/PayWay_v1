@@ -9,11 +9,12 @@
 /* Background gradient */
 body{
   min-height:100vh;
-  background:linear-gradient(135deg,#0c0f35,#121f6b,#1b2b8c);
+  background: linear-gradient(135deg,#0c0f35,#121f6b,#1b2b8c);
   display:flex;
   justify-content:center;
-  padding:40px 0;
+  align-items:center;   /* ⭐ this centers vertically */
 }
+
 
 /* ================= MAIN CARD ================== */
 .form-wrapper{
@@ -140,3 +141,10 @@ button:hover{
   }
 }
 
+.search-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  margin-top:10px;
+}

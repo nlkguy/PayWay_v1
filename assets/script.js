@@ -100,3 +100,187 @@ function registerEmployee(){
         window.location.href = "index.html";
     }, 1500);
 }
+/* =========================
+   CUSTOMER CREATION (US003)
+   ========================= */
+
+// Auto generate customer ID
+if(document.getElementById("custId")){
+    document.getElementById("custId").value =
+        "C" + Math.floor(100000 + Math.random() * 900000);
+}
+
+function createCustomer(){
+
+    let ssn = document.getElementById("ssn").value.trim();
+    let cid = document.getElementById("custId").value.trim();
+    let fn = document.getElementById("fname").value.trim();
+    let ln = document.getElementById("lname").value.trim();
+    let dob = document.getElementById("dob").value;
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let aadhaar = document.getElementById("aadhaar").value.trim();
+    let pan = document.getElementById("pan").value.trim();
+    let bal = document.getElementById("balance").value.trim();
+    let addr = document.getElementById("address").value.trim();
+    let accType = document.getElementById("accType").value;
+
+    // Required check
+    if(!ssn || !fn || !ln || !dob || !email || !phone || !aadhaar || !pan || !bal || !addr || !accType){
+        alert("All fields are mandatory");
+        return;
+    }
+
+    // SSN numeric
+    if(isNaN(ssn)){
+        alert("SSN must be numeric");
+        return;
+    }
+
+    // Phone validation
+    if(isNaN(phone) || phone.length !== 10){
+        alert("Contact Number must be 10 digits");
+        return;
+    }
+
+    // Aadhaar validation
+    if(isNaN(aadhaar) || aadhaar.length !== 12){
+        alert("Aadhaar must be 12 digits");
+        return;
+    }
+
+    // PAN validation
+    if(pan.length !== 10){
+        alert("PAN must be 10 characters");
+        return;
+    }
+
+    // Email validation
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailPattern.test(email)){
+        alert("Enter valid Email");
+        return;
+    }
+
+    // Show success
+    let msg = document.getElementById("custMsg");
+    msg.innerText = "Customer Creation Successful";
+    msg.style.display = "block";
+
+    // Redirect
+    setTimeout(()=>{
+        window.location.href = "dashboard.html";
+    },1400);
+}
+/* =========================
+   CUSTOMER UPDATE (US004)
+   ========================= */
+
+// Fake example data (UI only)
+let demoCustomer = {
+    id: "C123456",
+    fname: "Rahul",
+    lname: "Sharma",
+    email: "rahul@mail.com",
+    phone: "9876543210",
+    address: "Mumbai"
+};
+
+function searchCustomer(){
+
+    let id = document.getElementById("searchCustId").value.trim();
+
+    if(id === ""){
+        alert("Enter Customer ID");
+        return;
+    }
+
+    // Simulated search result
+    if(id !== demoCustomer.id){
+        alert("Customer not found (demo search only)");
+        return;
+    }
+
+    // Show update form
+    document.getElementById("updateSection").style.display = "block";
+
+    // Fill demo values
+    document.getElementById("upFname").value = demoCustomer.fname;
+    document.getElementById("upLname").value = demoCustomer.lname;
+    document.getElementById("upEmail").value = demoCustomer.email;
+    document.getElementById("upPhone").value = demoCustomer.phone;
+    document.getElementById("upAddress").value = demoCustomer.address;
+}
+
+function updateCustomer(){
+
+    let fn = document.getElementById("upFname").value.trim();
+    let ln = document.getElementById("upLname").value.trim();
+    let email = document.getElementById("upEmail").value.trim();
+    let phone = document.getElementById("upPhone").value.trim();
+    let addr = document.getElementById("upAddress").value.trim();
+
+    if(!fn || !ln || !email || !phone || !addr){
+        alert("All fields are required");
+        return;
+    }
+
+    if(isNaN(phone) || phone.length !== 10){
+        alert("Phone must be 10 digits");
+        return;
+    }
+
+    let msg = document.getElementById("updateMsg");
+    msg.style.display = "block";
+
+    setTimeout(()=>{
+        window.location.href = "dashboard.html";
+    },1400);
+}
+/* =========================
+   CUSTOMER DELETE (US005)
+   ========================= */
+
+// demo hardcoded customer
+let deleteDemo = {
+    id: "C123456",
+    name: "Rahul Sharma",
+    email: "rahul@mail.com",
+    phone: "9876543210"
+};
+
+function findCustomer(){
+
+    let id = document.getElementById("delCustId").value.trim();
+
+    if(id === ""){
+        alert("Enter Customer ID");
+        return;
+    }
+
+    if(id !== deleteDemo.id){
+        alert("Customer not found (demo only)");
+        return;
+    }
+
+    // show summary box
+    document.getElementById("customerSummary").style.display = "block";
+
+    document.getElementById("sumName").innerText = deleteDemo.name;
+    document.getElementById("sumEmail").innerText = deleteDemo.email;
+    document.getElementById("sumPhone").innerText = deleteDemo.phone;
+}
+
+function deleteCustomer(){
+
+    if(!confirm("Are you sure you want to delete this customer?")){
+        return;
+    }
+
+    let msg = document.getElementById("deleteMsg");
+    msg.style.display = "block";
+
+    setTimeout(()=>{
+        window.location.href = "dashboard.html";
+    },1400);
+}

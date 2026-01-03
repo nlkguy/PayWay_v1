@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Creation – PayWay Solutions</title>
+
+    <link rel="stylesheet" href="assets/style.css">
+
+</head>
+
+<body>
+
+<div class="form-wrapper">
+
+    <h2>Customer Creation</h2>
+    <p class="subtitle">Create a new bank customer record</p>
+
+    <div class="grid-2">
+
+        <div>
+            <label>SSN ID</label>
+            <input class="input-field" id="ssn" placeholder="Enter SSN ID">
+        </div>
+
+        <div>
+            <label>Customer ID (Auto Generated)</label>
+            <input class="input-field" id="custId" readonly>
+        </div>
+
+        <div>
+            <label>First Name</label>
+            <input class="input-field" id="fname" placeholder="Enter first name">
+        </div>
+
+        <div>
+            <label>Last Name</label>
+            <input class="input-field" id="lname" placeholder="Enter last name">
+        </div>
+
+        <div>
+            <label>Date of Birth</label>
+            <input class="input-field" type="date" id="dob">
+        </div>
+
+        <div>
+            <label>Account Type</label>
+            <select class="input-field" id="accType">
+                <option value="">Select</option>
+                <option>Savings</option>
+                <option>Current</option>
+            </select>
+        </div>
+
+        <div class="full">
+            <label>Address</label>
+            <input class="input-field" id="address" placeholder="House / Street / City">
+        </div>
+
+        <div>
+            <label>Email</label>
+            <input class="input-field" id="email" placeholder="example@mail.com">
+        </div>
+
+        <div>
+            <label>Contact Number</label>
+            <input class="input-field" id="phone" maxlength="10" placeholder="10 digit number">
+        </div>
+
+        <div>
+            <label>Aadhaar Number</label>
+            <input class="input-field" id="aadhaar" maxlength="12" placeholder="12 digit Aadhaar">
+        </div>
+
+        <div>
+            <label>PAN Number</label>
+            <input class="input-field" id="pan" maxlength="10" placeholder="ABCDE1234F">
+        </div>
+
+        <div>
+            <label>Initial Balance</label>
+            <input class="input-field" id="balance" placeholder="Amount">
+        </div>
+
+    </div>
+
+    <div class="center">
+        <button onclick="createCustomer()">Create Customer</button>
+    </div>
+
+    <div id="custMsg" class="success">
+        🎉 Customer Created Successfully
+    </div>
+
+    <p class="center" style="margin-top:10px;">
+        <a href="dashboard.html">⬅ Back to Dashboard</a>
+    </p>
+
+</div>
+
+<script src="assets/script.js"></script>
+
+</body>
+</html>
