@@ -1,0 +1,142 @@
+/* ================= GLOBAL ================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* Background gradient */
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#0c0f35,#121f6b,#1b2b8c);
+  display:flex;
+  justify-content:center;
+  padding:40px 0;
+}
+
+/* ================= MAIN CARD ================== */
+.form-wrapper{
+  width:95%;
+  max-width:900px;
+  background:white;
+  border-radius:20px;
+  padding:35px 45px;
+  box-shadow:0 25px 60px rgba(0,0,0,.30);
+}
+
+/* Accent strip */
+.form-wrapper::before{
+  content:'';
+  display:block;
+  width:100%;
+  height:6px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#5b3bff,#ff00c8);
+  margin-bottom:18px;
+}
+
+/* Title */
+.form-wrapper h2{
+  text-align:center;
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:12px;
+  color:#0c074f;
+}
+
+/* Subtext */
+.subtitle{
+  text-align:center;
+  font-size:13px;
+  color:#666;
+  margin-bottom:18px;
+}
+
+/* ================= GRID LAYOUT ================== */
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px 25px;
+}
+
+/* full-row items */
+.full{
+  grid-column:span 2;
+}
+
+/* ================= LABELS ================== */
+label{
+  font-size:13px;
+  font-weight:600;
+  color:#111;
+  margin-bottom:6px;
+  display:block;
+}
+
+/* ================= INPUTS ================== */
+.input-field{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1.5px solid #dad8ff;
+  background:#fafaff;
+  outline:none;
+  transition:.25s;
+}
+
+/* focus effect */
+.input-field:focus{
+  border-color:#6a3bff;
+  box-shadow:0 0 0 3px #d7ceff88;
+  background:white;
+}
+
+/* ================= BUTTON ================== */
+.center{
+  text-align:center;
+  margin-top:10px;
+}
+
+button{
+  padding:12px 36px;
+  border-radius:25px;
+  border:none;
+  background:linear-gradient(135deg,#5b3bff,#ff00c8);
+  color:white;
+  font-weight:600;
+  letter-spacing:.4px;
+  cursor:pointer;
+  box-shadow:0 15px 30px rgba(0,0,0,.25);
+  transition:.25s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 20px 35px rgba(0,0,0,.35);
+}
+
+/* ================= SUCCESS MESSAGE ================== */
+.success{
+  margin-top:16px;
+  background:#eaffe9;
+  color:#067b32;
+  padding:12px 14px;
+  border-radius:12px;
+  text-align:center;
+  display:none;
+  animation:pop .3s ease-in-out;
+}
+
+@keyframes pop{
+  from{transform:scale(.8);opacity:.3;}
+  to{transform:scale(1);opacity:1;}
+}
+
+/* ================= MOBILE RESPONSIVE ================== */
+@media(max-width:760px){
+  .grid-2{
+    grid-template-columns:1fr;
+  }
+}
+
