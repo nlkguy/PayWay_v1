@@ -1,6 +1,4 @@
-/* =========================
-   EMPLOYEE LOGIN  (US002)
-   ========================= */
+/*  EMPLOYEE LOGIN  */
 
 function login() {
 
@@ -20,16 +18,14 @@ function login() {
         msg.style.display = "block";
     }
 
-    // redirect to a dummy dashboard
+    // redirect to a dashboard
     setTimeout(() => {
         window.location.href = "dashboard.html";
     }, 1200);
 }
 
 
-/* =========================
-   EMPLOYEE REGISTRATION (US001)
-   ========================= */
+/* EMPLOYEE REGISTRATION */
 
 // auto-generate 7 digit employee ID
 window.onload = function(){
@@ -100,9 +96,7 @@ function registerEmployee(){
         window.location.href = "index.html";
     }, 1500);
 }
-/* =========================
-   CUSTOMER CREATION (US003)
-   ========================= */
+/* CUSTOMER CREATION  */
 
 // Auto generate customer ID
 if(document.getElementById("custId")){
@@ -172,9 +166,7 @@ function createCustomer(){
         window.location.href = "dashboard.html";
     },1400);
 }
-/* =========================
-   CUSTOMER UPDATE (US004)
-   ========================= */
+/* CUSTOMER UPDATE  */
 
 // Fake example data (UI only)
 let demoCustomer = {
@@ -237,9 +229,7 @@ function updateCustomer(){
         window.location.href = "dashboard.html";
     },1400);
 }
-/* =========================
-   CUSTOMER DELETE (US005)
-   ========================= */
+/* CUSTOMER DELETE  */
 
 // demo hardcoded customer
 let deleteDemo = {
@@ -282,5 +272,165 @@ function deleteCustomer(){
 
     setTimeout(()=>{
         window.location.href = "dashboard.html";
+    },1400);
+}
+
+/* TRANSACTION PROCESSING  */
+
+function submitTransaction(){
+
+    let txnId = document.getElementById("txnId").value.trim();
+    let ssn = document.getElementById("ssn").value.trim();
+    let name = document.getElementById("custName").value.trim();
+    let acc = document.getElementById("accId").value.trim();
+    let aadhaar = document.getElementById("aadhaar").value.trim();
+    let pan = document.getElementById("pan").value.trim();
+    let addr = document.getElementById("address").value.trim();
+    let date = document.getElementById("date").value;
+    let phone = document.getElementById("phone").value.trim();
+    let mode = document.getElementById("mode").value;
+    let amt = document.getElementById("amount").value.trim();
+    let type = document.getElementById("type").value;
+
+    if(!txnId || !ssn || !name || !acc || !aadhaar || !pan || !addr || !date || !phone || !mode || !amt || !type){
+        alert("All fields are mandatory");
+        return;
+    }
+
+    if(isNaN(phone) || phone.length !== 10){
+        alert("Contact number must be 10 digits");
+        return;
+    }
+
+    if(isNaN(aadhaar) || aadhaar.length !== 12){
+        alert("Aadhaar must be 12 digits");
+        return;
+    }
+
+    if(isNaN(amt) || amt <= 0){
+        alert("Enter valid transaction amount");
+        return;
+    }
+
+    let msg = document.getElementById("txnMsg");
+    msg.innerText = "Transaction Successful";
+    msg.style.display = "block";
+
+    setTimeout(()=>{
+        window.location.href = "dashboard.html";
+    },1400);
+}
+/* LOAN REQUEST  */
+
+function submitLoan(){
+
+    let ssn = document.getElementById("loanSSN").value.trim();
+    let name = document.getElementById("loanName").value.trim();
+    let occ = document.getElementById("occupation").value.trim();
+    let emp = document.getElementById("employer").value.trim();
+    let empAddr = document.getElementById("empAddress").value.trim();
+    let email = document.getElementById("loanEmail").value.trim();
+    let marital = document.getElementById("marital").value;
+    let phone = document.getElementById("loanPhone").value.trim();
+    let amt = document.getElementById("loanAmount").value.trim();
+    let dur = document.getElementById("loanDuration").value.trim();
+    let addr = document.getElementById("custAddress").value.trim();
+
+    if(!ssn || !name || !occ || !emp || !empAddr || !email || !marital || !phone || !amt || !dur || !addr){
+        alert("All fields are mandatory");
+        return;
+    }
+
+    if(isNaN(phone) || phone.length !== 10){
+        alert("Contact number must be 10 digits");
+        return;
+    }
+
+    if(isNaN(amt) || amt <= 0){
+        alert("Enter valid loan amount");
+        return;
+    }
+
+    let msg = document.getElementById("loanMsg");
+    msg.style.display = "block";
+
+    setTimeout(()=>{
+        window.location.href = "dashboard.html";
+    },1400);
+}
+/* =========================
+   LOAN UPDATE / CANCEL (US008)
+   ========================= */
+
+// Demo loan data
+let demoLoan = {
+    ssn: "123456789",
+    name: "Rahul Sharma",
+    amount: "500000",
+    duration: "5",
+    phone: "9876543210",
+    email: "rahul@mail.com"
+};
+
+function searchLoan(){
+
+    let ssn = document.getElementById("loanSearchSSN").value.trim();
+
+    if(ssn === ""){
+        alert("Enter Customer SSN ID");
+        return;
+    }
+
+    if(ssn !== demoLoan.ssn){
+        alert("Loan not found (demo only)");
+        return;
+    }
+
+    document.getElementById("loanSection").style.display = "block";
+
+    document.getElementById("upSSN").value = demoLoan.ssn;
+    document.getElementById("upName").value = demoLoan.name;
+    document.getElementById("upAmount").value = demoLoan.amount;
+    document.getElementById("upDuration").value = demoLoan.duration;
+    document.getElementById("upPhone").value = demoLoan.phone;
+    document.getElementById("upEmail").value = demoLoan.email;
+}
+
+function updateLoan(){
+
+    let amt = document.getElementById("upAmount").value.trim();
+    let dur = document.getElementById("upDuration").value.trim();
+
+    if(isNaN(amt) || amt <= 0){
+        alert("Enter valid loan amount");
+        return;
+    }
+
+    if(isNaN(dur) || dur <= 0){
+        alert("Enter valid loan duration");
+        return;
+    }
+
+    let msg = document.getElementById("loanUpdateMsg");
+    msg.innerText = "Loan Updated Successfully";
+    msg.style.display = "block";
+
+    setTimeout(()=>{
+        window.location.href="dashboard.html";
+    },1400);
+}
+
+function cancelLoan(){
+
+    if(!confirm("Are you sure you want to cancel this loan?")){
+        return;
+    }
+
+    let msg = document.getElementById("loanUpdateMsg");
+    msg.innerText = "Loan Cancelled Successfully";
+    msg.style.display = "block";
+
+    setTimeout(()=>{
+        window.location.href="dashboard.html";
     },1400);
 }

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Transaction Processing</title>
+
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+
+<body>
+
+<div class="form-wrapper">
+
+  <h2>Transaction Processing</h2>
+  <p class="subtitle">Enter customer transaction details</p>
+
+  <div class="grid-2">
+
+    <div>
+      <label>Transaction ID</label>
+      <input class="input-field" id="txnId" placeholder="TXN12345">
+    </div>
+
+    <div>
+      <label>Customer SSN ID</label>
+      <input class="input-field" id="ssn">
+    </div>
+
+    <div>
+      <label>Customer Name</label>
+      <input class="input-field" id="custName">
+    </div>
+
+    <div>
+      <label>Account ID</label>
+      <input class="input-field" id="accId">
+    </div>
+
+    <div>
+      <label>Aadhaar Number</label>
+      <input class="input-field" id="aadhaar" maxlength="12">
+    </div>
+
+    <div>
+      <label>PAN Number</label>
+      <input class="input-field" id="pan" maxlength="10">
+    </div>
+
+    <div class="full">
+      <label>Address</label>
+      <input class="input-field" id="address">
+    </div>
+
+    <div>
+      <label>Date</label>
+      <input class="input-field" type="date" id="date">
+    </div>
+
+    <div>
+      <label>Contact Number</label>
+      <input class="input-field" id="phone" maxlength="10">
+    </div>
+
+    <div>
+      <label>Mode of Transaction</label>
+      <select class="input-field" id="mode">
+        <option value="">Select</option>
+        <option>Cash</option>
+        <option>UPI</option>
+        <option>NEFT</option>
+        <option>IMPS</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Transaction Amount</label>
+      <input class="input-field" id="amount">
+    </div>
+
+    <div>
+      <label>Transaction Type</label>
+      <select class="input-field" id="type">
+        <option value="">Select</option>
+        <option>Credit</option>
+        <option>Debit</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="center">
+    <button onclick="submitTransaction()">Submit Transaction</button>
+  </div>
+
+  <div id="txnMsg" class="success">
+    🎉 Transaction Recorded Successfully
+  </div>
+
+  <p class="center" style="margin-top:10px;">
+    <a href="dashboard.html">⬅ Back to Dashboard</a>
+  </p>
+
+</div>
+
+<script src="assets/script.js"></script>
+
+</body>
+</html>

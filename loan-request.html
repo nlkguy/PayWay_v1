@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Loan Request PayWay Solutions</title>
+
+<link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+<div class="form-wrapper">
+
+  <h2>Loan Request</h2>
+  <p class="subtitle">Initiate a new loan request for a customer</p>
+
+  <div class="grid-2">
+
+    <div>
+      <label>Customer SSN ID</label>
+      <input class="input-field" id="loanSSN">
+    </div>
+
+    <div>
+      <label>Customer Name</label>
+      <input class="input-field" id="loanName">
+    </div>
+
+    <div>
+      <label>Occupation</label>
+      <input class="input-field" id="occupation">
+    </div>
+
+    <div>
+      <label>Employer Name</label>
+      <input class="input-field" id="employer">
+    </div>
+
+    <div class="full">
+      <label>Employer Address</label>
+      <input class="input-field" id="empAddress">
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input class="input-field" id="loanEmail">
+    </div>
+
+    <div>
+      <label>Marital Status</label>
+      <select class="input-field" id="marital">
+        <option value="">Select</option>
+        <option>Single</option>
+        <option>Married</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Contact Number</label>
+      <input class="input-field" id="loanPhone" maxlength="10">
+    </div>
+
+    <div>
+      <label>Loan Amount</label>
+      <input class="input-field" id="loanAmount">
+    </div>
+
+    <div>
+      <label>Loan Duration (Years)</label>
+      <input class="input-field" id="loanDuration">
+    </div>
+
+    <div class="full">
+      <label>Customer Address</label>
+      <input class="input-field" id="custAddress">
+    </div>
+
+  </div>
+
+  <div class="center">
+    <button onclick="submitLoan()">Submit Loan Request</button>
+  </div>
+
+  <div id="loanMsg" class="success">
+    🎉 Loan Request Submitted Successfully
+  </div>
+
+  <p class="center" style="margin-top:10px;">
+    <a href="dashboard.html">⬅ Back to Dashboard</a>
+  </p>
+
+</div>
+
+<script src="assets/script.js"></script>
+
+</body>
+</html>

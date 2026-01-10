@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Loan Update / Cancel</title>
+
+<link rel="stylesheet" href="assets/style.css">
+
+<style>
+  body{
+    min-height:100vh;
+    background: linear-gradient(135deg,#0c0f35,#121f6b,#1b2b8c);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="form-wrapper">
+
+  <h2>Loan Update / Cancel</h2>
+  <p class="subtitle">Search and manage loan request</p>
+
+  <!-- SEARCH -->
+  <div class="search-row">
+    <input class="input-field" id="loanSearchSSN" placeholder="Enter Customer SSN ID" style="max-width:300px;">
+    <button onclick="searchLoan()">Search</button>
+  </div>
+
+  <hr style="margin:15px 0; opacity:.3;">
+
+  <!-- LOAN DETAILS -->
+  <div id="loanSection" style="display:none;">
+
+    <div class="grid-2">
+
+      <div>
+        <label>Customer SSN ID</label>
+        <input class="input-field" id="upSSN" readonly>
+      </div>
+
+      <div>
+        <label>Customer Name</label>
+        <input class="input-field" id="upName">
+      </div>
+
+      <div>
+        <label>Loan Amount</label>
+        <input class="input-field" id="upAmount">
+      </div>
+
+      <div>
+        <label>Loan Duration (Years)</label>
+        <input class="input-field" id="upDuration">
+      </div>
+
+      <div>
+        <label>Contact Number</label>
+        <input class="input-field" id="upPhone">
+      </div>
+
+      <div>
+        <label>Email</label>
+        <input class="input-field" id="upEmail">
+      </div>
+
+    </div>
+
+    <div class="center">
+      <button onclick="updateLoan()">Update Loan</button>
+      <button onclick="cancelLoan()" style="background:#ff2b2b;margin-left:10px;">Cancel Loan</button>
+    </div>
+
+    <div id="loanUpdateMsg" class="success">
+      🎉 Loan Updated Successfully
+    </div>
+
+  </div>
+
+  <p class="center" style="margin-top:10px;">
+    <a href="dashboard.html">⬅ Back to Dashboard</a>
+  </p>
+
+</div>
+
+<script src="assets/script.js"></script>
+
+</body>
+</html>

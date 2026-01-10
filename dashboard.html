@@ -1,117 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Employee Dashboard</title>
+<meta charset="UTF-8">
+<title>PayWay Bank – Employee Dashboard</title>
+<link rel="stylesheet" href="assets/styles.css">
 
-  <link rel="stylesheet" href="assets/style.css">
+<style>
+.dashboard-layout{
+  display:flex;
+  width:100%;
+  min-height:100vh;
+}
 
-  <style>
+/* Sidebar */
+.sidebar{
+  width:240px;
+  background:#0c074f;
+  color:white;
+  padding:20px;
+}
 
-    body{
-      min-height:100vh;
-      background: linear-gradient(135deg,#0c0f35,#121f6b,#1b2b8c);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:30px 0;
-    }
+.sidebar h2{
+  text-align:center;
+  margin-bottom:20px;
+  font-size:22px;
+}
 
-    .dash-card{
-      width:95%;
-      max-width:1000px;
-      background:white;
-      border-radius:22px;
-      padding:35px 45px;
-      box-shadow:0 25px 70px rgba(0,0,0,.35);
-    }
+.sidebar a{
+  display:block;
+  padding:12px 15px;
+  margin-bottom:10px;
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
+  background:rgba(255,255,255,.08);
+  transition:.2s;
+}
 
-    .dash-card::before{
-      content:"";
-      display:block;
-      width:100%;
-      height:6px;
-      border-radius:10px;
-      background:linear-gradient(135deg,#6c4bff,#ff00c8);
-      margin-bottom:18px;
-    }
+.sidebar a:hover{
+  background:linear-gradient(135deg,#5b3bff,#ff00c8);
+}
 
-    .title{
-      text-align:center;
-      font-size:26px;
-      font-weight:700;
-      color:#0b084a;
-    }
+/* Main Area */
+.main-area{
+  flex:1;
+  padding:25px 30px;
+  background:#f5f6fb;
+}
 
-    .subtitle{
-      text-align:center;
-      color:#666;
-      font-size:13px;
-      margin-bottom:20px;
-    }
+/* Top Bar */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
 
-    .modules{
-      margin-top:20px;
-      display:grid;
-      grid-template-columns: repeat(3,1fr);
-      gap:18px;
-    }
+.topbar h1{
+  font-size:22px;
+}
 
-    .box{
-      background:#fafaff;
-      padding:18px;
-      border-radius:16px;
-      border:1.5px solid #e5e4ff;
-      box-shadow:0 15px 30px rgba(0,0,0,.08);
-      transition:.25s;
-      text-align:center;
-      font-weight:600;
-      cursor:pointer;
-    }
+.logout-btn{
+  padding:10px 25px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(135deg,#5b3bff,#ff00c8);
+  color:white;
+  cursor:pointer;
+}
 
-    .box:hover{
-      transform:translateY(-4px);
-      border-color:#7a4dff;
-      box-shadow:0 25px 40px rgba(0,0,0,.15);
-    }
-
-    .logout{
-      text-align:center;
-      margin-top:25px;
-    }
-
-  </style>
-
+/* Welcome Card */
+.welcome-card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 15px 40px rgba(0,0,0,.1);
+}
+</style>
 </head>
 
 <body>
 
-  <div class="dash-card">
+<div class="dashboard-layout">
 
-    <h2 class="title">Welcome to PayWay Solutions Employee Portal</h2>
-    <p class="subtitle">Choose a module below to proceed</p>
+  <!-- LEFT MENU -->
+  <div class="sidebar">
+    <h2>PayWay Bank</h2>
 
-    <!-- FEATURE MODULES -->
-    <div class="modules">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="employee-register.html">Employee Registration</a>
+    <a href="customer-create.html">Customer Creation</a>
+    <a href="customer-update.html">Customer Update</a>
+    <a href="customer-delete.html">Customer Deletion</a>
+    <a href="transaction.html">Transaction Processing</a>
+    <a href="loan-request.html">Loan Management</a>
+  </div>
 
-      <a href="employee-register.html" class="box">👤 Employee Registration</a>
+  <!-- MAIN CONTENT -->
+  <div class="main-area">
 
-      <a href="customer-create.html" class="box">🧾 Customer Creation</a>
-
-      <a href="customer-update.html" class="box">✏️ Customer Update</a>
-
-      <a href="customer-delete.html" class="box">🗑️ Customer Deletion</a>
-
-      <a href="transaction.html" class="box">💰 Transaction Processing</a>
-
-      <a href="loan-request.html" class="box">🏦 Loan Management</a>
-
+    <div class="topbar">
+      <h1>Employee Portal</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
-    <div class="logout">
-      <a href="index.html"><button>Logout</button></a>
+    <div class="welcome-card">
+      <h2>Welcome to PayWay Solutions Banking System</h2>
+      <p>Select a module from the left menu to begin operations.</p>
     </div>
 
   </div>
+
+</div>
+
+<script>
+function logout(){
+  window.location.href="index.html";
+}
+</script>
 
 </body>
 </html>
