@@ -33,8 +33,8 @@
 .logo{
   display:flex;
   align-items:center;
-  gap:10px;
-  margin-bottom:30px;
+  gap:50px;
+  margin-bottom:50px;
 }
 
 .logo img{
@@ -171,41 +171,45 @@ th{
 
     <div class="logo">
       <img src="assets/PayWay Logo.jpeg" alt="PayWay Logo">
-      <span>PayWay</span>
+      <span>FinCore BMS</span>
+      
     </div>
+    <span style="font-size:12px; font-weight:400;">powered by PayWay Solutions</span>
+    <br><br>
 
-    <a href="#">Dashboard</a>
-    <a href="#">Employee Registration</a>
-    <a href="#">Customer Creation</a>
-    <a href="#">Customer Update</a>
-    <a href="#">Customer Deletion</a>
-    <a href="#">Transaction Processing</a>
-    <a href="#">Loan Management</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="employee-register.html">Employee Registration</a>
+    <a href="customer-create.html">Customer Creation</a>
+    <a href="customer-update.html">Customer Update</a>
+    <a href="customer-delete.html">Customer Deletion</a>
+    <a href="transaction.html">Transaction Processing</a>
+    <a href="loan-request.html">Loan Request</a>
+    <a href="loan-update.html">Loan Update</a>
   </div>
 
   <!-- Main Content -->
   <div class="main-area">
 
     <div class="topbar">
-      <h1>Good Morning</h1>
+      <h1>Good Morning Employee 420-69-13-666</h1>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
     <!-- Cards -->
     <div class="cards-row">
       <div class="card">
-        <h4>Balance</h4>
-        <h2>₹XXXXXXX</h2>
-        <p>Available</p>
+        <h4>Loan Requests</h4>
+        <h2>13</h2>
+        <p>Pending Approval</p>
       </div>
       <div class="card">
         <h4>Total Customers</h4>
-        <h2>1,248</h2>
+        <h2>69</h2>
         <p>Active</p>
       </div>
       <div class="card">
         <h4>Transactions</h4>
-        <h2>356</h2>
+        <h2>13,666</h2>
         <p>This Month</p>
       </div>
     </div>
@@ -222,25 +226,25 @@ th{
             <th>Amount</th>
           </tr>
           <tr>
-            <td>Jenny Wilson</td>
+            <td>John Transactson</td>
             <td>Credit</td>
-            <td>+ ₹455</td>
+            <td>+ ₹42,013</td>
           </tr>
           <tr>
-            <td>Robert Fox</td>
+            <td>William B Fetched</td>
             <td>Debit</td>
-            <td>- ₹455</td>
+            <td>- ₹13,666</td>
           </tr>
           <tr>
-            <td>Jacob Jones</td>
+            <td>Fromothee Backendev</td>
             <td>Credit</td>
-            <td>+ ₹455</td>
+            <td>+ ₹69,666</td>
           </tr>
         </table>
       </div>
 
       <div class="chart-card">
-        <h3>Insights</h3>
+        <h3>Active Loans</h3>
         <canvas id="barChart"></canvas>
       </div>
 
