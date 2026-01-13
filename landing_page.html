@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PayWay Solutions Bank</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#f5f7fb;
+}
+
+/* NAVBAR */
+.navbar{
+  background:white;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+.logo{
+  font-size:24px;
+  font-weight:700;
+  color:#0c074f;
+}
+
+.nav-links a{
+  margin:0 15px;
+  text-decoration:none;
+  color:#333;
+  font-weight:500;
+}
+
+.nav-links a:hover{
+  color:#5b3bff;
+}
+
+.login-btn{
+  padding:10px 25px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#5b3bff,#ff00c8);
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* HERO */
+.hero{
+  display:flex;
+  padding:80px 60px;
+  align-items:center;
+  gap:40px;
+}
+
+.hero-left{
+  flex:1;
+}
+
+.hero-left h1{
+  font-size:48px;
+  color:#0c074f;
+}
+
+.hero-left p{
+  margin-top:15px;
+  font-size:16px;
+  color:#555;
+  max-width:500px;
+}
+
+.hero-left button{
+  margin-top:30px;
+  padding:15px 40px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#5b3bff,#ff00c8);
+  color:white;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.hero-right{
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+
+/* Side image */
+.side-img{
+  width:100%;
+  max-width:520px;
+  height:auto;
+  border-radius:20px;
+  box-shadow:0 30px 70px rgba(0,0,0,.25);
+  object-fit:cover;
+}
+
+@media (max-width:900px){
+  .hero{flex-direction:column; padding:40px 24px; gap:24px}
+  .hero-left h1{font-size:36px}
+}
+
+/* SERVICES */
+.services{
+  padding:60px;
+  background:white;
+}
+
+.services h2{
+  text-align:center;
+  font-size:32px;
+  color:#0c074f;
+  margin-bottom:40px;
+}
+
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.service{
+  background:#f7f8ff;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.service h3{
+  margin-bottom:10px;
+  color:#0c074f;
+}
+
+/* FOOTER */
+.footer{
+  background:#0c074f;
+  color:white;
+  text-align:center;
+  padding:30px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="landing.html">Home</a>
+    <a href="index.html">Employee Login</a>
+    <a href="employee-register.html">Register</a>
+    <a href="dashboard.html">Dashboard</a>
+  </div>
+  <a href="index.html" class="login-btn">Login</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <h1>Banking Made Simple for Employees</h1>
+    <p>
+      Manage customers, loans, and transactions with PayWay Solutions —
+      a modern banking platform built for secure and efficient operations.
+    </p>
+    <button onclick="window.location.href='employee-register.html'">Get Started</button>
+  </div>
+
+  <div class="hero-right">
+    <img src="images/best-banks-in-india.jpg" alt="Banking Illustration" class="side-img">
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="services">
+  <h2>Our Banking Services</h2>
+
+  <div class="service-grid">
+    <div class="service">
+      <h3>Customer Management</h3>
+      <p>Create, update, and manage customer records securely.</p>
+    </div>
+
+    <div class="service">
+      <h3>Transaction Processing</h3>
+      <p>Deposit and withdraw money with real-time tracking.</p>
+    </div>
+
+    <div class="service">
+      <h3>Loan Services</h3>
+      <p>Apply, update, and manage customer loans.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2026 PayWay Solutions Banking System
+</div>
+
+</body>
+</html>
