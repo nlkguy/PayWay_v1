@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Playground — PayWay_v1</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;max-width:980px;margin:32px auto;padding:0 16px;color:#0b2545}
+    header{display:flex;gap:12px;align-items:center}
+    h1{font-size:20px;margin:0}
+    p.lead{color:#425a75;margin:8px 0 18px}
+    input[type=search]{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .card{border:1px solid #e6eef8;padding:12px;border-radius:8px;background:#fff}
+    ul{margin:8px 0 0;padding:0;list-style:none}
+    li{padding:6px 0}
+    a{color:#0969da;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .meta{font-size:12px;color:#6b7280}
+    .footer{margin-top:22px;color:#475569;font-size:13px}
+  </style>
+</head>
+<body>
+  <header>
+    <img src="assets/PayWay Logo.jpeg" alt="logo" width="48" height="48" style="object-fit:cover;border-radius:6px">
+    <div>
+      <h1>Playground — PayWay_v1</h1>
+      <p class="lead">Quick links to every page and important asset in this project. Use the filter to find files.</p>
+    </div>
+  </header>
+
+  <input id="filter" type="search" placeholder="Filter pages or assets (type to narrow)..." aria-label="Filter links" />
+
+  <div class="grid" id="lists">
+    <div class="card">
+      <strong>HTML Pages</strong>
+      <ul id="html-list">
+        <li><a href="index.html">index.html</a> <span class="meta">— Home / entry</span></li>
+        <li><a href="landing_page.html">landing_page.html</a> <span class="meta">— Landing</span></li>
+        <li><a href="dashboard.html">dashboard.html</a> <span class="meta">— Dashboard</span></li>
+        <li><a href="employee-login.html">employee-login.html</a></li>
+        <li><a href="employee-register.html">employee-register.html</a></li>
+        <li><a href="customer-list.html">customer-list.html</a></li>
+        <li><a href="customer-create.html">customer-create.html</a></li>
+        <li><a href="customer-update.html">customer-update.html</a></li>
+        <li><a href="customer-delete.html">customer-delete.html</a></li>
+        <li><a href="customer-profile.html">customer-profile.html</a></li>
+        <li><a href="transaction.html">transaction.html</a></li>
+        <li><a href="transaction-list.html">transaction-list.html</a></li>
+        <li><a href="transaction-create.html">transaction-create.html</a></li>
+        <li><a href="transaction-detail.html">transaction-detail.html</a></li>
+        <li><a href="loan-request.html">loan-request.html</a></li>
+        <li><a href="loan-update.html">loan-update.html</a></li>
+        <li><a href="x.html">x.html</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <strong>Assets & Scripts</strong>
+      <ul id="asset-list">
+        <li><a href="assets/PayWay Logo.jpeg">assets/PayWay Logo.jpeg</a></li>
+        <li><a href="assets/script.js">assets/script.js</a></li>
+        <li><a href="assets/style.css">assets/style.css</a></li>
+        <li><a href="script.js">script.js</a> <span class="meta">— root script</span></li>
+        <li><a href="style.css">style.css</a> <span class="meta">— root stylesheet</span></li>
+        <li><a href="images/best-banks-in-india.jpg">images/best-banks-in-india.jpg</a></li>
+        <li><a href="java-temp-files/FinCoreBMS.java">java-temp-files/FinCoreBMS.java</a> <span class="meta">— temp java file</span></li>
+        <li><a href="VALIDATION-GUIDE.md">VALIDATION-GUIDE.md</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    Tip: Open in your browser (double-click or use a local dev server). Links are relative to this file.
+  </div>
+
+  <script>
+    const filterInput = document.getElementById('filter');
+    const lists = Array.from(document.querySelectorAll('#html-list li, #asset-list li'));
+
+    function normalize(s){return (s||'').toLowerCase();}
+
+    filterInput.addEventListener('input', ()=>{
+      const q = normalize(filterInput.value.trim());
+      lists.forEach(li=>{
+        const text = normalize(li.textContent + ' ' + (li.querySelector('a')?.getAttribute('href')||''));
+        li.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
