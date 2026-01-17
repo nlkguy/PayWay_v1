@@ -2,96 +2,824 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Loan Request PayWay Solutions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Request - PayWay Solutions</title>
 
-<link rel="stylesheet" href="assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* FORM CONTAINER */
+.form-container {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 850px;
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-header h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.form-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* FORM GROUP */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+.form-row.three-col {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+  background-color: #f8f9fa;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+}
+
+/* ERROR MESSAGE */
+.error-message {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.form-group.error input,
+.form-group.error textarea,
+.form-group.error select {
+  border-color: #e74c3c;
+}
+
+.form-group.error .error-message {
+  display: block;
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* POPUP/MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 40px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.modal-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  color: #27ae60;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.modal-body {
+  text-align: center;
+  color: #27ae60;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.modal-details {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border-left: 4px solid #27ae60;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #27ae60;
+  font-weight: 600;
+  font-size: 14px;
+  word-break: break-word;
+  max-width: 200px;
+  text-align: right;
+}
+
+.modal-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .form-container {
+    padding: 40px 25px;
+    margin-top: 100px;
+  }
+
+  .form-header h1 {
+    font-size: 24px;
+  }
+
+  .form-row,
+  .form-row.three-col {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .detail-value {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .form-container {
+    padding: 30px 20px;
+    margin-top: 120px;
+  }
+
+  .form-header h1 {
+    font-size: 22px;
+  }
+
+  .modal-content {
+    padding: 25px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detail-value {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<div class="form-wrapper">
-
-  <h2>Loan Request</h2>
-  <p class="subtitle">Initiate a new loan request for a customer</p>
-
-  <div class="grid-2">
-
-    <div>
-      <label>Customer SSN ID</label>
-      <input class="input-field" id="loanSSN">
-    </div>
-
-    <div>
-      <label>Customer Name</label>
-      <input class="input-field" id="loanName">
-    </div>
-
-    <div>
-      <label>Occupation</label>
-      <input class="input-field" id="occupation">
-    </div>
-
-    <div>
-      <label>Employer Name</label>
-      <input class="input-field" id="employer">
-    </div>
-
-    <div class="full">
-      <label>Employer Address</label>
-      <input class="input-field" id="empAddress">
-    </div>
-
-    <div>
-      <label>Email</label>
-      <input class="input-field" id="loanEmail">
-    </div>
-
-    <div>
-      <label>Marital Status</label>
-      <select class="input-field" id="marital">
-        <option value="">Select</option>
-        <option>Single</option>
-        <option>Married</option>
-      </select>
-    </div>
-
-    <div>
-      <label>Contact Number</label>
-      <input class="input-field" id="loanPhone" maxlength="10">
-    </div>
-
-    <div>
-      <label>Loan Amount</label>
-      <input class="input-field" id="loanAmount">
-    </div>
-
-    <div>
-      <label>Loan Duration (Years)</label>
-      <input class="input-field" id="loanDuration">
-    </div>
-
-    <div class="full">
-      <label>Customer Address</label>
-      <input class="input-field" id="custAddress">
-    </div>
-
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="landing_page.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="transaction.html">Transactions</a>
+    <a href="loan-request.html">Loans</a>
   </div>
-
-  <div class="center">
-    <button onclick="submitLoan()">Submit Loan Request</button>
-  </div>
-
-  <div id="loanMsg" class="success">
-    🎉 Loan Request Submitted Successfully
-  </div>
-
-  <p class="center" style="margin-top:10px;">
-    <a href="dashboard.html">⬅ Back to Dashboard</a>
-  </p>
-
+  <a href="dashboard.html" class="back-btn">← Back</a>
 </div>
 
-<script src="assets/script.js"></script>
+<!-- FORM CONTAINER -->
+<div class="form-container">
+  <div class="form-header">
+    <h1>Loan Request</h1>
+    <p>Initiate a new loan request for a customer</p>
+  </div>
+
+  <form id="loanForm">
+    <!-- Row 1: Customer SSN and Name -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="customerSSN">Customer SSN ID</label>
+        <input 
+          type="text" 
+          id="customerSSN" 
+          name="customerSSN"
+          placeholder="Enter SSN ID"
+          maxlength="20"
+          required
+        >
+        <div class="error-message">SSN ID is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input 
+          type="text" 
+          id="customerName" 
+          name="customerName"
+          placeholder="Enter full name"
+          maxlength="100"
+          required
+        >
+        <div class="error-message">Customer name is required</div>
+      </div>
+    </div>
+
+    <!-- Row 2: Occupation and Employer Name -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="occupation">Occupation</label>
+        <input 
+          type="text" 
+          id="occupation" 
+          name="occupation"
+          placeholder="Enter occupation"
+          maxlength="50"
+          required
+        >
+        <div class="error-message">Occupation is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="employerName">Employer Name</label>
+        <input 
+          type="text" 
+          id="employerName" 
+          name="employerName"
+          placeholder="Enter employer name"
+          maxlength="100"
+          required
+        >
+        <div class="error-message">Employer name is required</div>
+      </div>
+    </div>
+
+    <!-- Row 3: Employer Address -->
+    <div class="form-group">
+      <label for="employerAddress">Employer Address</label>
+      <textarea 
+        id="employerAddress" 
+        name="employerAddress"
+        placeholder="Enter employer address"
+        maxlength="200"
+        rows="2"
+        required
+      ></textarea>
+      <div class="error-message">Employer address is required (max 200 characters)</div>
+    </div>
+
+    <!-- Row 4: Email and Marital Status -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email"
+          placeholder="Enter email address"
+          required
+        >
+        <div class="error-message">Please enter a valid email address</div>
+      </div>
+
+      <div class="form-group">
+        <label for="maritalStatus">Marital Status</label>
+        <select id="maritalStatus" name="maritalStatus" required>
+          <option value="">Select Status</option>
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Divorced">Divorced</option>
+          <option value="Widowed">Widowed</option>
+        </select>
+        <div class="error-message">Marital status is required</div>
+      </div>
+    </div>
+
+    <!-- Row 5: Contact Number and Customer Address -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="contactNumber">Contact Number</label>
+        <input 
+          type="text" 
+          id="contactNumber" 
+          name="contactNumber"
+          placeholder="Enter 10-digit number"
+          maxlength="10"
+          required
+        >
+        <div class="error-message">Contact number must be 10 digits</div>
+      </div>
+
+      <div class="form-group">
+        <label for="customerAddress">Customer Address</label>
+        <input 
+          type="text" 
+          id="customerAddress" 
+          name="customerAddress"
+          placeholder="Enter customer address"
+          maxlength="200"
+          required
+        >
+        <div class="error-message">Customer address is required</div>
+      </div>
+    </div>
+
+    <!-- Row 6: Loan Amount and Duration -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="loanAmount">Loan Amount</label>
+        <input 
+          type="number" 
+          id="loanAmount" 
+          name="loanAmount"
+          placeholder="Enter loan amount"
+          min="0"
+          step="0.01"
+          required
+        >
+        <div class="error-message">Loan amount is required and must be positive</div>
+      </div>
+
+      <div class="form-group">
+        <label for="loanDuration">Length of Loan (Years)</label>
+        <input 
+          type="number" 
+          id="loanDuration" 
+          name="loanDuration"
+          placeholder="Enter duration in years"
+          min="1"
+          max="30"
+          required
+        >
+        <div class="error-message">Loan duration must be between 1 and 30 years</div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Loan Request</button>
+  </form>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-icon">✓</div>
+      <h2>Loan Request Submitted!</h2>
+    </div>
+    <div class="modal-body">
+      Loan request submitted successfully.
+    </div>
+    <div class="modal-details">
+      <div class="detail-row">
+        <span class="detail-label">Customer Name</span>
+        <span class="detail-value" id="modalName"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">SSN ID</span>
+        <span class="detail-value" id="modalSSN"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Loan Amount</span>
+        <span class="detail-value" id="modalAmount"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Duration</span>
+        <span class="detail-value" id="modalDuration"></span>
+      </div>
+    </div>
+    <button class="modal-button" onclick="redirectDashboard()">Continue</button>
+  </div>
+</div>
+
+<script>
+// Form submission handler
+document.getElementById('loanForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Clear previous error states
+  clearErrors();
+
+  // Get form values
+  const customerSSN = document.getElementById('customerSSN').value.trim();
+  const customerName = document.getElementById('customerName').value.trim();
+  const occupation = document.getElementById('occupation').value.trim();
+  const employerName = document.getElementById('employerName').value.trim();
+  const employerAddress = document.getElementById('employerAddress').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const maritalStatus = document.getElementById('maritalStatus').value;
+  const contactNumber = document.getElementById('contactNumber').value.trim();
+  const customerAddress = document.getElementById('customerAddress').value.trim();
+  const loanAmount = document.getElementById('loanAmount').value;
+  const loanDuration = document.getElementById('loanDuration').value;
+
+  let isValid = true;
+
+  // Validate SSN
+  if (!customerSSN || customerSSN.length === 0) {
+    showError('customerSSN', 'SSN ID is required');
+    isValid = false;
+  }
+
+  // Validate Customer Name
+  if (!customerName || customerName.length === 0) {
+    showError('customerName', 'Customer name is required');
+    isValid = false;
+  }
+
+  // Validate Occupation
+  if (!occupation || occupation.length === 0) {
+    showError('occupation', 'Occupation is required');
+    isValid = false;
+  }
+
+  // Validate Employer Name
+  if (!employerName || employerName.length === 0) {
+    showError('employerName', 'Employer name is required');
+    isValid = false;
+  }
+
+  // Validate Employer Address
+  if (!employerAddress || employerAddress.length === 0 || employerAddress.length > 200) {
+    showError('employerAddress', 'Employer address is required (max 200 characters)');
+    isValid = false;
+  }
+
+  // Validate Email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    showError('email', 'Please enter a valid email address');
+    isValid = false;
+  }
+
+  // Validate Marital Status
+  if (!maritalStatus) {
+    showError('maritalStatus', 'Marital status is required');
+    isValid = false;
+  }
+
+  // Validate Contact Number
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!contactNumber || !phoneRegex.test(contactNumber)) {
+    showError('contactNumber', 'Contact number must be exactly 10 digits');
+    isValid = false;
+  }
+
+  // Validate Customer Address
+  if (!customerAddress || customerAddress.length === 0 || customerAddress.length > 200) {
+    showError('customerAddress', 'Customer address is required (max 200 characters)');
+    isValid = false;
+  }
+
+  // Validate Loan Amount
+  if (loanAmount === '' || isNaN(loanAmount) || loanAmount <= 0) {
+    showError('loanAmount', 'Loan amount must be a positive number');
+    isValid = false;
+  }
+
+  // Validate Loan Duration
+  if (loanDuration === '' || isNaN(loanDuration) || loanDuration < 1 || loanDuration > 30) {
+    showError('loanDuration', 'Loan duration must be between 1 and 30 years');
+    isValid = false;
+  }
+
+  // If validation passes, show success modal
+  if (isValid) {
+    document.getElementById('modalName').textContent = customerName;
+    document.getElementById('modalSSN').textContent = customerSSN;
+    document.getElementById('modalAmount').textContent = '₹' + parseFloat(loanAmount).toFixed(2);
+    document.getElementById('modalDuration').textContent = loanDuration + ' year(s)';
+    showSuccessModal();
+  }
+});
+
+// Show error message
+function showError(fieldId, message) {
+  const field = document.getElementById(fieldId);
+  const formGroup = field.closest('.form-group');
+  if (formGroup) {
+    formGroup.classList.add('error');
+    const errorMsg = formGroup.querySelector('.error-message');
+    if (errorMsg) {
+      errorMsg.textContent = message;
+    }
+  }
+}
+
+// Clear all errors
+function clearErrors() {
+  document.querySelectorAll('.form-group').forEach(group => {
+    group.classList.remove('error');
+  });
+}
+
+// Show success modal
+function showSuccessModal() {
+  document.getElementById('successModal').style.display = 'block';
+}
+
+// Close modal and redirect
+function redirectDashboard() {
+  document.getElementById('successModal').style.display = 'none';
+  setTimeout(() => {
+    window.location.href = 'dashboard.html';
+  }, 300);
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('successModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// Real-time validation for text fields
+['customerSSN', 'customerName', 'occupation', 'employerName', 'customerAddress'].forEach(fieldId => {
+  document.getElementById(fieldId).addEventListener('input', function(e) {
+    if (e.target.value.trim().length > 0) {
+      e.target.closest('.form-group').classList.remove('error');
+    }
+  });
+});
+
+// Real-time validation for email
+document.getElementById('email').addEventListener('input', function(e) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (emailRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for contact number
+document.getElementById('contactNumber').addEventListener('input', function(e) {
+  const phoneRegex = /^[0-9]{10}$/;
+  if (phoneRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for loan amount
+document.getElementById('loanAmount').addEventListener('input', function(e) {
+  if (e.target.value > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for loan duration
+document.getElementById('loanDuration').addEventListener('input', function(e) {
+  if (e.target.value >= 1 && e.target.value <= 30) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for employer address
+document.getElementById('employerAddress').addEventListener('input', function(e) {
+  if (e.target.value.trim().length > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+</script>
 
 </body>
 </html>

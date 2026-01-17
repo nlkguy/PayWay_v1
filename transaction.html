@@ -2,108 +2,825 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Transaction Processing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transaction Processing - PayWay Solutions</title>
 
-<link rel="stylesheet" href="assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* FORM CONTAINER */
+.form-container {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-header h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.form-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* FORM GROUP */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+.form-row.three-col {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+  background-color: #f8f9fa;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+}
+
+/* ERROR MESSAGE */
+.error-message {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.form-group.error input,
+.form-group.error textarea,
+.form-group.error select {
+  border-color: #e74c3c;
+}
+
+.form-group.error .error-message {
+  display: block;
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* POPUP/MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 40px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.modal-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  color: #27ae60;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.modal-body {
+  text-align: center;
+  color: #27ae60;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.modal-details {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border-left: 4px solid #27ae60;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #27ae60;
+  font-weight: 600;
+  font-size: 14px;
+  word-break: break-word;
+  max-width: 200px;
+  text-align: right;
+}
+
+.modal-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .form-container {
+    padding: 40px 25px;
+    margin-top: 100px;
+  }
+
+  .form-header h1 {
+    font-size: 24px;
+  }
+
+  .form-row,
+  .form-row.three-col {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .detail-value {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .form-container {
+    padding: 30px 20px;
+    margin-top: 120px;
+  }
+
+  .form-header h1 {
+    font-size: 22px;
+  }
+
+  .modal-content {
+    padding: 25px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detail-value {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<div class="form-wrapper">
-
-  <h2>Transaction Processing</h2>
-  <p class="subtitle">Enter customer transaction details</p>
-
-  <div class="grid-2">
-
-    <div>
-      <label>Transaction ID</label>
-      <input class="input-field" id="txnId" placeholder="TXN12345">
-    </div>
-
-    <div>
-      <label>Customer SSN ID</label>
-      <input class="input-field" id="ssn">
-    </div>
-
-    <div>
-      <label>Customer Name</label>
-      <input class="input-field" id="custName">
-    </div>
-
-    <div>
-      <label>Account ID</label>
-      <input class="input-field" id="accId">
-    </div>
-
-    <div>
-      <label>Aadhaar Number</label>
-      <input class="input-field" id="aadhaar" maxlength="12">
-    </div>
-
-    <div>
-      <label>PAN Number</label>
-      <input class="input-field" id="pan" maxlength="10">
-    </div>
-
-    <div class="full">
-      <label>Address</label>
-      <input class="input-field" id="address">
-    </div>
-
-    <div>
-      <label>Date</label>
-      <input class="input-field" type="date" id="date">
-    </div>
-
-    <div>
-      <label>Contact Number</label>
-      <input class="input-field" id="phone" maxlength="10">
-    </div>
-
-    <div>
-      <label>Mode of Transaction</label>
-      <select class="input-field" id="mode">
-        <option value="">Select</option>
-        <option>Cash</option>
-        <option>UPI</option>
-        <option>NEFT</option>
-        <option>IMPS</option>
-      </select>
-    </div>
-
-    <div>
-      <label>Transaction Amount</label>
-      <input class="input-field" id="amount">
-    </div>
-
-    <div>
-      <label>Transaction Type</label>
-      <select class="input-field" id="type">
-        <option value="">Select</option>
-        <option>Credit</option>
-        <option>Debit</option>
-      </select>
-    </div>
-
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="landing_page.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="transaction.html">Transactions</a>
+    <a href="loan-request.html">Loans</a>
   </div>
-
-  <div class="center">
-    <button onclick="submitTransaction()">Submit Transaction</button>
-  </div>
-
-  <div id="txnMsg" class="success">
-    🎉 Transaction Recorded Successfully
-  </div>
-
-  <p class="center" style="margin-top:10px;">
-    <a href="dashboard.html">⬅ Back to Dashboard</a>
-  </p>
-
+  <a href="dashboard.html" class="back-btn">← Back</a>
 </div>
 
-<script src="assets/script.js"></script>
+<!-- FORM CONTAINER -->
+<div class="form-container">
+  <div class="form-header">
+    <h1>Transaction Processing</h1>
+    <p>Enter customer transaction details</p>
+  </div>
+
+  <form id="transactionForm">
+    <!-- Row 1: Transaction ID and Customer SSN -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="transactionId">Transaction ID</label>
+        <input 
+          type="text" 
+          id="transactionId" 
+          name="transactionId"
+          placeholder="Auto-generated TXN ID"
+          disabled
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="customerSSN">Customer SSN ID</label>
+        <input 
+          type="text" 
+          id="customerSSN" 
+          name="customerSSN"
+          placeholder="Enter SSN ID"
+          maxlength="20"
+          required
+        >
+        <div class="error-message">SSN ID is required</div>
+      </div>
+    </div>
+
+    <!-- Row 2: Customer Name and Account ID -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input 
+          type="text" 
+          id="customerName" 
+          name="customerName"
+          placeholder="Enter customer name"
+          maxlength="100"
+          required
+        >
+        <div class="error-message">Customer name is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="accountId">Account ID</label>
+        <input 
+          type="text" 
+          id="accountId" 
+          name="accountId"
+          placeholder="Enter account number"
+          required
+        >
+        <div class="error-message">Account ID is required</div>
+      </div>
+    </div>
+
+    <!-- Row 3: Aadhar and PAN -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="aadharNo">Aadhar Card No.</label>
+        <input 
+          type="text" 
+          id="aadharNo" 
+          name="aadharNo"
+          placeholder="Enter 12-digit Aadhar (e.g., 123456789012)"
+          maxlength="12"
+          required
+        >
+        <div class="error-message">Aadhar number must be exactly 12 digits (e.g., 123456789012)</div>
+      </div>
+
+      <div class="form-group">
+        <label for="panNo">Pan Card No.</label>
+        <input 
+          type="text" 
+          id="panNo" 
+          name="panNo"
+          placeholder="PAN format: AAAAA0000A (e.g., ABCDE1234F)"
+          maxlength="10"
+          required
+        >
+        <div class="error-message">PAN must be 10 chars (format: AAAAA0000A, e.g., ABCDE1234F)</div>
+      </div>
+    </div>
+
+    <!-- Row 4: Address -->
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea 
+        id="address" 
+        name="address"
+        placeholder="Enter street, city, state, zip code"
+        maxlength="200"
+        rows="3"
+        required
+      ></textarea>
+      <div class="error-message">Address is required (max 200 characters)</div>
+    </div>
+
+    <!-- Row 5: Date and Contact Number -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="transactionDate">Date</label>
+        <input 
+          type="date" 
+          id="transactionDate" 
+          name="transactionDate"
+          required
+        >
+        <div class="error-message">Transaction date is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="contactNumber">Contact Number</label>
+        <input 
+          type="text" 
+          id="contactNumber" 
+          name="contactNumber"
+          placeholder="Enter 10-digit number"
+          maxlength="10"
+          required
+        >
+        <div class="error-message">Contact number must be 10 digits</div>
+      </div>
+    </div>
+
+    <!-- Row 6: Mode of Transaction and Amount -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="modeOfTransaction">Mode of Transaction</label>
+        <select id="modeOfTransaction" name="modeOfTransaction" required>
+          <option value="">Select Mode</option>
+          <option value="Cash">Cash</option>
+          <option value="UPI">UPI</option>
+          <option value="NEFT">NEFT</option>
+          <option value="IMPS">IMPS</option>
+          <option value="Cheque">Cheque</option>
+        </select>
+        <div class="error-message">Mode of transaction is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="transactionAmount">Transaction Amount</label>
+        <input 
+          type="number" 
+          id="transactionAmount" 
+          name="transactionAmount"
+          placeholder="Enter amount"
+          min="0"
+          step="0.01"
+          required
+        >
+        <div class="error-message">Transaction amount is required and must be positive</div>
+      </div>
+    </div>
+
+    <!-- Row 7: Transaction Type (Credit/Debit) -->
+    <div class="form-group">
+      <label for="transactionType">Transaction Type</label>
+      <select id="transactionType" name="transactionType" required>
+        <option value="">Select Type</option>
+        <option value="Credit">Credit</option>
+        <option value="Debit">Debit</option>
+      </select>
+      <div class="error-message">Transaction type is required</div>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Transaction</button>
+  </form>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-icon">✓</div>
+      <h2>Transaction Recorded!</h2>
+    </div>
+    <div class="modal-body">
+      Transaction recorded successfully.
+    </div>
+    <div class="modal-details">
+      <div class="detail-row">
+        <span class="detail-label">Transaction ID</span>
+        <span class="detail-value" id="modalTxnId"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Customer Name</span>
+        <span class="detail-value" id="modalName"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Amount</span>
+        <span class="detail-value" id="modalAmount"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Type</span>
+        <span class="detail-value" id="modalType"></span>
+      </div>
+    </div>
+    <button class="modal-button" onclick="redirectDashboard()">Continue</button>
+  </div>
+</div>
+
+<script>
+// Generate Transaction ID
+function generateTransactionId() {
+  return 'TXN' + Date.now().toString().slice(-9);
+}
+
+// Initialize Transaction ID on page load
+window.addEventListener('DOMContentLoaded', function() {
+  const txnId = generateTransactionId();
+  document.getElementById('transactionId').value = txnId;
+});
+
+// Form submission handler
+document.getElementById('transactionForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Clear previous error states
+  clearErrors();
+
+  // Get form values
+  const transactionId = document.getElementById('transactionId').value;
+  const customerSSN = document.getElementById('customerSSN').value.trim();
+  const customerName = document.getElementById('customerName').value.trim();
+  const accountId = document.getElementById('accountId').value.trim();
+  const aadharNo = document.getElementById('aadharNo').value.trim();
+  const panNo = document.getElementById('panNo').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const transactionDate = document.getElementById('transactionDate').value;
+  const contactNumber = document.getElementById('contactNumber').value.trim();
+  const modeOfTransaction = document.getElementById('modeOfTransaction').value;
+  const transactionAmount = document.getElementById('transactionAmount').value;
+  const transactionType = document.getElementById('transactionType').value;
+
+  let isValid = true;
+
+  // Validate SSN
+  if (!customerSSN || customerSSN.length === 0) {
+    showError('customerSSN', 'SSN ID is required');
+    isValid = false;
+  }
+
+  // Validate Customer Name
+  if (!customerName || customerName.length === 0) {
+    showError('customerName', 'Customer name is required');
+    isValid = false;
+  }
+
+  // Validate Account ID
+  if (!accountId || accountId.length === 0) {
+    showError('accountId', 'Account ID is required');
+    isValid = false;
+  }
+
+  // Validate Aadhar (exactly 12 digits)
+  const aadharRegex = /^[0-9]{12}$/;
+  if (!aadharNo || !aadharRegex.test(aadharNo)) {
+    showError('aadharNo', 'Aadhar number must be exactly 12 digits (e.g., 123456789012)');
+    isValid = false;
+  }
+
+  // Validate PAN (10 characters: 5 letters, 4 numbers, 1 letter. Format: AAAAA0000A)
+  const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+  if (!panNo || !panRegex.test(panNo)) {
+    showError('panNo', 'PAN must be 10 chars (format: AAAAA0000A, e.g., ABCDE1234F)');
+    isValid = false;
+  }
+
+  // Validate Address
+  if (!address || address.length === 0 || address.length > 200) {
+    showError('address', 'Address is required (max 200 characters)');
+    isValid = false;
+  }
+
+  // Validate Date
+  if (!transactionDate) {
+    showError('transactionDate', 'Transaction date is required');
+    isValid = false;
+  }
+
+  // Validate Contact Number
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!contactNumber || !phoneRegex.test(contactNumber)) {
+    showError('contactNumber', 'Contact number must be exactly 10 digits');
+    isValid = false;
+  }
+
+  // Validate Mode of Transaction
+  if (!modeOfTransaction) {
+    showError('modeOfTransaction', 'Mode of transaction is required');
+    isValid = false;
+  }
+
+  // Validate Transaction Amount
+  if (transactionAmount === '' || isNaN(transactionAmount) || transactionAmount <= 0) {
+    showError('transactionAmount', 'Transaction amount must be a positive number');
+    isValid = false;
+  }
+
+  // Validate Transaction Type
+  if (!transactionType) {
+    showError('transactionType', 'Transaction type is required');
+    isValid = false;
+  }
+
+  // If validation passes, show success modal
+  if (isValid) {
+    document.getElementById('modalTxnId').textContent = transactionId;
+    document.getElementById('modalName').textContent = customerName;
+    document.getElementById('modalAmount').textContent = '₹' + parseFloat(transactionAmount).toFixed(2);
+    document.getElementById('modalType').textContent = transactionType;
+    showSuccessModal();
+  }
+});
+
+// Show error message
+function showError(fieldId, message) {
+  const formGroup = document.getElementById(fieldId).closest('.form-group');
+  if (formGroup) {
+    formGroup.classList.add('error');
+    const errorMsg = formGroup.querySelector('.error-message');
+    if (errorMsg) {
+      errorMsg.textContent = message;
+    }
+  }
+}
+
+// Clear all errors
+function clearErrors() {
+  document.querySelectorAll('.form-group').forEach(group => {
+    group.classList.remove('error');
+  });
+}
+
+// Show success modal
+function showSuccessModal() {
+  document.getElementById('successModal').style.display = 'block';
+}
+
+// Close modal and redirect
+function redirectDashboard() {
+  document.getElementById('successModal').style.display = 'none';
+  setTimeout(() => {
+    window.location.href = 'dashboard.html';
+  }, 300);
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('successModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// Real-time validation
+['customerSSN', 'customerName', 'accountId', 'aadharNo', 'panNo'].forEach(fieldId => {
+  document.getElementById(fieldId).addEventListener('input', function(e) {
+    if (e.target.value.trim().length > 0) {
+      e.target.closest('.form-group').classList.remove('error');
+    }
+  });
+});
+
+document.getElementById('contactNumber').addEventListener('input', function(e) {
+  const phoneRegex = /^[0-9]{10}$/;
+  if (phoneRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+document.getElementById('address').addEventListener('input', function(e) {
+  if (e.target.value.trim().length > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+document.getElementById('transactionAmount').addEventListener('input', function(e) {
+  if (e.target.value > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+</script>
 
 </body>
 </html>

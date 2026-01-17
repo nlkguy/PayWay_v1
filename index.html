@@ -2,107 +2,324 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>FinCore BMS Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Login - PayWay Solutions</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- MAIN CSS FILE -->
-  
-  <link rel="stylesheet" href="assets/style.css">
-
-  <!-- PAGE SPECIFIC CSS -->
   <style>
-
-    body{
-      min-height:100vh;
-      background: linear-gradient(135deg,#0c0f35,#121f6b,#1b2b8c);
-      display:flex;
-      justify-content:center;
-      align-items:center;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .login-container{
-      width:920px;
-      min-height:500px;
-      background:white;
-      border-radius:24px;
-      display:flex;
-      overflow:hidden;
-      box-shadow:0 30px 70px rgba(0,0,0,.35);
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* LOGIN CONTAINER */
+    .login-container {
+      width: 100%;
+      max-width: 900px;
+      background: white;
+      border-radius: 15px;
+      display: flex;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
     /* LEFT SIDE */
-    .login-left{
-      flex:1;
-      padding:45px 50px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      color:#111;
+    .login-left {
+      flex: 1;
+      padding: 50px 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .login-left h2{
-      text-align:center;
-      margin-bottom:6px;
-      font-size:26px;
-      font-weight:700;
+    .login-left h2 {
+      text-align: center;
+      font-size: 28px;
+      color: #1e3c72;
+      margin-bottom: 8px;
+      font-weight: 700;
     }
 
-    .login-left small{
-      text-align:center;
-      color:#666;
-      margin-bottom:18px;
-      display:block;
+    .login-left small {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      display: block;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #1e3c72;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #2a5298;
+      box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+      background-color: #f8f9fa;
+    }
+
+    .form-group input::placeholder {
+      color: #999;
+    }
+
+    /* ERROR MESSAGE */
+    .error-message {
+      color: #e74c3c;
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .form-group.error input {
+      border-color: #e74c3c;
+    }
+
+    .form-group.error .error-message {
+      display: block;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .register-link a {
+      color: #2a5298;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .register-link a:hover {
+      color: #1e3c72;
     }
 
     /* RIGHT SIDE PANEL */
-    .login-right{
-      flex:1.2;
-      background:linear-gradient(135deg,#6e00ff,#12004b);
-      color:white;
-      padding:60px 40px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
+    .login-right {
+      flex: 1.1;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      padding: 50px 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .login-right h1{
-      font-size:32px;
-      font-weight:800;
-      margin-bottom:8px;
+    .login-right h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      line-height: 1.3;
     }
 
-    .login-right p{
-      opacity:.9;
-      font-size:14px;
+    .login-right p {
+      opacity: 0.95;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 25px;
     }
 
-    /* Inputs look better here */
-    .input-field{
-      width:100%;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1.5px solid #dad8ff;
-      background:#fafaff;
-      outline:none;
-      transition:.25s;
-      margin-bottom:14px;
+    .features {
+      list-style: none;
     }
 
-    .input-field:focus{
-      border-color:#6a3bff;
-      box-shadow:0 0 0 3px #cfc3ff80;
-      background:white;
+    .features li {
+      padding: 10px 0;
+      font-size: 14px;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    button{
-      width:140px;
-      border-radius:25px;
+    .features li:before {
+      content: "✓";
+      font-weight: 700;
+      font-size: 16px;
     }
 
-    .center{
-      text-align:center;
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .modal.show {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      animation: slideDown 0.3s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+
+    .modal-header h2 {
+      color: #27ae60;
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .modal-body {
+      color: #27ae60;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 30px;
+    }
+
+    .modal-button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #27ae60, #229954);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .login-container {
+        flex-direction: column;
+      }
+
+      .login-left,
+      .login-right {
+        padding: 40px 30px;
+      }
+
+      .login-right h1 {
+        font-size: 24px;
+      }
+
+      .login-right p {
+        font-size: 14px;
+      }
+
+      .features li {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-left,
+      .login-right {
+        padding: 30px 20px;
+      }
+
+      .login-left h2 {
+        font-size: 24px;
+      }
+
+      .login-right h1 {
+        font-size: 22px;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
     }
   </style>
 
@@ -116,38 +333,154 @@
     <div class="login-left">
 
       <h2>Employee Login</h2>
-      <small>Access your FinCore BMS Employee account</small>
+      <small>Access your PayWay Solutions Employee account</small>
 
-      <label>Employee ID</label>
-      <input class="input-field" id="empId" placeholder="Enter employee ID">
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="empId">Employee ID</label>
+          <input 
+            type="text" 
+            id="empId" 
+            name="empId"
+            placeholder="Enter employee ID (7-10 digits)"
+            maxlength="10"
+            required
+          >
+          <div class="error-message">Employee ID must be 7-10 digits</div>
+        </div>
 
-      <label>Password</label>
-      <input class="input-field" id="password" type="password" placeholder="Enter password">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password"
+            placeholder="Enter your password"
+            maxlength="30"
+            required
+          >
+          <div class="error-message">Password is required</div>
+        </div>
 
-      <div class="center">
-        <button onclick="login()">LOGIN</button>
-      </div>
+        <button type="submit" class="login-btn">LOGIN</button>
+      </form>
 
-      <p class="center" style="margin-top:12px;">
+      <p class="register-link">
         Don't have an account?
         <a href="employee-register.html">Register here</a>
       </p>
-
-      <div id="loginMsg" class="success center">
-        ✔ Login Successful
-      </div>
 
     </div>
 
     <!-- RIGHT SIDE -->
     <div class="login-right">
-      <h1>Welcome to FinCoreBMS by PayWay Solutions</h1>
-      <p>Log in to access your Employee Account</p>
+      <h1>Welcome to PayWay Solutions</h1>
+      <!-- <p>Access our comprehensive banking management system. Manage customers, process transactions, and handle loans efficiently.</p> -->
+      <!-- <ul class="features">
+        <li>Customer Management</li>
+        <li>Transaction Processing</li>
+        <li>Loan Management</li>
+        <li>Secure & Reliable</li>
+        <li>24/7 Support</li>
+      </ul> -->
     </div>
 
   </div>
 
-  <script src="assets/script.js"></script>
+  <!-- SUCCESS MODAL -->
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon">✓</div>
+      <div class="modal-header">
+        <h2>Login Successful!</h2>
+      </div>
+      <div class="modal-body">
+        Welcome back! You'll be redirected shortly.
+      </div>
+      <button class="modal-button" onclick="redirectToDashboard()">Continue</button>
+    </div>
+  </div>
+
+  <script>
+    // Form submission handler
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const empId = document.getElementById('empId').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      clearErrors();
+      let isValid = true;
+
+      // Validate Employee ID (7-10 digits)
+      const empIdRegex = /^[0-9]{7,10}$/;
+      if (!empId || !empIdRegex.test(empId)) {
+        showError('empId', 'Employee ID must be 7-10 digits');
+        isValid = false;
+      }
+
+      // Validate Password
+      if (!password || password.length === 0) {
+        showError('password', 'Password is required');
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Show success modal
+        document.getElementById('successModal').classList.add('show');
+      }
+    });
+
+    // Show error
+    function showError(fieldId, message) {
+      const field = document.getElementById(fieldId);
+      const formGroup = field.closest('.form-group');
+      if (formGroup) {
+        formGroup.classList.add('error');
+        const errorMsg = formGroup.querySelector('.error-message');
+        if (errorMsg) {
+          errorMsg.textContent = message;
+        }
+      }
+    }
+
+    // Clear all errors
+    function clearErrors() {
+      document.querySelectorAll('.form-group').forEach(group => {
+        group.classList.remove('error');
+      });
+    }
+
+    // Redirect to dashboard
+    function redirectToDashboard() {
+      document.getElementById('successModal').classList.remove('show');
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 300);
+    }
+
+    // Real-time validation
+    document.getElementById('empId').addEventListener('input', function(e) {
+      const empIdRegex = /^[0-9]{7,10}$/;
+      if (empIdRegex.test(e.target.value)) {
+        e.target.closest('.form-group').classList.remove('error');
+      }
+    });
+
+    document.getElementById('password').addEventListener('input', function(e) {
+      if (e.target.value.length > 0) {
+        e.target.closest('.form-group').classList.remove('error');
+      }
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('successModal');
+      if (event.target === modal) {
+        modal.classList.remove('show');
+      }
+    });
+  </script>
 
 </body>
 </html>

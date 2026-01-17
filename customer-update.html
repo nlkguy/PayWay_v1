@@ -1,80 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Customer Update PayWay Solutions</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Update - PayWay Solutions</title>
 
-    <link rel="stylesheet" href="assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* FORM CONTAINER */
+.form-container {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 700px;
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-header h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.form-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* SEARCH SECTION */
+.search-section {
+  margin-bottom: 35px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.search-section h3 {
+  color: #1e3c72;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.search-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.search-group {
+  flex: 1;
+}
+
+.search-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.search-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.search-group input:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+}
+
+.search-btn {
+  padding: 12px 35px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* UPDATE SECTION */
+.update-section {
+  display: none;
+}
+
+.update-section.visible {
+  display: block;
+}
+
+.customer-details {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border-left: 4px solid #2a5298;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* FORM GROUP */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+  background-color: #f8f9fa;
+}
+
+.form-group input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  color: #999;
+}
+
+/* ERROR MESSAGE */
+.error-message {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.form-group.error input,
+.form-group.error textarea {
+  border-color: #e74c3c;
+}
+
+.form-group.error .error-message {
+  display: block;
+}
+
+/* ALERT MESSAGE */
+.alert {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  display: none;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.alert.visible {
+  display: block;
+}
+
+.alert.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.alert.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* UPDATE BUTTON */
+.update-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.update-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.update-btn:active {
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .form-container {
+    padding: 40px 25px;
+    margin-top: 100px;
+  }
+
+  .form-header h1 {
+    font-size: 24px;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row .search-group {
+    width: 100%;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .form-container {
+    padding: 30px 20px;
+    margin-top: 120px;
+  }
+
+  .form-header h1 {
+    font-size: 22px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<div class="form-wrapper">
-
-    <h2>Customer Details Update</h2>
-    <p class="subtitle">Search and modify existing customer record</p>
-
-    <!--  SEARCH SECTION -->
-    <div class="search-row">
-
-    <input class="input-field" id="searchCustId" placeholder="C123456" style="max-width:300px;">
-
-    <button onclick="searchCustomer()">Search</button>
-
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="landing_page.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="transaction.html">Transactions</a>
+    <a href="loan-request.html">Loans</a>
+  </div>
+  <a href="dashboard.html" class="back-btn">← Back</a>
 </div>
 
+<!-- FORM CONTAINER -->
+<div class="form-container">
+  <div class="form-header">
+    <h1>Customer Details Update</h1>
+    <p>Search and modify existing customer record</p>
+  </div>
 
-    <hr style="margin:18px 0; opacity:.3;">
+  <!-- SEARCH SECTION -->
+  <div class="search-section">
+    <h3>Step 1: Search Customer</h3>
+    <div class="search-row">
+      <div class="search-group">
+        <label for="searchSSN">Enter Customer SSN ID</label>
+        <input 
+          type="text" 
+          id="searchSSN" 
+          placeholder="Enter SSN ID to search"
+          maxlength="20"
+        >
+      </div>
+      <button class="search-btn" onclick="searchCustomer()">Search</button>
+    </div>
+    <div id="searchAlert" class="alert"></div>
+  </div>
 
-    <!--  UPDATE FORM -->
-    <div id="updateSection" style="display:none;">
+  <!-- UPDATE SECTION -->
+  <div class="update-section" id="updateSection">
+    <h3 style="color: #1e3c72; font-weight: 700; margin-bottom: 20px;">Step 2: Customer Details</h3>
 
-        <div class="grid-2">
-
-            <div>
-                <label>First Name</label>
-                <input class="input-field" id="upFname">
-            </div>
-
-            <div>
-                <label>Last Name</label>
-                <input class="input-field" id="upLname">
-            </div>
-
-            <div>
-                <label>Email</label>
-                <input class="input-field" id="upEmail">
-            </div>
-
-            <div>
-                <label>Contact Number</label>
-                <input class="input-field" id="upPhone">
-            </div>
-
-            <div class="full">
-                <label>Address</label>
-                <input class="input-field" id="upAddress">
-            </div>
-
-        </div>
-
-        <div class="center">
-            <button onclick="updateCustomer()">Update Customer</button>
-        </div>
-
-        <div id="updateMsg" class="success">
-            🎉 Customer Update Successful
-        </div>
-
+    <!-- CUSTOMER READ-ONLY DETAILS -->
+    <div class="customer-details">
+      <div class="detail-item">
+        <span class="detail-label">SSN ID (Read-Only)</span>
+        <span class="detail-value" id="detailSSN"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Customer Name</span>
+        <span class="detail-value" id="detailName"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Account Number</span>
+        <span class="detail-value" id="detailAccount"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Email</span>
+        <span class="detail-value" id="detailEmail"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Account Balance</span>
+        <span class="detail-value" id="detailBalance"></span>
+      </div>
     </div>
 
-    <p class="center" style="margin-top:10px;">
-        <a href="dashboard.html">⬅ Back to Dashboard</a>
-    </p>
+    <h3 style="color: #1e3c72; font-weight: 700; margin: 30px 0 20px 0;">Step 3: Update Editable Fields</h3>
 
+    <form id="updateForm">
+      <!-- Email and Contact Number -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            placeholder="Enter email address"
+            required
+          >
+          <div class="error-message">Please enter a valid email</div>
+        </div>
+
+        <div class="form-group">
+          <label for="contact">Contact Number</label>
+          <input 
+            type="text" 
+            id="contact" 
+            name="contact"
+            placeholder="Enter 10-digit number"
+            maxlength="10"
+            required
+          >
+          <div class="error-message">Contact number must be 10 digits</div>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea 
+          id="address" 
+          name="address"
+          placeholder="Enter street, city, state, zip code"
+          maxlength="200"
+          rows="3"
+          required
+        ></textarea>
+        <div class="error-message">Address is required (max 200 characters)</div>
+      </div>
+
+      <!-- Gender and Marital Status -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <input 
+            type="text" 
+            id="gender" 
+            name="gender"
+            placeholder="Male / Female / Other"
+            required
+          >
+          <div class="error-message">Gender is required</div>
+        </div>
+
+        <div class="form-group">
+          <label for="maritalStatus">Marital Status</label>
+          <input 
+            type="text" 
+            id="maritalStatus" 
+            name="maritalStatus"
+            placeholder="Single / Married / Divorced / Widowed"
+            required
+          >
+          <div class="error-message">Marital status is required</div>
+        </div>
+      </div>
+
+      <div id="updateAlert" class="alert"></div>
+
+      <button type="submit" class="update-btn">Update Customer</button>
+    </form>
+  </div>
 </div>
 
-<script src="assets/script.js"></script>
+<script>
+// Load customers from localStorage
+function loadCustomers() {
+  return JSON.parse(localStorage.getItem('bankCustomers')) || [];
+}
+
+let currentCustomer = null;
+let allCustomers = [];
+
+// Get SSN from URL if available
+function getSsnFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('ssn');
+}
+
+// Search for customer
+function searchCustomer() {
+  const ssn = document.getElementById('searchSSN').value.trim().toUpperCase();
+  const searchAlert = document.getElementById('searchAlert');
+  
+  // Clear previous alerts
+  searchAlert.classList.remove('visible', 'success', 'error');
+
+  if (!ssn) {
+    showAlert(searchAlert, 'error', 'Please enter SSN ID to search');
+    return;
+  }
+
+  // Load customers from localStorage
+  allCustomers = loadCustomers();
+  const customer = allCustomers.find(c => c.ssn.toUpperCase() === ssn);
+
+  // Check if customer exists
+  if (customer) {
+    currentCustomer = customer;
+    populateCustomerDetails(currentCustomer);
+    document.getElementById('updateSection').classList.add('visible');
+    showAlert(searchAlert, 'success', 'Customer found! Review details below and update as needed.');
+  } else {
+    document.getElementById('updateSection').classList.remove('visible');
+    showAlert(searchAlert, 'error', 'Customer not found. Please check the SSN ID and try again.');
+  }
+}
+
+// Populate customer details
+function populateCustomerDetails(customer) {
+  document.getElementById('detailSSN').textContent = customer.ssn;
+  document.getElementById('detailName').textContent = customer.name;
+  document.getElementById('detailAccount').textContent = customer.accountNumber;
+  document.getElementById('detailEmail').textContent = customer.email;
+  document.getElementById('detailBalance').textContent = '₹' + parseFloat(customer.balance).toLocaleString('en-IN', {minimumFractionDigits: 2});
+
+  // Populate editable fields
+  document.getElementById('email').value = customer.email;
+  document.getElementById('contact').value = customer.contact;
+  document.getElementById('address').value = customer.address;
+  document.getElementById('gender').value = customer.gender;
+  document.getElementById('maritalStatus').value = customer.maritalStatus;
+}
+
+// Form submission
+document.getElementById('updateForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  if (!currentCustomer) {
+    const updateAlert = document.getElementById('updateAlert');
+    showAlert(updateAlert, 'error', 'Please search for a customer first');
+    return;
+  }
+
+  clearErrors();
+
+  const email = document.getElementById('email').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const gender = document.getElementById('gender').value.trim();
+  const maritalStatus = document.getElementById('maritalStatus').value.trim();
+
+  let isValid = true;
+
+  // Validate email
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!email || !emailRegex.test(email)) {
+    showError('email', 'Please enter a valid email address');
+    isValid = false;
+  }
+
+  // Validate contact number
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!contact || !phoneRegex.test(contact)) {
+    showError('contact', 'Contact number must be exactly 10 digits');
+    isValid = false;
+  }
+
+  // Validate address
+  if (!address || address.length === 0 || address.length > 200) {
+    showError('address', 'Address is required (max 200 characters)');
+    isValid = false;
+  }
+
+  // Validate gender
+  if (!gender) {
+    showError('gender', 'Gender is required');
+    isValid = false;
+  }
+
+  // Validate marital status
+  if (!maritalStatus) {
+    showError('maritalStatus', 'Marital status is required');
+    isValid = false;
+  }
+
+  // If validation passes, update in localStorage
+  if (isValid) {
+    currentCustomer.email = email;
+    currentCustomer.contact = contact;
+    currentCustomer.address = address;
+    currentCustomer.gender = gender;
+    currentCustomer.maritalStatus = maritalStatus;
+
+    // Update in localStorage
+    const customers = loadCustomers();
+    const index = customers.findIndex(c => c.ssn === currentCustomer.ssn);
+    if (index > -1) {
+      customers[index] = currentCustomer;
+      localStorage.setItem('bankCustomers', JSON.stringify(customers));
+    }
+
+    // Show success and redirect
+    const updateAlert = document.getElementById('updateAlert');
+    showAlert(updateAlert, 'success', '✓ Customer details updated successfully!');
+    setTimeout(() => {
+      window.location.href = 'customer-list.html';
+    }, 1500);
+  }
+});
+
+// Show error message
+function showError(fieldId, message) {
+  const field = document.getElementById(fieldId);
+  const formGroup = field.closest('.form-group');
+  formGroup.classList.add('error');
+  formGroup.querySelector('.error-message').textContent = message;
+}
+
+// Clear all errors
+function clearErrors() {
+  document.querySelectorAll('.form-group').forEach(group => {
+    group.classList.remove('error');
+  });
+}
+
+// Show alert message
+function showAlert(alertElement, type, message) {
+  alertElement.textContent = message;
+  alertElement.classList.add('visible', type);
+}
+
+// Real-time validation
+document.getElementById('email').addEventListener('input', function(e) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (emailRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+document.getElementById('contact').addEventListener('input', function(e) {
+  const phoneRegex = /^[0-9]{10}$/;
+  if (phoneRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+document.getElementById('address').addEventListener('input', function(e) {
+  if (e.target.value.trim().length > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+document.getElementById('gender').addEventListener('input', function(e) {
+  if (e.target.value.trim().length > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+document.getElementById('maritalStatus').addEventListener('input', function(e) {
+  if (e.target.value.trim().length > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Allow Enter key in search
+document.getElementById('searchSSN').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    searchCustomer();
+  }
+});
+</script>
 
 </body>
 </html>

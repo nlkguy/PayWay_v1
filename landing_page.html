@@ -2,153 +2,428 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PayWay Solutions Bank</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayWay Solutions Bank - Banking Excellence</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-body{
-  background:#f5f7fb;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
 }
 
 /* NAVBAR */
-.navbar{
-  background:white;
-  padding:20px 60px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 8px 30px rgba(0,0,0,.08);
+.navbar {
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
-.logo{
-  font-size:24px;
-  font-weight:700;
-  color:#0c074f;
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.nav-links a{
-  margin:0 15px;
-  text-decoration:none;
-  color:#333;
-  font-weight:500;
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
 }
 
-.nav-links a:hover{
-  color:#5b3bff;
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.login-btn{
-  padding:10px 25px;
-  border-radius:25px;
-  background:linear-gradient(135deg,#5b3bff,#ff00c8);
-  color:white;
-  text-decoration:none;
-  font-weight:600;
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  transition: width 0.3s ease;
 }
 
-/* HERO */
-.hero{
-  display:flex;
-  padding:80px 60px;
-  align-items:center;
-  gap:40px;
+.nav-links a:hover {
+  color: #1e3c72;
 }
 
-.hero-left{
-  flex:1;
+.nav-links a:hover::after {
+  width: 100%;
 }
 
-.hero-left h1{
-  font-size:48px;
-  color:#0c074f;
+.login-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
 }
 
-.hero-left p{
-  margin-top:15px;
-  font-size:16px;
-  color:#555;
-  max-width:500px;
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
 }
 
-.hero-left button{
-  margin-top:30px;
-  padding:15px 40px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(135deg,#5b3bff,#ff00c8);
-  color:white;
-  font-size:16px;
-  font-weight:600;
-  cursor:pointer;
-  box-shadow:0 15px 40px rgba(0,0,0,.2);
+/* HERO SECTION */
+.hero {
+  display: flex;
+  padding: 100px 60px;
+  align-items: center;
+  gap: 60px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%);
 }
 
-.hero-right{
-  flex:1;
-  display:flex;
-  justify-content:center;
+.hero-left {
+  flex: 1;
 }
 
-/* Side image */
-.side-img{
-  width:100%;
-  max-width:520px;
-  height:auto;
-  border-radius:20px;
-  box-shadow:0 30px 70px rgba(0,0,0,.25);
-  object-fit:cover;
+.hero-left h1 {
+  font-size: 56px;
+  color: #1e3c72;
+  margin-bottom: 20px;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
-@media (max-width:900px){
-  .hero{flex-direction:column; padding:40px 24px; gap:24px}
-  .hero-left h1{font-size:36px}
+.hero-left p {
+  font-size: 18px;
+  color: #666;
+  max-width: 550px;
+  margin-bottom: 40px;
+  line-height: 1.8;
 }
 
-/* SERVICES */
-.services{
-  padding:60px;
-  background:white;
+.hero-left button {
+  padding: 16px 45px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(30, 60, 114, 0.3);
 }
 
-.services h2{
-  text-align:center;
-  font-size:32px;
-  color:#0c074f;
-  margin-bottom:40px;
+.hero-left button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(30, 60, 114, 0.4);
 }
 
-.service-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
-.service{
-  background:#f7f8ff;
-  padding:30px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+.side-img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
 }
 
-.service h3{
-  margin-bottom:10px;
-  color:#0c074f;
+/* FEATURES SECTION */
+.features {
+  padding: 80px 60px;
+  background: white;
+}
+
+.features h2 {
+  text-align: center;
+  font-size: 42px;
+  color: #1e3c72;
+  margin-bottom: 60px;
+  font-weight: 800;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: linear-gradient(135deg, #f8f9fa, #eef2f7);
+  padding: 45px 35px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(30, 60, 114, 0.1);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 45px rgba(30, 60, 114, 0.15);
+  background: linear-gradient(135deg, #fff, #f0f4f9);
+}
+
+.feature-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.feature-card h3 {
+  font-size: 22px;
+  color: #1e3c72;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.feature-card p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* STATS SECTION */
+.stats {
+  padding: 80px 60px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-align: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 50px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-item h3 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.stat-item p {
+  font-size: 18px;
+  opacity: 0.95;
+}
+
+/* CTA SECTION */
+.cta {
+  padding: 80px 60px;
+  text-align: center;
+  background: white;
+}
+
+.cta h2 {
+  font-size: 42px;
+  color: #1e3c72;
+  margin-bottom: 25px;
+  font-weight: 800;
+}
+
+.cta p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  padding: 14px 35px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-btn-primary {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.cta-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.cta-btn-secondary {
+  background: white;
+  color: #1e3c72;
+  border: 2px solid #1e3c72;
+}
+
+.cta-btn-secondary:hover {
+  background: #1e3c72;
+  color: white;
 }
 
 /* FOOTER */
-.footer{
-  background:#0c074f;
-  color:white;
-  text-align:center;
-  padding:30px;
+.footer {
+  background: #1a2940;
+  color: white;
+  padding: 50px 60px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.footer-section h3 {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 14px;
+}
+
+.footer-section a:hover {
+  color: white;
+}
+
+.footer-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .hero {
+    flex-direction: column;
+    padding: 50px 30px;
+    gap: 40px;
+  }
+
+  .hero-left h1 {
+    font-size: 38px;
+  }
+
+  .features, .stats, .cta, .footer {
+    padding: 50px 30px;
+  }
+
+  .features h2, .cta h2 {
+    font-size: 32px;
+  }
+
+  .stat-item h3 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-left h1 {
+    font-size: 28px;
+  }
+
+  .hero-left p {
+    font-size: 16px;
+  }
+
+  .features h2 {
+    font-size: 26px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-btn {
+    width: 100%;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
@@ -159,55 +434,124 @@ body{
 <div class="navbar">
   <div class="logo">PayWay Solutions</div>
   <div class="nav-links">
-    <a href="landing.html">Home</a>
-    <a href="index.html">Employee Login</a>
-    <a href="employee-register.html">Register</a>
+    <a href="landing_page.html">Home</a>
     <a href="dashboard.html">Dashboard</a>
+    <a href="transaction.html">Transactions</a>
+    <a href="loan-request.html">Loans</a>
   </div>
-  <a href="index.html" class="login-btn">Login</a>
+  <a href="index.html" class="login-btn">Employee Login</a>
 </div>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <div class="hero">
   <div class="hero-left">
-    <h1>Banking Made Simple for Employees</h1>
+    <h1>Modern Banking for the Digital Age</h1>
     <p>
-      Manage customers, loans, and transactions with PayWay Solutions —
-      a modern banking platform built for secure and efficient operations.
+      Experience seamless banking operations with PayWay Solutions. 
+      Manage customers, process transactions, and handle loans with security and efficiency.
     </p>
-    <button onclick="window.location.href='employee-register.html'">Get Started</button>
+    <button onclick="window.location.href='index.html'">Login to Platform</button>
   </div>
-
   <div class="hero-right">
-    <img src="images/best-banks-in-india.jpg" alt="Banking Illustration" class="side-img">
+    <img src="images/best-banks-in-india.jpg" alt="Banking Platform" class="side-img">
   </div>
 </div>
 
-<!-- SERVICES -->
-<div class="services">
-  <h2>Our Banking Services</h2>
-
-  <div class="service-grid">
-    <div class="service">
+<!-- FEATURES SECTION -->
+<div class="features">
+  <h2>Core Services</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">👥</span>
       <h3>Customer Management</h3>
-      <p>Create, update, and manage customer records securely.</p>
+      <p>Create, update, and manage customer profiles with comprehensive account information and history tracking.</p>
     </div>
 
-    <div class="service">
-      <h3>Transaction Processing</h3>
-      <p>Deposit and withdraw money with real-time tracking.</p>
+    <div class="feature-card">
+      <span class="feature-icon">💳</span>
+      <h3>Transactions</h3>
+      <p>Process deposits and withdrawals instantly with real-time balance updates and detailed transaction records.</p>
     </div>
 
-    <div class="service">
+    <div class="feature-card">
+      <span class="feature-icon">💰</span>
       <h3>Loan Services</h3>
-      <p>Apply, update, and manage customer loans.</p>
+      <p>Request, update, and manage customer loans with transparent terms and flexible repayment options.</p>
     </div>
+  </div>
+</div>
+
+<!-- STATS SECTION -->
+<div class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <h3>50K+</h3>
+      <p>Active Customers</p>
+    </div>
+    <div class="stat-item">
+      <h3>$2B+</h3>
+      <p>Assets Under Management</p>
+    </div>
+    <div class="stat-item">
+      <h3>99.9%</h3>
+      <p>Uptime Guarantee</p>
+    </div>
+    <div class="stat-item">
+      <h3>24/7</h3>
+      <p>Support Available</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA SECTION -->
+<div class="cta">
+  <h2>Ready to Get Started?</h2>
+  <p>Join thousands of employees managing banking operations securely with PayWay Solutions.</p>
+  <div class="cta-buttons">
+    <button class="cta-btn cta-btn-primary" onclick="window.location.href='index.html'">Login Now</button>
+    <button class="cta-btn cta-btn-secondary" onclick="window.location.href='employee-register.html'">Create Account</button>
   </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  © 2026 PayWay Solutions Banking System
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>PayWay Solutions</h3>
+      <p style="font-size: 14px; color: rgba(255, 255, 255, 0.8);">Providing secure and efficient banking services for modern financial operations.</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="landing_page.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="transaction.html">Transactions</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="customer-create.html">Customer Creation</a></li>
+        <li><a href="loan-request.html">Loan Management</a></li>
+        <li><a href="employee-register.html">Employee Portal</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Security</h3>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Security Center</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-divider">
+    © 2026 PayWay Solutions Banking System. All rights reserved.
+  </div>
 </div>
 
 </body>
