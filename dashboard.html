@@ -410,7 +410,7 @@ tbody tr:hover {
   <div class="sidebar">
 
     <div class="logo">
-      <span>PayWay Solutions</span>
+      <span>FinCoreBMS v1.3</span>
     </div>
     <div class="sidebar-subtitle">Employee Dashboard</div>
 
@@ -443,6 +443,7 @@ tbody tr:hover {
       <div class="sidebar-label">Loans</div>
       <a href="loan-request.html">Request Loan</a>
       <a href="loan-update.html">Update Loan</a>
+      <a href="loan-list.html">View Loans</a>
     </div>
 
   </div>
@@ -451,7 +452,8 @@ tbody tr:hover {
   <div class="main-area">
 
     <div class="topbar">
-      <h1>Employee Dashboard</h1>
+      <h1>Welcome, <span id="employeeIdDisplay">[Employee Name/ID Placeholder]</span></h1>
+      
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
@@ -541,6 +543,11 @@ function loadDashboardData() {
   
   // Create chart
   createSummaryChart(transactions);
+
+  // set employee name/id display (placeholder logic)
+  // localStorage.setItem('employeeId', employeeId); } // This should be set during login
+  const employeeId = localStorage.getItem('employeeId') || '[EmployeeID Placeholder]';
+  document.getElementById('employeeIdDisplay').textContent = employeeId;
 }
 
 // Display recent transactions

@@ -404,6 +404,7 @@ tbody tr:hover {
 
 <body>
 
+
 <div class="dashboard-layout">
 
   <!-- Sidebar -->
@@ -451,8 +452,11 @@ tbody tr:hover {
   <div class="main-area">
 
     <div class="topbar">
-      <h1>Employee Dashboard</h1>
-      <button class="logout-btn" onclick="logout()">Logout</button>
+
+      <h1>EmployeeID's Dashboard</h1>
+        <h1 id="dashboardTitle">Employee Dashboard</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+
     </div>
 
     <!-- Stats Cards -->
@@ -521,9 +525,7 @@ tbody tr:hover {
 </div>
 
 <script>
-function logout(){
-  window.location.href="index.html";
-}
+
 
 // Load data from localStorage
 function loadDashboardData() {
@@ -601,4 +603,26 @@ function createSummaryChart(transactions) {
 
 // Initialize dashboard
 window.addEventListener('DOMContentLoaded', loadDashboardData);
+
+// Initialize and show logged-in employee id (if any)
+function initDashboardUser() {
+  const emp = localStorage.getItem('employeeId');
+  const title = document.getElementById('dashboardTitle');
+  if (emp && title) {
+    // show friendly greeting with employee id
+    title.textContent = `Welcome, Employee ${emp}`;
+  }
+}
+
+window.addEventListener('DOMContentLoaded', initDashboardUser);
+
+function logout(){
+  // clear stored employee info and go back to login
+  try { localStorage.removeItem('employeeId'); } catch(e){}
+  window.location.href = 'employee-login.html';
+}
+
 </script>
+
+</body>
+</html>

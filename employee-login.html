@@ -367,9 +367,12 @@ body {
   <div class="logo">PayWay Solutions</div>
   <div class="nav-links">
     <a href="landing_page.html">Home</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="transaction-list.html">Transactions</a>
-    <a href="loan-request.html">Loans</a>
+    <a href="misc/pricing.html">Pricing</a>
+    <a href="misc/about-us.html">About</a>
+    <a href="misc/contact-us.html">Contact</a>
+    <a href="misc/privacy-policy.html">Privacy</a>
+    <a href="misc/security-policy.html">Security</a>
+    <a href="misc/terms-of-service.html">Terms</a>
   </div>
   <a href="landing_page.html" class="back-btn">← Back</a>
 </div>
@@ -378,7 +381,7 @@ body {
 <div class="login-container">
   <div class="login-header">
     <h1>Employee Login</h1>
-    <p>Access your banking operations portal</p>
+    <p>Access your Employee Dashboard</p>
   </div>
 
   <form id="loginForm">
@@ -389,7 +392,7 @@ body {
         id="employeeId" 
         name="employeeId"
         placeholder="Enter your 7-digit Employee ID"
-        maxlength="10"
+        maxlength="7"
         required
       >
       <div class="error-message">Employee ID must be 7-10 characters</div>
@@ -424,7 +427,7 @@ body {
       <h2>Login Successful!</h2>
     </div>
     <div class="modal-body">
-      Employee Registration successful.
+      Employee Login successful.
     </div>
     <button class="modal-button" onclick="redirectHome()">Continue to Home</button>
   </div>
@@ -443,14 +446,29 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   clearErrors();
 
   // Validate Employee ID
-  if (employeeId.length < 7 || employeeId.length > 10) {
-    showError('employeeId', 'Employee ID must be 7-10 characters');
+  if (employeeId.length < 7 || isNaN(employeeId)) {
+    showError('employeeId', 'Employee ID must be 7 digits');
     return;
   }
 
   // Validate Password
-  if (!password || password.length === 0) {
-    showError('password', 'Password is required');
+  if (!password || password.length > 30 || password.length < 8 ) {
+    showError('password', 'Password length 8 to 30 characters are required');
+    return;
+  }
+  // if password doent contain at least one special character, atleast a number , atleast a upper and lowercase ,  show error
+  const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+  const numberPattern = /[0-9]/;
+  const upperCasePattern = /[A-Z]/;
+  const lowerCasePattern = /[a-z]/;
+
+  if (
+    !specialCharPattern.test(password) ||
+    !numberPattern.test(password) ||
+    !upperCasePattern.test(password) ||
+    !lowerCasePattern.test(password)
+  ) {
+    showError('password', 'Password must contain at least one special character, one number, one uppercase and one lowercase letter');
     return;
   }
 
@@ -459,8 +477,12 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     return;
   }
 
-  // If validation passes, show success modal
-  showSuccessModal();
+  // If validation passes, redirect directly to the dashboard (no modal)
+  // store the logged in employee id so other pages (dashboard) can show it
+  try { localStorage.setItem('employeeId', employeeId); } catch(e) { // throw error in console
+    console.error('LocalStorage is not available.', e);
+  }
+  window.location.href = 'dashboard.html';
 });
 
 // Show error message
@@ -486,7 +508,8 @@ function showSuccessModal() {
 function redirectHome() {
   document.getElementById('successModal').style.display = 'none';
   setTimeout(() => {
-    window.location.href = 'landing_page.html';
+    // After successful employee login, go to the employee dashboard
+    window.location.href = 'dashboard.html';
   }, 300);
 }
 

@@ -437,7 +437,7 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">PayWay Solutions</div>
+  <div class="logo">FinCore</div>
   <div class="nav-links">
     <a href="landing_page.html">Home</a>
     <a href="dashboard.html">Dashboard</a>
@@ -484,11 +484,25 @@ function loadCustomerProfile() {
     return;
   }
 
-  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [];
-  const customer = customers.find(c => c.ssn === ssn);
+  // Debug: log the requested SSN and what's currently in localStorage
+  console.log('[debug] requested ssn:', ssn);
+  const raw = localStorage.getItem('bankCustomers');
+  let customers = [];
+  try {
+    customers = JSON.parse(raw) || [];
+  } catch (err) {
+    console.error('[debug] failed parsing bankCustomers from localStorage:', err, 'raw:', raw);
+    customers = [];
+  }
+  console.log('[debug] bankCustomers length:', customers.length, customers);
+
+  // Try flexible matching (string/number) to avoid type mismatches
+  const customer = customers.find(c => c.ssn === ssn || String(c.ssn) === String(ssn));
 
   if (!customer) {
-    showError();
+    // If not found, provide debug info in console and show error state
+    console.warn('[debug] customer not found for ssn:', ssn);
+    showError(customers);
     return;
   }
 
@@ -602,8 +616,25 @@ function displayProfile(customer) {
 }
 
 // Show error state
-function showError() {
-  document.getElementById('errorState').style.display = 'block';
+function showError(customers) {
+  const errorState = document.getElementById('errorState');
+  // If customers provided, render a short debug list to help diagnose
+  if (Array.isArray(customers)) {
+    const list = customers.map(c => `SSN: ${c.ssn} — Name: ${c.name}`).join('<br>');
+    // append debug details below existing message
+    const debugDiv = document.createElement('div');
+    debugDiv.style.marginTop = '16px';
+    debugDiv.style.fontSize = '13px';
+    debugDiv.style.color = '#666';
+    debugDiv.innerHTML = `<strong>Debug: stored customers</strong><br>${list || 'none'}`;
+    // remove any previous debug info
+    const prev = errorState.querySelector('.debug-info');
+    if (prev) prev.remove();
+    debugDiv.className = 'debug-info';
+    errorState.appendChild(debugDiv);
+  }
+
+  errorState.style.display = 'block';
   document.getElementById('profileContainer').innerHTML = '';
 }
 

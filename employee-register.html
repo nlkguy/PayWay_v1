@@ -136,7 +136,8 @@ body {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 14px 16px;
   border: 2px solid #e0e0e0;
@@ -147,8 +148,23 @@ body {
   resize: vertical;
 }
 
+/* Style select dropdown arrow and spacing to match inputs */
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #999 50%),
+                    linear-gradient(135deg, #999 50%, transparent 50%),
+                    linear-gradient(#fff, #fff);
+  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px), 0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+  padding-right: 42px;
+}
+
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: #2a5298;
   box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
@@ -160,7 +176,8 @@ body {
   color: #999;
 }
 
-.form-group input:disabled {
+.form-group input:disabled,
+.form-group select:disabled {
   background-color: #f5f5f5;
   cursor: not-allowed;
   color: #666;
@@ -175,7 +192,8 @@ body {
 }
 
 .form-group.error input,
-.form-group.error textarea {
+.form-group.error textarea,
+.form-group.error select {
   border-color: #e74c3c;
 }
 
@@ -441,7 +459,7 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">PayWay Solutions</div>
+  <div class="logo">FinCoreBMS</div>
   <div class="nav-links">
     <a href="landing_page.html">Home</a>
     <a href="dashboard.html">Dashboard</a>
@@ -459,9 +477,11 @@ body {
   </div>
 
   <form id="registrationForm">
+
+    <div class="form-row">
     <!-- Employee ID (Auto-generated, non-editable) -->
     <div class="form-group">
-      <label for="employeeId">Employee ID</label>
+      <label for="employeeId">Employee ID (Auto-Generated)</label>
       <input 
         type="text" 
         id="employeeId" 
@@ -469,6 +489,18 @@ body {
         placeholder="Auto-generated"
         disabled
       >
+    </div>
+    <div class="form-group">
+      <label for="employeeRole">Employee Role</label>
+      <select id="employeeRole" name="employeeRole" required>
+        <option value="">Select Role</option>
+        <option value="Teller">Teller</option>
+        <option value="Manager">Manager</option>
+        <option value="Auditor">Auditor</option>
+        <option value="Clerk">Clerk</option>
+      </select>
+    </div>
+
     </div>
 
     <!-- First Name and Last Name -->
@@ -542,6 +574,37 @@ body {
       </div>
     </div>
 
+
+    <!-- Gender and date of birth , select dropdwon for gender and  date seelcted for dob-->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="emp_gender">Gender</label>
+        <select id="emp_gender" name="emp_gender" required>
+          <option value="">Select gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+        <div class="error-message">Please select a gender</div>
+      </div>
+
+      <div class="form-group">
+        <label for="emp_dob">Date of Birth</label>
+        <input 
+          type="date" 
+          id="emp_dob" 
+          name="emp_dob"
+          placeholder="Select date of birth"
+          dateformat="dd-mm-yyyy"
+          required
+        >
+        <div class="error-message">Date of birth is required</div>
+      </div>
+    </div>
+
+    
+
     <!-- Address -->
     <div class="form-group">
       <label for="address">Address</label>
@@ -569,6 +632,40 @@ body {
       >
       <div class="error-message">Contact number must be 10 digits</div>
     </div>
+
+    <!-- Aadhar and PAN-->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="emp_aadhaar">Aadhaar Number</label>
+        <input 
+          type="number" 
+          id="emp_aadhaar" 
+          name="emp_aadhaar"
+          placeholder="12 digits"
+          maxlength="12"
+          minlength="12"
+          required
+        >
+        <div class="error-message">12 digit Aadhaar number is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="emp_pan">PAN Number</label>
+        <input 
+          type="text" 
+          id="emp_pan" 
+          name="emp_pan"
+          placeholder="10 characters"
+          maxlength="10"
+          minlength="10"
+          nospecialcharacters="true"
+          required
+        >
+        <div class="error-message">10 character PAN number is required, Alphanumeric , no special characters</div>
+      </div>
+    </div>
+
+    
 
     <button type="submit" class="register-btn">Register</button>
   </form>
@@ -634,6 +731,8 @@ document.getElementById('registrationForm').addEventListener('submit', function(
   const confirmPassword = document.getElementById('confirmPassword').value;
   const address = document.getElementById('address').value.trim();
   const contactNumber = document.getElementById('contactNumber').value.trim();
+  const gender = document.getElementById('emp_gender').value;
+  const empDob = document.getElementById('emp_dob').value;
 
   let isValid = true;
 
@@ -679,6 +778,36 @@ document.getElementById('registrationForm').addEventListener('submit', function(
   const phoneRegex = /^[0-9]{10}$/;
   if (!contactNumber || !phoneRegex.test(contactNumber)) {
     showError('contactNumber', 'Contact number must be exactly 10 digits');
+    isValid = false;
+  }
+
+  // Validate Gender
+  if (!gender || gender.trim() === '') {
+    showError('emp_gender', 'Please select a gender');
+    isValid = false;
+  }
+
+  // Validate DOB , error if age is less than 18
+  age = function(dob) {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+  if (!empDob || age(empDob) < 18) {
+    showError('emp_dob', 'Date of birth is required and age must be at least 18 years');
+    isValid = false;
+  }
+  if(age(empDob) < 0){
+    showError('emp_dob', 'Wow !! who invented time travel ? Future date not allowed');
+    isValid = false;
+  }
+  if(age(empDob) > 100){
+    showError('emp_dob', 'Too old to work here ! Age must be less than 100 years');
     isValid = false;
   }
 
@@ -766,6 +895,29 @@ document.getElementById('contactNumber').addEventListener('input', function(e) {
     e.target.closest('.form-group').classList.remove('error');
   }
 });
+
+// Real-time validation for gender dropdown
+document.getElementById('emp_gender').addEventListener('change', function(e) {
+  if (e.target.value && e.target.value.trim() !== '') {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for DOB
+document.getElementById('emp_dob').addEventListener('input', function(e) {
+  if (e.target.value) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// validate PAN number to be alphanumeric only , NNNNN1111N - N for alphabets and 1 for digits
+document.getElementById('emp_pan').addEventListener('input', function(e) {
+  const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/i;
+  if (panRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
 </script>
 
 </body>
