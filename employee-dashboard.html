@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PayWay Solutions – Employee Dashboard</title>
+<title>FinCoreBMS – Employee Dashboard</title>
 
 <!-- Poppins Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -39,6 +39,58 @@ body {
   overflow-y: auto;
   box-shadow: 0 4px 30px rgba(30, 60, 114, 0.2);
 }
+
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
 
 /* LOGO */
 .logo {
@@ -404,13 +456,15 @@ tbody tr:hover {
 
 <body>
 
+  
+
 <div class="dashboard-layout">
 
   <!-- Sidebar -->
   <div class="sidebar">
 
     <div class="logo">
-      <span>FinCoreBMS v1.3</span>
+      <span>FinCoreBMS</span>
     </div>
     <div class="sidebar-subtitle">Employee Dashboard</div>
 
@@ -420,23 +474,33 @@ tbody tr:hover {
     </div>
 
     <div class="sidebar-section">
-      <div class="sidebar-label">Employees</div>
+      <div class="sidebar-label">Employee Management</div>
       <a href="employee-register.html">Register Employee</a>
-      <a href="employee-login.html">Employee Login</a>
+      <!-- <a href="employee-login.html">Employee Login</a> -->
+      <a href="employee-update.html">Update Employee</a>
+      <a href="employee-delete.html">Delete Employee</a>
     </div>
 
     <div class="sidebar-section">
-      <div class="sidebar-label">Customers</div>
-      <a href="customer-create.html">Create Customer</a>
+      <div class="sidebar-label">Customer Management</div>
+      <a href="customer-register.html">Create Customer</a>
       <a href="customer-list.html">View Customers</a>
       <a href="customer-update.html">Update Customer</a>
       <a href="customer-delete.html">Delete Customer</a>
     </div>
 
     <div class="sidebar-section">
-      <div class="sidebar-label">Transactions</div>
+      <div class="sidebar-label">Transaction Management</div>
       <a href="transaction-create.html">Create Transaction</a>
       <a href="transaction-list.html">View Transactions</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Accounts Management</div>
+      <a href="account-create.html">Create Account</a>
+      <a href="account-list.html">View Accounts</a>
+      <a href="account-update.html">Update Account</a>
+      <a href="account-list.html">Accounts List</a>
     </div>
 
     <div class="sidebar-section">

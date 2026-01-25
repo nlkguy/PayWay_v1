@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Employee Login - PayWay Solutions</title>
+<title>FinCoreBMS - Employee Login</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -364,15 +364,13 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">PayWay Solutions</div>
+  <div class="logo">FinCoreBMS</div>
   <div class="nav-links">
-    <a href="landing_page.html">Home</a>
-    <a href="misc/pricing.html">Pricing</a>
-    <a href="misc/about-us.html">About</a>
-    <a href="misc/contact-us.html">Contact</a>
-    <a href="misc/privacy-policy.html">Privacy</a>
-    <a href="misc/security-policy.html">Security</a>
-    <a href="misc/terms-of-service.html">Terms</a>
+    <a href="index.html">Home</a>
+    <a href="misc-about-us.html">About</a>
+    <a href="misc-contact-us.html">Contact</a>
+    <a href="misc-privacy-policy.html">Privacy</a>
+    <a href="misc-security-policy.html">Security</a>
   </div>
   <a href="landing_page.html" class="back-btn">← Back</a>
 </div>
@@ -395,7 +393,7 @@ body {
         maxlength="7"
         required
       >
-      <div class="error-message">Employee ID must be 7-10 characters</div>
+      <div class="error-message">Employee ID must be 7 digits</div>
     </div>
 
     <div class="form-group">
@@ -434,15 +432,13 @@ body {
 </div>
 
 <script>
-// Form submission handler
+// handle login form submission
 document.getElementById('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  // Get form values
   const employeeId = document.getElementById('employeeId').value.trim();
   const password = document.getElementById('password').value;
 
-  // Clear previous error states
   clearErrors();
 
   // Validate Employee ID
@@ -477,12 +473,22 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     return;
   }
 
-  // If validation passes, redirect directly to the dashboard (no modal)
+  // If validation passes, show the success modal instead of redirecting immediately.
   // store the logged in employee id so other pages (dashboard) can show it
-  try { localStorage.setItem('employeeId', employeeId); } catch(e) { // throw error in console
+  try { 
+    localStorage.setItem('employeeId', employeeId); 
+    localStorage.setItem('isEmployeeLoggedIn', 'true'); // set login status (camelCase key)
+    console.log('Employee logged in:', employeeId);
+  } catch(e) { // throw error in console
     console.error('LocalStorage is not available.', e);
   }
-  window.location.href = 'dashboard.html';
+  // Show modal; the modal's Continue button triggers redirectHome()
+  try {
+    showSuccessModal();
+  } catch (e) {
+    console.error('Failed to show success modal, redirecting directly.', e);
+    window.location.href = 'employee-dashboard.html';
+  }
 });
 
 // Show error message
@@ -509,8 +515,8 @@ function redirectHome() {
   document.getElementById('successModal').style.display = 'none';
   setTimeout(() => {
     // After successful employee login, go to the employee dashboard
-    window.location.href = 'dashboard.html';
-  }, 300);
+    window.location.href = 'employee-dashboard.html';
+  }, 100);
 }
 
 // Close modal when clicking outside
