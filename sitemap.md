@@ -32,6 +32,7 @@
 ---
 
 - account-create
+- account-update
 - account-delete
 - account-deposit
 - account-withdraw
