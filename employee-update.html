@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Employee - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1000px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* FORM CARD */
+.form-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+/* FORM HEADER */
+.form-header {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  padding: 40px;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.form-header p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* FORM AREA */
+.form-area {
+  padding: 40px;
+}
+
+.form-section {
+  margin-bottom: 40px;
+}
+
+.form-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3c72;
+  margin-bottom: 25px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-section h3::before {
+  content: '';
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  border-radius: 2px;
+}
+
+/* GRID LAYOUT */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: span 2;
+}
+
+label {
+  font-weight: 600;
+  color: #1e3c72;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+  background: #f8f9fa;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* CHECKBOX & RADIO */
+.checkbox-group,
+.radio-group {
+  margin: 15px 0;
+}
+
+.checkbox-item,
+.radio-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.checkbox-item input[type="checkbox"],
+.radio-item input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.checkbox-item label,
+.radio-item label {
+  margin: 0;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* FORM ACTIONS */
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 2px solid #e0e0e0;
+}
+
+button {
+  padding: 14px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.btn-cancel {
+  background: #f0f0f0;
+  color: #555;
+  border: 2px solid #e0e0e0;
+}
+
+.btn-cancel:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.btn-reset {
+  background: #fff3e0;
+  color: #e65100;
+  border: 2px solid #ffe0b2;
+}
+
+.btn-reset:hover {
+  background: #ffe0b2;
+  transform: translateY(-2px);
+}
+
+/* SUCCESS MESSAGE */
+.alert {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border-left: 4px solid;
+  display: none;
+}
+
+.alert.success {
+  background: #d4edda;
+  color: #155724;
+  border-left-color: #28a745;
+  display: block;
+}
+
+.alert.error {
+  background: #f8d7da;
+  color: #721c24;
+  border-left-color: #f5c6cb;
+  display: block;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full {
+    grid-column: span 1;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .container {
+    margin-top: 200px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .form-header {
+    padding: 30px 20px;
+  }
+
+  .form-area {
+    padding: 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">💼 PayWay</div>
+  <div class="nav-links">
+    <a href="employee-list.html" class="back-btn">← Back to List</a>
+  </div>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+  <div class="page-header">
+    <h1>Update Employee</h1>
+    <p>Edit employee information and details</p>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="form-card">
+    <!-- FORM HEADER -->
+    <div class="form-header">
+      <h2>John Doe (ID: EMP-001)</h2>
+      <p>Update employee details below</p>
+    </div>
+
+    <!-- FORM AREA -->
+    <div class="form-area">
+      <div class="alert success" id="successMsg">✓ Employee updated successfully!</div>
+      <div class="alert error" id="errorMsg">✗ An error occurred while updating the employee.</div>
+
+      <!-- PERSONAL INFORMATION -->
+      <div class="form-section">
+        <h3>Personal Information</h3>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" value="John" placeholder="Enter first name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" value="Doe" placeholder="Enter last name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" value="john.doe@payway.com" placeholder="Enter email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" value="+1 (555) 123-4567" placeholder="Enter phone number">
+          </div>
+
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="text" id="dob" value="January 15, 1990" placeholder="Enter date of birth">
+          </div>
+
+          <div class="form-group">
+            <label for="nationality">Nationality</label>
+            <input type="text" id="nationality" value="American" placeholder="Enter nationality">
+          </div>
+        </div>
+      </div>
+
+      <!-- EMPLOYMENT INFORMATION -->
+      <div class="form-section">
+        <h3>Employment Information</h3>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="empId">Employee ID</label>
+            <input type="text" id="empId" value="EMP-2023-001" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="department">Department *</label>
+            <select id="department" required>
+              <option selected>Operations</option>
+              <option>Human Resources</option>
+              <option>Finance</option>
+              <option>Information Technology</option>
+              <option>Marketing</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="designation">Designation *</label>
+            <input type="text" id="designation" value="Senior Officer" placeholder="Enter designation" required>
+          </div>
+
+          <div class="form-group">
+            <label for="reportingTo">Reporting Manager *</label>
+            <select id="reportingTo" required>
+              <option selected>Sarah Johnson</option>
+              <option>Emma Wilson</option>
+              <option>Christopher White</option>
+              <option>David Martinez</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="joinDate">Join Date *</label>
+            <input type="text" id="joinDate" value="March 10, 2023" placeholder="Enter join date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="status">Employment Status *</label>
+            <select id="status" required>
+              <option selected>Active</option>
+              <option>Inactive</option>
+              <option>On Leave</option>
+              <option>Terminated</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT INFORMATION -->
+      <div class="form-section">
+        <h3>Contact Information</h3>
+        
+        <div class="form-grid">
+          <div class="form-group full">
+            <label for="address">Address</label>
+            <input type="text" id="address" value="123 Main Street, New York, NY 10001" placeholder="Enter full address">
+          </div>
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" value="New York" placeholder="Enter city">
+          </div>
+
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" value="New York" placeholder="Enter state">
+          </div>
+
+          <div class="form-group">
+            <label for="zipCode">Zip Code</label>
+            <input type="text" id="zipCode" value="10001" placeholder="Enter zip code">
+          </div>
+
+          <div class="form-group">
+            <label for="emergencyContact">Emergency Contact</label>
+            <input type="text" id="emergencyContact" value="Jane Doe (Sister)" placeholder="Enter emergency contact">
+          </div>
+
+          <div class="form-group">
+            <label for="emergencyPhone">Emergency Phone</label>
+            <input type="tel" id="emergencyPhone" value="+1 (555) 987-6543" placeholder="Enter emergency contact phone">
+          </div>
+        </div>
+      </div>
+
+      <!-- ROLES & PERMISSIONS -->
+      <div class="form-section">
+        <h3>Roles & Permissions</h3>
+        
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Assign Roles</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="roleView" checked>
+                <label for="roleView">View Customer Records</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="roleCreate" checked>
+                <label for="roleCreate">Create Customer Accounts</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="roleEdit" checked>
+                <label for="roleEdit">Edit Customer Information</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="roleDelete">
+                <label for="roleDelete">Delete Customer Records</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="roleLoan" checked>
+                <label for="roleLoan">Manage Loan Requests</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="roleTransaction" checked>
+                <label for="roleTransaction">Process Transactions</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM ACTIONS -->
+      <div class="form-actions">
+        <button type="button" class="btn-save" onclick="updateEmployee()">Save Changes</button>
+        <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
+        <button type="button" class="btn-cancel" onclick="window.location.href='employee-list.html'">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateEmployee() {
+  // Validate required fields
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const designation = document.getElementById('designation').value.trim();
+
+  if (!firstName || !lastName || !email || !designation) {
+    document.getElementById('errorMsg').style.display = 'block';
+    document.getElementById('successMsg').style.display = 'none';
+    return;
+  }
+
+  // Show success message
+  document.getElementById('successMsg').style.display = 'block';
+  document.getElementById('errorMsg').style.display = 'none';
+
+  // Hide success message after 3 seconds
+  setTimeout(() => {
+    document.getElementById('successMsg').style.display = 'none';
+  }, 3000);
+}
+
+function resetForm() {
+  document.getElementById('firstName').value = 'John';
+  document.getElementById('lastName').value = 'Doe';
+  document.getElementById('email').value = 'john.doe@payway.com';
+  document.getElementById('phone').value = '+1 (555) 123-4567';
+  document.getElementById('dob').value = 'January 15, 1990';
+  document.getElementById('nationality').value = 'American';
+  document.getElementById('department').value = 'Operations';
+  document.getElementById('designation').value = 'Senior Officer';
+  document.getElementById('reportingTo').value = 'Sarah Johnson';
+  document.getElementById('joinDate').value = 'March 10, 2023';
+  document.getElementById('status').value = 'Active';
+  document.getElementById('address').value = '123 Main Street, New York, NY 10001';
+  document.getElementById('city').value = 'New York';
+  document.getElementById('state').value = 'New York';
+  document.getElementById('zipCode').value = '10001';
+  document.getElementById('emergencyContact').value = 'Jane Doe (Sister)';
+  document.getElementById('emergencyPhone').value = '+1 (555) 987-6543';
+}
+</script>
+
+</body>
+</html>

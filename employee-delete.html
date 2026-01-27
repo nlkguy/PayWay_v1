@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Employee - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* CONTAINER */
+.container {
+  max-width: 800px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* DELETE CARD */
+.delete-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  border-left: 5px solid #e74c3c;
+}
+
+/* WARNING SECTION */
+.warning-section {
+  background: #fff3cd;
+  border-bottom: 2px solid #ffc107;
+  padding: 25px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.warning-icon {
+  font-size: 40px;
+  flex-shrink: 0;
+}
+
+.warning-content h3 {
+  color: #856404;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.warning-content p {
+  color: #856404;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* EMPLOYEE INFO SECTION */
+.info-section {
+  padding: 40px;
+}
+
+.info-section h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e3c72;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.employee-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  margin-bottom: 30px;
+}
+
+.employee-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin: 0 auto 15px;
+  border: 3px solid white;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.2);
+}
+
+.employee-info {
+  text-align: center;
+}
+
+.employee-info h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e3c72;
+  margin-bottom: 8px;
+}
+
+.employee-info p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* DETAILS TABLE */
+.details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.details-table tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.details-table tr:last-child {
+  border-bottom: none;
+}
+
+.details-table td {
+  padding: 14px 0;
+  font-size: 14px;
+}
+
+.details-table td:first-child {
+  font-weight: 600;
+  color: #1e3c72;
+  width: 40%;
+}
+
+.details-table td:last-child {
+  color: #555;
+}
+
+/* REASON SECTION */
+.reason-section {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  margin-bottom: 30px;
+}
+
+.reason-section label {
+  display: block;
+  font-weight: 600;
+  color: #1e3c72;
+  margin-bottom: 12px;
+}
+
+.reason-section textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  resize: vertical;
+  min-height: 80px;
+  transition: all 0.3s ease;
+}
+
+.reason-section textarea:focus {
+  outline: none;
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.reason-hint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 8px;
+}
+
+/* CONFIRMATION SECTION */
+.confirmation-section {
+  background: #ffebee;
+  border: 2px dashed #e74c3c;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.confirmation-section h4 {
+  color: #c62828;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  cursor: pointer;
+  accent-color: #e74c3c;
+}
+
+.checkbox-item label {
+  margin: 0;
+  color: #c62828;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+button {
+  padding: 14px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.btn-delete:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(231, 76, 60, 0.4);
+}
+
+.btn-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  background: #f0f0f0;
+  color: #555;
+  border: 2px solid #e0e0e0;
+}
+
+.btn-cancel:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.modal-content h2 {
+  color: #c62828;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.modal-content p {
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.modal-buttons button {
+  flex: 1;
+}
+
+.btn-confirm-delete {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.btn-confirm-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(231, 76, 60, 0.4);
+}
+
+.btn-modal-cancel {
+  background: #e0e0e0;
+  color: #555;
+}
+
+.btn-modal-cancel:hover {
+  background: #d0d0d0;
+}
+
+/* SUCCESS MESSAGE */
+.alert {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border-left: 4px solid;
+  display: none;
+}
+
+.alert.success {
+  background: #d4edda;
+  color: #155724;
+  border-left-color: #28a745;
+  display: block;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .container {
+    margin-top: 200px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .info-section {
+    padding: 20px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .warning-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .warning-icon {
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">💼 PayWay</div>
+  <div class="nav-links">
+    <a href="employee-list.html" class="back-btn">← Back to List</a>
+  </div>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+  <div class="page-header">
+    <h1>Delete Employee</h1>
+    <p>Permanently remove an employee from the system</p>
+  </div>
+
+  <div class="alert success" id="successMsg">✓ Employee deleted successfully! Redirecting...</div>
+
+  <!-- DELETE CARD -->
+  <div class="delete-card">
+    <!-- WARNING SECTION -->
+    <div class="warning-section">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-content">
+        <h3>This Action Cannot Be Undone</h3>
+        <p>Deleting an employee will permanently remove all their records from the system. Please proceed with caution.</p>
+      </div>
+    </div>
+
+    <!-- INFO SECTION -->
+    <div class="info-section">
+      <h2>Confirm Employee Deletion</h2>
+
+      <!-- EMPLOYEE CARD -->
+      <div class="employee-card">
+        <div class="employee-avatar">👤</div>
+        <div class="employee-info">
+          <h3>John Doe</h3>
+          <p>Employee ID: <strong>EMP-001</strong></p>
+          <p>Senior Officer | Operations Department</p>
+        </div>
+      </div>
+
+      <!-- DETAILS TABLE -->
+      <table class="details-table">
+        <tr>
+          <td>Full Name</td>
+          <td>John Doe</td>
+        </tr>
+        <tr>
+          <td>Email Address</td>
+          <td>john.doe@payway.com</td>
+        </tr>
+        <tr>
+          <td>Phone Number</td>
+          <td>+1 (555) 123-4567</td>
+        </tr>
+        <tr>
+          <td>Department</td>
+          <td>Operations</td>
+        </tr>
+        <tr>
+          <td>Designation</td>
+          <td>Senior Officer</td>
+        </tr>
+        <tr>
+          <td>Join Date</td>
+          <td>March 10, 2023</td>
+        </tr>
+        <tr>
+          <td>Current Status</td>
+          <td>
+            <span style="background: #d4edda; color: #155724; padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 12px; display: inline-block;">Active</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Years of Service</td>
+          <td>2 years, 10 months</td>
+        </tr>
+      </table>
+
+      <!-- REASON SECTION -->
+      <div class="reason-section">
+        <label for="reason">Reason for Deletion (Optional)</label>
+        <textarea id="reason" placeholder="Enter the reason for deleting this employee record..."></textarea>
+        <p class="reason-hint">This will be logged for audit purposes</p>
+      </div>
+
+      <!-- CONFIRMATION SECTION -->
+      <div class="confirmation-section">
+        <h4>Confirm Deletion</h4>
+        <div class="checkbox-item">
+          <input type="checkbox" id="confirmDelete">
+          <label for="confirmDelete">I understand that this action will permanently delete the employee record</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="confirmAudit">
+          <label for="confirmAudit">I understand this action will be logged and cannot be reversed</label>
+        </div>
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="action-buttons">
+        <button type="button" class="btn-delete" id="deleteBtn" disabled onclick="confirmDelete()">Delete Employee</button>
+        <button type="button" class="btn-cancel" onclick="window.location.href='employee-list.html'">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<div class="modal" id="confirmModal">
+  <div class="modal-content">
+    <div class="modal-icon">🗑️</div>
+    <h2>Confirm Deletion?</h2>
+    <p>Are you absolutely sure you want to delete John Doe's employee record? This action cannot be undone and will be permanently logged in the system.</p>
+    <div class="modal-buttons">
+      <button class="btn-confirm-delete" onclick="deleteEmployee()">Yes, Delete</button>
+      <button class="btn-modal-cancel" onclick="closeConfirmModal()">No, Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Enable/Disable delete button based on checkboxes
+document.getElementById('confirmDelete').addEventListener('change', updateDeleteButton);
+document.getElementById('confirmAudit').addEventListener('change', updateDeleteButton);
+
+function updateDeleteButton() {
+  const confirmDelete = document.getElementById('confirmDelete').checked;
+  const confirmAudit = document.getElementById('confirmAudit').checked;
+  document.getElementById('deleteBtn').disabled = !(confirmDelete && confirmAudit);
+}
+
+function confirmDelete() {
+  document.getElementById('confirmModal').classList.add('show');
+}
+
+function closeConfirmModal() {
+  document.getElementById('confirmModal').classList.remove('show');
+}
+
+function deleteEmployee() {
+  const reason = document.getElementById('reason').value;
+  const auditLog = `Employee Deleted: John Doe (EMP-001)\nReason: ${reason || 'Not specified'}\nTimestamp: ${new Date().toLocaleString()}`;
+  
+  // Simulate deletion
+  document.getElementById('successMsg').style.display = 'block';
+  document.getElementById('confirmModal').classList.remove('show');
+  
+  // Redirect after 2 seconds
+  setTimeout(() => {
+    window.location.href = 'employee-list.html';
+  }, 2000);
+}
+
+// Close modal when clicking outside
+document.getElementById('confirmModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeConfirmModal();
+  }
+});
+</script>
+
+</body>
+</html>

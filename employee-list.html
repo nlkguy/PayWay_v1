@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee List - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* SEARCH & FILTER SECTION */
+.search-section {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.search-section .form-group {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 0;
+}
+
+.search-section label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.search-section input,
+.search-section select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.search-section input:focus,
+.search-section select:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+  background-color: #f8f9fa;
+}
+
+.btn-search {
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.btn-search:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.btn-reset {
+  padding: 12px 32px;
+  background: #f0f0f0;
+  color: #555;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btn-reset:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.btn-add {
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(39, 174, 96, 0.4);
+}
+
+/* TABLE CARD */
+.table-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.table-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3c72;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-card h3::before {
+  content: '';
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  border-radius: 2px;
+}
+
+/* TABLE STYLING */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 16px;
+  text-align: left;
+  background: #f8f9fa;
+  color: #1e3c72;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+td {
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #555;
+}
+
+tbody tr {
+  transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.status-active {
+  color: #27ae60;
+  font-weight: 600;
+  background: #d4edda;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.status-inactive {
+  color: #e74c3c;
+  font-weight: 600;
+  background: #f8d7da;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 12px;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-view,
+.btn-edit,
+.btn-delete {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-view {
+  background: #e3f2fd;
+  color: #1e3c72;
+}
+
+.btn-view:hover {
+  background: #bbdefb;
+  transform: translateY(-2px);
+}
+
+.btn-edit {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.btn-edit:hover {
+  background: #ffe0b2;
+  transform: translateY(-2px);
+}
+
+.btn-delete {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.btn-delete:hover {
+  background: #ffcdd2;
+  transform: translateY(-2px);
+}
+
+/* PAGINATION */
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.pagination a,
+.pagination span {
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #1e3c72;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.pagination a:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.pagination .active {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  border-color: #2a5298;
+}
+
+/* NO DATA MESSAGE */
+.no-data {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+}
+
+.no-data p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .container {
+    margin-top: 200px;
+  }
+
+  .search-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-section .form-group {
+    min-width: 100%;
+  }
+
+  .btn-search,
+  .btn-reset,
+  .btn-add {
+    width: 100%;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  td, th {
+    padding: 10px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .btn-view,
+  .btn-edit,
+  .btn-delete {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">💼 PayWay</div>
+  <div class="nav-links">
+    <a href="employee-dashboard.html" class="back-btn">← Back to Dashboard</a>
+  </div>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+  <div class="page-header">
+    <h1>Employee List</h1>
+    <p>Manage all employees in your organization</p>
+  </div>
+
+  <!-- SEARCH & FILTER SECTION -->
+  <div class="search-section">
+    <div class="form-group">
+      <label for="searchName">Search by Name/ID</label>
+      <input type="text" id="searchName" placeholder="Enter employee name or ID">
+    </div>
+
+    <div class="form-group">
+      <label for="filterDept">Filter by Department</label>
+      <select id="filterDept">
+        <option value="">All Departments</option>
+        <option value="Operations">Operations</option>
+        <option value="HR">Human Resources</option>
+        <option value="Finance">Finance</option>
+        <option value="IT">Information Technology</option>
+        <option value="Marketing">Marketing</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="filterStatus">Filter by Status</label>
+      <select id="filterStatus">
+        <option value="">All Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+    </div>
+
+    <button class="btn-search" onclick="searchEmployees()">Search</button>
+    <button class="btn-reset" onclick="resetFilters()">Reset</button>
+    <a href="#" class="btn-add" onclick="alert('Add new employee functionality'); return false;">+ Add Employee</a>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="table-card">
+    <h3>
+      <span>Employees</span>
+      <span style="font-size: 13px; color: #999; font-weight: 500;">Total: 12 employees</span>
+    </h3>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Designation</th>
+            <th>Status</th>
+            <th>Join Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#EMP-001</td>
+            <td>John Doe</td>
+            <td>john.doe@payway.com</td>
+            <td>Operations</td>
+            <td>Senior Officer</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Mar 10, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-002</td>
+            <td>Sarah Johnson</td>
+            <td>sarah.johnson@payway.com</td>
+            <td>Operations</td>
+            <td>Manager</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Feb 15, 2022</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-003</td>
+            <td>Mike Smith</td>
+            <td>mike.smith@payway.com</td>
+            <td>Finance</td>
+            <td>Accountant</td>
+            <td><span class="status-active">Active</span></td>
+            <td>May 20, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-004</td>
+            <td>Emma Wilson</td>
+            <td>emma.wilson@payway.com</td>
+            <td>Human Resources</td>
+            <td>HR Specialist</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Aug 03, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-005</td>
+            <td>James Brown</td>
+            <td>james.brown@payway.com</td>
+            <td>Information Technology</td>
+            <td>Software Developer</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Jan 12, 2024</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-006</td>
+            <td>Lisa Anderson</td>
+            <td>lisa.anderson@payway.com</td>
+            <td>Marketing</td>
+            <td>Marketing Manager</td>
+            <td><span class="status-inactive">Inactive</span></td>
+            <td>Jul 08, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-007</td>
+            <td>Robert Davis</td>
+            <td>robert.davis@payway.com</td>
+            <td>Finance</td>
+            <td>Financial Analyst</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Apr 18, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-008</td>
+            <td>Jennifer Lee</td>
+            <td>jennifer.lee@payway.com</td>
+            <td>Operations</td>
+            <td>Customer Service</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Jun 25, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-009</td>
+            <td>David Martinez</td>
+            <td>david.martinez@payway.com</td>
+            <td>Information Technology</td>
+            <td>IT Support Specialist</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Sep 10, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-010</td>
+            <td>Amanda Garcia</td>
+            <td>amanda.garcia@payway.com</td>
+            <td>Human Resources</td>
+            <td>Recruiter</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Oct 05, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-011</td>
+            <td>Christopher White</td>
+            <td>christopher.white@payway.com</td>
+            <td>Finance</td>
+            <td>CFO</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Nov 12, 2021</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>#EMP-012</td>
+            <td>Rebecca Taylor</td>
+            <td>rebecca.taylor@payway.com</td>
+            <td>Marketing</td>
+            <td>Content Specialist</td>
+            <td><span class="status-active">Active</span></td>
+            <td>Dec 01, 2023</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-view" onclick="alert('View employee details')">View</button>
+                <button class="btn-edit" onclick="window.location.href='employee-update.html'">Edit</button>
+                <button class="btn-delete" onclick="window.location.href='employee-delete.html'">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <span class="active">1</span>
+      <a href="#" onclick="return false;">2</a>
+      <a href="#" onclick="return false;">3</a>
+      <a href="#" onclick="return false;">Next →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function searchEmployees() {
+  const name = document.getElementById('searchName').value;
+  const dept = document.getElementById('filterDept').value;
+  const status = document.getElementById('filterStatus').value;
+  
+  alert(`Searching for:\nName: ${name || 'All'}\nDepartment: ${dept || 'All'}\nStatus: ${status || 'All'}`);
+}
+
+function resetFilters() {
+  document.getElementById('searchName').value = '';
+  document.getElementById('filterDept').value = '';
+  document.getElementById('filterStatus').value = '';
+  alert('Filters reset');
+}
+</script>
+
+</body>
+</html>
