@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FinCoreBMS – Employee Dashboard</title>
+<title>FinCoreBMS – Customer Dashboard</title>
 
 <!-- Poppins Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -466,33 +466,18 @@ tbody tr:hover {
     <div class="logo">
       <span>FinCoreBMS</span>
     </div>
-    <div class="sidebar-subtitle">Employee Dashboard</div>
+    <div class="sidebar-subtitle">Customer Dashboard</div>
 
     <div class="sidebar-section">
       <div class="sidebar-label">Main</div>
-      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="dashboard.html" class="active">My Dashboard</a>
     </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">Employee Management</div>
-      <a href="employee-register.html">Register Employee</a>
-      <!-- <a href="employee-login.html">Employee Login</a> -->
-      <a href="employee-update.html">Update Employee</a>
-      <a href="employee-delete.html">Delete Employee</a>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">Customer Management</div>
-      <a href="customer-register.html">Create Customer</a>
-      <a href="customer-list.html">View Customers</a>
-      <a href="customer-update.html">Update Customer</a>
-      <a href="customer-delete.html">Delete Customer</a>
-    </div>
-
     <div class="sidebar-section">
       <div class="sidebar-label">Transaction Management</div>
       <a href="transaction-create.html">Create Transaction</a>
       <a href="transaction-list.html">View Transactions</a>
+      <a href="customer-withdraw.html">Account Withdraw</a>
+      <a href="customer-deposit.html">Account Deposit</a>
     </div>
 
     <div class="sidebar-section">
@@ -516,25 +501,24 @@ tbody tr:hover {
   <div class="main-area">
 
     <div class="topbar">
-      <h1>Welcome, <span id="employeeIdDisplay">[Employee Name/ID Placeholder]</span></h1>
-      
+      <h1>Welcome, Fellow Customer  <span id="customerIdDisplay">[Customer Name/ID Placeholder]</span></h1>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
     <!-- Stats Cards -->
     <div class="cards-row">
       <div class="card">
-        <h4>📊 Active Customers</h4>
-        <h2 id="totalCustomers">0</h2>
+        <h4>📊 Active Accounts</h4>
+        <h2 id="totalAccounts">0</h2>
         <p>Registered in System</p>
       </div>
       <div class="card">
-        <h4>💳 Total Transactions</h4>
-        <h2 id="totalTransactions">0</h2>
+        <h4>💳 Total Balance</h4>
+        <h2 id="totalBalance">0</h2>
         <p>This Session</p>
       </div>
       <div class="card">
-        <h4>💰 Pending Loans</h4>
+        <h4>💰 Pending Loans/Requests</h4>
         <h2 id="pendingLoans">0</h2>
         <p>Awaiting Approval</p>
       </div>
@@ -548,7 +532,7 @@ tbody tr:hover {
         <table>
           <thead>
             <tr>
-              <th>Customer Name</th>
+              <th>Account no</th>
               <th>Type</th>
               <th>Amount</th>
               <th>Date</th>
@@ -571,31 +555,22 @@ tbody tr:hover {
 
     </div>
 
-    <!-- Quick Actions Card -->
-    <div class="action-card">
-      <h3>📋 Quick Actions</h3>
-      <p>Fast access to frequently used operations</p>
-      <div class="quick-links">
-        <a href="customer-create.html" class="quick-link-btn">➕ Create New Customer</a>
-        <a href="transaction-create.html" class="quick-link-btn">💳 Record Transaction</a>
-        <a href="loan-request.html" class="quick-link-btn">📄 Submit Loan Request</a>
-        <a href="customer-list.html" class="quick-link-btn">👥 View All Customers</a>
-      </div>
-    </div>
-
   </div>
 </div>
 
 <script>
 function logout(){
-  localStorage.removeItem('employeeId');
-  localStorage.setItem('isEmployeeLoggedIn', 'false');
+  localStorage.removeItem('customerId');
+  localStorage.setItem('isCustomerLoggedIn', 'false');
   window.location.href="index.html";
 }
 
+const customerId = localStorage.getItem('customerId') || '[CustomerID Placeholder]';
+document.getElementById('customerIdDisplay').textContent = customerId;
+
 // Load data from localStorage
 function loadDashboardData() {
-  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [];
+  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [''];
   const transactions = JSON.parse(localStorage.getItem('bankTransactions')) || [];
   const loans = JSON.parse(localStorage.getItem('bankLoans')) || [];
 
@@ -611,9 +586,8 @@ function loadDashboardData() {
   createSummaryChart(transactions);
 
   // set employee name/id display (placeholder logic)
-  // localStorage.setItem('employeeId', employeeId); } // This should be set during login
-  const employeeId = localStorage.getItem('employeeId') || '[EmployeeID Placeholder]';
-  document.getElementById('employeeIdDisplay').textContent = employeeId;
+  // localStorage.setItem('customerId', customerId); } // This should be set during login
+
 }
 
 // Display recent transactions

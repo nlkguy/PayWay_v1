@@ -750,7 +750,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // auto fill the name fields with test data for testing purpose only
 // get the names from a list of random names first name sand last names lists 
-// names with indian popculture references , south indian names , north indian names , famous indian personalities names
+// names with indian popculture references , south indian names , north indian names , famous indian persanaltities names
 
 const firstNames=["Vijay","Nirav","Mehul","Harshad","Ketan","Ramalinga","Gali","Janardhan","Mohammad","Mansoor","Parthasarathy","Rana","Subrata"];
 const lastNames=["Mallya","Modi","Choksi","Mehta","Parekh","Raju","Reddy","Khan","Kapoor","Roy"];
@@ -760,6 +760,13 @@ window.addEventListener('DOMContentLoaded', function() {
   const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
   document.getElementById('firstName').value = randomFirstName;
   document.getElementById('lastName').value = randomLastName;
+});
+
+// autofill employee role
+window.addEventListener('DOMContentLoaded', function() {
+  const roles = ['Teller', 'Manager', 'Auditor', 'Clerk'];
+  const randomRole = roles[Math.floor(Math.random() * roles.length)];
+  document.getElementById('employeeRole').value = randomRole;
 });
 
 // autofill random email based on tthe selcted first name and last name
@@ -922,6 +929,33 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     document.getElementById('modalEmail').textContent = email;
     showSuccessModal();
   }
+  // save all data to local storage , as one of the employees data
+  const emp_aadhaar = document.getElementById('emp_aadhaar').value.trim();
+  const emp_pan = document.getElementById('emp_pan').value.trim(); 
+  const emp_role = document.getElementById('employeeRole').value;
+  
+  const employeeData = {
+    employeeId,
+    firstName,
+    lastName,
+    email,
+    address,
+    contactNumber,
+    gender,
+    empDob,
+    emp_aadhaar,
+    emp_pan,
+    emp_role
+  };
+  // persist employee data to localStorage (simple list)
+  try {
+    const existing = JSON.parse(localStorage.getItem('employees') || '[]');
+    existing.push(employeeData);
+    localStorage.setItem('employees', JSON.stringify(existing));
+  } catch (e) {
+    console.error('Failed to persist employee data to localStorage', e);
+  }
+
 });
 
 // Show error message
@@ -947,7 +981,7 @@ function showSuccessModal() {
 function redirectHome() {
   document.getElementById('successModal').style.display = 'none';
   setTimeout(() => {
-    window.location.href = 'landing_page.html';
+    window.location.href = 'employee-login.html';
   }, 300);
 }
 
