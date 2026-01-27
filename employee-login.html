@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Employee Login - PayWay Solutions</title>
+<title>FinCoreBMS - Employee Login</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -364,12 +364,13 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">PayWay Solutions</div>
+  <div class="logo">FinCoreBMS</div>
   <div class="nav-links">
-    <a href="landing_page.html">Home</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="transaction-list.html">Transactions</a>
-    <a href="loan-request.html">Loans</a>
+    <a href="index.html">Home</a>
+    <a href="misc-about-us.html">About</a>
+    <a href="misc-contact-us.html">Contact</a>
+    <a href="misc-privacy-policy.html">Privacy</a>
+    <a href="misc-security-policy.html">Security</a>
   </div>
   <a href="landing_page.html" class="back-btn">← Back</a>
 </div>
@@ -378,7 +379,7 @@ body {
 <div class="login-container">
   <div class="login-header">
     <h1>Employee Login</h1>
-    <p>Access your banking operations portal</p>
+    <p>Access your Employee Dashboard</p>
   </div>
 
   <form id="loginForm">
@@ -389,10 +390,10 @@ body {
         id="employeeId" 
         name="employeeId"
         placeholder="Enter your 7-digit Employee ID"
-        maxlength="10"
+        maxlength="7"
         required
       >
-      <div class="error-message">Employee ID must be 7-10 characters</div>
+      <div class="error-message">Employee ID must be 7 digits</div>
     </div>
 
     <div class="form-group">
@@ -424,33 +425,46 @@ body {
       <h2>Login Successful!</h2>
     </div>
     <div class="modal-body">
-      Employee Registration successful.
+      Employee Login successful.
     </div>
     <button class="modal-button" onclick="redirectHome()">Continue to Home</button>
   </div>
 </div>
 
 <script>
-// Form submission handler
+// handle login form submission
 document.getElementById('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  // Get form values
   const employeeId = document.getElementById('employeeId').value.trim();
   const password = document.getElementById('password').value;
 
-  // Clear previous error states
   clearErrors();
 
   // Validate Employee ID
-  if (employeeId.length < 7 || employeeId.length > 10) {
-    showError('employeeId', 'Employee ID must be 7-10 characters');
+  if (employeeId.length < 7 || isNaN(employeeId)) {
+    showError('employeeId', 'Employee ID must be 7 digits');
     return;
   }
 
   // Validate Password
-  if (!password || password.length === 0) {
-    showError('password', 'Password is required');
+  if (!password || password.length > 30 || password.length < 8 ) {
+    showError('password', 'Password length 8 to 30 characters are required');
+    return;
+  }
+  // if password doent contain at least one special character, atleast a number , atleast a upper and lowercase ,  show error
+  const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+  const numberPattern = /[0-9]/;
+  const upperCasePattern = /[A-Z]/;
+  const lowerCasePattern = /[a-z]/;
+
+  if (
+    !specialCharPattern.test(password) ||
+    !numberPattern.test(password) ||
+    !upperCasePattern.test(password) ||
+    !lowerCasePattern.test(password)
+  ) {
+    showError('password', 'Password must contain at least one special character, one number, one uppercase and one lowercase letter');
     return;
   }
 
@@ -459,8 +473,22 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     return;
   }
 
-  // If validation passes, show success modal
-  showSuccessModal();
+  // If validation passes, show the success modal instead of redirecting immediately.
+  // store the logged in employee id so other pages (dashboard) can show it
+  try { 
+    localStorage.setItem('employeeId', employeeId); 
+    localStorage.setItem('isEmployeeLoggedIn', 'true'); // set login status (camelCase key)
+    console.log('Employee logged in:', employeeId);
+  } catch(e) { // throw error in console
+    console.error('LocalStorage is not available.', e);
+  }
+  // Show modal; the modal's Continue button triggers redirectHome()
+  try {
+    showSuccessModal();
+  } catch (e) {
+    console.error('Failed to show success modal, redirecting directly.', e);
+    window.location.href = 'employee-dashboard.html';
+  }
 });
 
 // Show error message
@@ -486,8 +514,9 @@ function showSuccessModal() {
 function redirectHome() {
   document.getElementById('successModal').style.display = 'none';
   setTimeout(() => {
-    window.location.href = 'landing_page.html';
-  }, 300);
+    // After successful employee login, go to the employee dashboard
+    window.location.href = 'employee-dashboard.html';
+  }, 100);
 }
 
 // Close modal when clicking outside

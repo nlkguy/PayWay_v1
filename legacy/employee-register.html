@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Registration - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* REGISTRATION CONTAINER */
+.register-container {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 850px;
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.register-header h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.register-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* FORM GROUP */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  resize: vertical;
+}
+
+/* Style select dropdown arrow and spacing to match inputs */
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #999 50%),
+                    linear-gradient(135deg, #999 50%, transparent 50%),
+                    linear-gradient(#fff, #fff);
+  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px), 0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+  padding-right: 42px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+  background-color: #f8f9fa;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  color: #666;
+}
+
+/* ERROR MESSAGE */
+.error-message {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.form-group.error input,
+.form-group.error textarea,
+.form-group.error select {
+  border-color: #e74c3c;
+}
+
+.form-group.error .error-message {
+  display: block;
+}
+
+/* REGISTER BUTTON */
+.register-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+  margin-top: 10px;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.register-btn:active {
+  transform: translateY(0);
+}
+
+/* LOGIN LINK */
+.login-link {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.login-link p {
+  color: #666;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #2a5298;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: #1e3c72;
+}
+
+/* POPUP/MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 40px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.modal-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  color: #27ae60;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.modal-body {
+  text-align: center;
+  color: #27ae60;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.modal-details {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border-left: 4px solid #27ae60;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #27ae60;
+  font-weight: 600;
+  font-size: 14px;
+  word-break: break-word;
+  max-width: 200px;
+  text-align: right;
+}
+
+.modal-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .register-container {
+    padding: 40px 25px;
+    margin-top: 100px;
+  }
+
+  .register-header h1 {
+    font-size: 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .detail-value {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .register-container {
+    padding: 30px 20px;
+    margin-top: 120px;
+  }
+
+  .register-header h1 {
+    font-size: 22px;
+  }
+
+  .modal-content {
+    padding: 25px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detail-value {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">FinCoreBMS</div>
+  <div class="nav-links">
+    <a href="landing_page.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="transaction-list.html">Transactions</a>
+    <a href="loan-request.html">Loans</a>
+  </div>
+  <a href="landing_page.html" class="back-btn">← Back</a>
+</div>
+
+<!-- REGISTRATION CONTAINER -->
+<div class="register-container">
+  <div class="register-header">
+    <h1>Employee Registration</h1>
+    <p>Create your banking operations account</p>
+  </div>
+
+  <form id="registrationForm">
+
+    <div class="form-row">
+    <!-- Employee ID (Auto-generated, non-editable) -->
+    <div class="form-group">
+      <label for="employeeId">Employee ID (Auto-Generated)</label>
+      <input 
+        type="text" 
+        id="employeeId" 
+        name="employeeId"
+        placeholder="Auto-generated"
+        disabled
+      >
+    </div>
+    <div class="form-group">
+      <label for="employeeRole">Employee Role</label>
+      <select id="employeeRole" name="employeeRole" required>
+        <option value="">Select Role</option>
+        <option value="Teller">Teller</option>
+        <option value="Manager">Manager</option>
+        <option value="Auditor">Auditor</option>
+        <option value="Clerk">Clerk</option>
+      </select>
+    </div>
+
+    </div>
+
+    <!-- First Name and Last Name -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          name="firstName"
+          placeholder="Enter first name"
+          maxlength="50"
+          required
+        >
+        <div class="error-message">First name is required (max 50 characters)</div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input 
+          type="text" 
+          id="lastName" 
+          name="lastName"
+          placeholder="Enter last name"
+          maxlength="50"
+          required
+        >
+        <div class="error-message">Last name is required (max 50 characters)</div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        type="email" 
+        id="email" 
+        name="email"
+        placeholder="Enter your email address"
+        required
+      >
+      <div class="error-message">Please enter a valid email address</div>
+    </div>
+
+    <!-- Password and Confirm Password -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password"
+          placeholder="Min 8 chars: uppercase, lowercase, number, special char"
+          maxlength="30"
+          required
+        >
+        <div class="error-message">Password must be 8-30 chars with uppercase, lowercase, number & special char (@$!%*?&)</div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          name="confirmPassword"
+          placeholder="Confirm password"
+          maxlength="30"
+          required
+        >
+        <div class="error-message">Passwords do not match</div>
+      </div>
+    </div>
+
+
+    <!-- Gender and date of birth , select dropdwon for gender and  date seelcted for dob-->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="emp_gender">Gender</label>
+        <select id="emp_gender" name="emp_gender" required>
+          <option value="">Select gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+        <div class="error-message">Please select a gender</div>
+      </div>
+
+      <div class="form-group">
+        <label for="emp_dob">Date of Birth</label>
+        <input 
+          type="date" 
+          id="emp_dob" 
+          name="emp_dob"
+          placeholder="Select date of birth"
+          dateformat="dd-mm-yyyy"
+          required
+        >
+        <div class="error-message">Date of birth is required</div>
+      </div>
+    </div>
+
+    
+
+    <!-- Address -->
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea 
+        id="address" 
+        name="address"
+        placeholder="Enter street, city details"
+        maxlength="100"
+        rows="3"
+        required
+      ></textarea>
+      <div class="error-message">Address is required (max 100 characters)</div>
+    </div>
+
+    <!-- Contact Number -->
+    <div class="form-group">
+      <label for="contactNumber">Contact Number</label>
+      <input 
+        type="text" 
+        id="contactNumber" 
+        name="contactNumber"
+        placeholder="Enter 10-digit contact number"
+        maxlength="10"
+        required
+      >
+      <div class="error-message">Contact number must be 10 digits</div>
+    </div>
+
+    <!-- Aadhar and PAN-->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="emp_aadhaar">Aadhaar Number</label>
+        <input 
+          type="number" 
+          id="emp_aadhaar" 
+          name="emp_aadhaar"
+          placeholder="12 digits"
+          maxlength="12"
+          minlength="12"
+          required
+        >
+        <div class="error-message">12 digit Aadhaar number is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="emp_pan">PAN Number</label>
+        <input 
+          type="text" 
+          id="emp_pan" 
+          name="emp_pan"
+          placeholder="10 characters"
+          maxlength="10"
+          minlength="10"
+          nospecialcharacters="true"
+          required
+        >
+        <div class="error-message">10 character PAN number is required, Alphanumeric , no special characters</div>
+      </div>
+    </div>
+
+    
+
+    <button type="submit" class="register-btn">Register</button>
+  </form>
+
+  <div class="login-link">
+    <p>Already have an account? <a href="index.html">Login here</a></p>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-icon">✓</div>
+      <h2>Registration Successful!</h2>
+    </div>
+    <div class="modal-body">
+      Employee Registration successful.
+    </div>
+    <div class="modal-details">
+      <div class="detail-row">
+        <span class="detail-label">Employee ID</span>
+        <span class="detail-value" id="modalEmployeeId"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Customer Name</span>
+        <span class="detail-value" id="modalCustomerName"></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Email</span>
+        <span class="detail-value" id="modalEmail"></span>
+      </div>
+    </div>
+    <button class="modal-button" onclick="redirectHome()">Continue to Home</button>
+  </div>
+</div>
+
+<script>
+// Generate a random 7-digit Employee ID
+function generateEmployeeId() {
+  return String(Math.floor(Math.random() * 9000000) + 1000000);
+}
+
+// Initialize Employee ID on page load
+window.addEventListener('DOMContentLoaded', function() {
+  const employeeId = generateEmployeeId();
+  document.getElementById('employeeId').value = employeeId;
+});
+
+// Form submission handler
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Clear previous error states
+  clearErrors();
+
+  // Get form values
+  const employeeId = document.getElementById('employeeId').value;
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  const address = document.getElementById('address').value.trim();
+  const contactNumber = document.getElementById('contactNumber').value.trim();
+  const gender = document.getElementById('emp_gender').value;
+  const empDob = document.getElementById('emp_dob').value;
+
+  let isValid = true;
+
+  // Validate First Name
+  if (!firstName || firstName.length === 0 || firstName.length > 50) {
+    showError('firstName', 'First name is required (max 50 characters)');
+    isValid = false;
+  }
+
+  // Validate Last Name
+  if (!lastName || lastName.length === 0 || lastName.length > 50) {
+    showError('lastName', 'Last name is required (max 50 characters)');
+    isValid = false;
+  }
+
+  // Validate Email
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!email || !emailRegex.test(email)) {
+    showError('email', 'Please enter a valid email address (e.g., name@example.com)');
+    isValid = false;
+  }
+
+  // Validate Password (Min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char)
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/;
+  if (!password || !passwordRegex.test(password)) {
+    showError('password', 'Password must be 8-30 chars with uppercase, lowercase, number & special char (@$!%*?&)');
+    isValid = false;
+  }
+
+  // Validate Confirm Password
+  if (password !== confirmPassword) {
+    showError('confirmPassword', 'Passwords do not match');
+    isValid = false;
+  }
+
+  // Validate Address
+  if (!address || address.length === 0 || address.length > 100) {
+    showError('address', 'Address is required (max 100 characters)');
+    isValid = false;
+  }
+
+  // Validate Contact Number (exactly 10 digits)
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!contactNumber || !phoneRegex.test(contactNumber)) {
+    showError('contactNumber', 'Contact number must be exactly 10 digits');
+    isValid = false;
+  }
+
+  // Validate Gender
+  if (!gender || gender.trim() === '') {
+    showError('emp_gender', 'Please select a gender');
+    isValid = false;
+  }
+
+  // Validate DOB , error if age is less than 18
+  age = function(dob) {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+  if (!empDob || age(empDob) < 18) {
+    showError('emp_dob', 'Date of birth is required and age must be at least 18 years');
+    isValid = false;
+  }
+  if(age(empDob) < 0){
+    showError('emp_dob', 'Wow !! who invented time travel ? Future date not allowed');
+    isValid = false;
+  }
+  if(age(empDob) > 100){
+    showError('emp_dob', 'Too old to work here ! Age must be less than 100 years');
+    isValid = false;
+  }
+
+  // If validation passes, show success modal
+  if (isValid) {
+    const fullName = firstName + ' ' + lastName;
+    document.getElementById('modalEmployeeId').textContent = employeeId;
+    document.getElementById('modalCustomerName').textContent = fullName;
+    document.getElementById('modalEmail').textContent = email;
+    showSuccessModal();
+  }
+});
+
+// Show error message
+function showError(fieldId, message) {
+  const formGroup = document.getElementById(fieldId).closest('.form-group');
+  formGroup.classList.add('error');
+  formGroup.querySelector('.error-message').textContent = message;
+}
+
+// Clear all errors
+function clearErrors() {
+  document.querySelectorAll('.form-group').forEach(group => {
+    group.classList.remove('error');
+  });
+}
+
+// Show success modal
+function showSuccessModal() {
+  document.getElementById('successModal').style.display = 'block';
+}
+
+// Close modal and redirect
+function redirectHome() {
+  document.getElementById('successModal').style.display = 'none';
+  setTimeout(() => {
+    window.location.href = 'landing_page.html';
+  }, 300);
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('successModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// Real-time validation for name fields
+['firstName', 'lastName'].forEach(fieldId => {
+  document.getElementById(fieldId).addEventListener('input', function(e) {
+    if (e.target.value.trim().length > 0) {
+      e.target.closest('.form-group').classList.remove('error');
+    }
+  });
+});
+
+// Real-time validation for email
+document.getElementById('email').addEventListener('input', function(e) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (emailRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for passwords
+document.getElementById('confirmPassword').addEventListener('input', function(e) {
+  const password = document.getElementById('password').value;
+  if (e.target.value === password && e.target.value.length > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for address
+document.getElementById('address').addEventListener('input', function(e) {
+  if (e.target.value.trim().length > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for contact number
+document.getElementById('contactNumber').addEventListener('input', function(e) {
+  const phoneRegex = /^[0-9]{10}$/;
+  if (phoneRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for gender dropdown
+document.getElementById('emp_gender').addEventListener('change', function(e) {
+  if (e.target.value && e.target.value.trim() !== '') {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for DOB
+document.getElementById('emp_dob').addEventListener('input', function(e) {
+  if (e.target.value) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// validate PAN number to be alphanumeric only , NNNNN1111N - N for alphabets and 1 for digits
+document.getElementById('emp_pan').addEventListener('input', function(e) {
+  const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/i;
+  if (panRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+</script>
+
+</body>
+</html>

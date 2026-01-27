@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Employee Registration - PayWay Solutions</title>
+<title>FinCoreBMS - Employee Registration</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -26,6 +26,20 @@ body {
 
 /* NAVBAR */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.navbar_not_logged_in {
   position: fixed;
   top: 0;
   left: 0;
@@ -136,7 +150,8 @@ body {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 14px 16px;
   border: 2px solid #e0e0e0;
@@ -147,8 +162,23 @@ body {
   resize: vertical;
 }
 
+/* Style select dropdown arrow and spacing to match inputs */
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #999 50%),
+                    linear-gradient(135deg, #999 50%, transparent 50%),
+                    linear-gradient(#fff, #fff);
+  background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px), 0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+  padding-right: 42px;
+}
+
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: #2a5298;
   box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
@@ -160,7 +190,8 @@ body {
   color: #999;
 }
 
-.form-group input:disabled {
+.form-group input:disabled,
+.form-group select:disabled {
   background-color: #f5f5f5;
   cursor: not-allowed;
   color: #666;
@@ -175,7 +206,8 @@ body {
 }
 
 .form-group.error input,
-.form-group.error textarea {
+.form-group.error textarea,
+.form-group.error select {
   border-color: #e74c3c;
 }
 
@@ -441,14 +473,25 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">PayWay Solutions</div>
+  <div class="logo">FinCoreBMS</div>
   <div class="nav-links">
-    <a href="landing_page.html">Home</a>
+    <a href="index.html">Home</a>
     <a href="dashboard.html">Dashboard</a>
     <a href="transaction-list.html">Transactions</a>
     <a href="loan-request.html">Loans</a>
   </div>
-  <a href="landing_page.html" class="back-btn">← Back</a>
+  <a href="index.html" class="back-btn">← Back</a>
+</div>
+<div class="navbar_not_logged_in">
+  <div class="logo">FinCoreBMS</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="misc-about-us.html">About</a>
+    <a href="misc-contact-us.html">Contact</a>
+    <a href="misc-privacy-policy.html">Privacy</a>
+    <a href="misc-security-policy.html">Security</a>
+  </div>
+  <a href="index.html" class="back-btn">← Back</a>
 </div>
 
 <!-- REGISTRATION CONTAINER -->
@@ -459,9 +502,11 @@ body {
   </div>
 
   <form id="registrationForm">
+
+    <div class="form-row">
     <!-- Employee ID (Auto-generated, non-editable) -->
     <div class="form-group">
-      <label for="employeeId">Employee ID</label>
+      <label for="employeeId">Employee ID (Auto-Generated)</label>
       <input 
         type="text" 
         id="employeeId" 
@@ -469,6 +514,18 @@ body {
         placeholder="Auto-generated"
         disabled
       >
+    </div>
+    <div class="form-group">
+      <label for="employeeRole">Employee Role</label>
+      <select id="employeeRole" name="employeeRole" required>
+        <option value="">Select Role</option>
+        <option value="Teller">Teller</option>
+        <option value="Manager">Manager</option>
+        <option value="Auditor">Auditor</option>
+        <option value="Clerk">Clerk</option>
+      </select>
+    </div>
+
     </div>
 
     <!-- First Name and Last Name -->
@@ -542,6 +599,37 @@ body {
       </div>
     </div>
 
+
+    <!-- Gender and date of birth , select dropdwon for gender and  date seelcted for dob-->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="emp_gender">Gender</label>
+        <select id="emp_gender" name="emp_gender" required>
+          <option value="">Select gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+        <div class="error-message">Please select a gender</div>
+      </div>
+
+      <div class="form-group">
+        <label for="emp_dob">Date of Birth</label>
+        <input 
+          type="date" 
+          id="emp_dob" 
+          name="emp_dob"
+          placeholder="Select date of birth"
+          dateformat="dd-mm-yyyy"
+          required
+        >
+        <div class="error-message">Date of birth is required</div>
+      </div>
+    </div>
+
+    
+
     <!-- Address -->
     <div class="form-group">
       <label for="address">Address</label>
@@ -569,6 +657,40 @@ body {
       >
       <div class="error-message">Contact number must be 10 digits</div>
     </div>
+
+    <!-- Aadhar and PAN-->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="emp_aadhaar">Aadhaar Number</label>
+        <input 
+          type="number" 
+          id="emp_aadhaar" 
+          name="emp_aadhaar"
+          placeholder="12 digits"
+          maxlength="12"
+          minlength="12"
+          required
+        >
+        <div class="error-message">12 digit Aadhaar number is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="emp_pan">PAN Number</label>
+        <input 
+          type="text" 
+          id="emp_pan" 
+          name="emp_pan"
+          placeholder="10 characters"
+          maxlength="10"
+          minlength="10"
+          nospecialcharacters="true"
+          required
+        >
+        <div class="error-message">10 character PAN number is required, Alphanumeric , no special characters</div>
+      </div>
+    </div>
+
+    
 
     <button type="submit" class="register-btn">Register</button>
   </form>
@@ -607,15 +729,93 @@ body {
 </div>
 
 <script>
+// if Employee is logged in state , show norml navbar , otherwise show not logged in navbar
+
+if(localStorage.getItem('isEmployeeLoggedIn') === 'true'){
+  document.querySelector('.navbar').style.display = 'flex';
+  document.querySelector('.navbar_not_logged_in').style.display = 'none';
+} else {
+  document.querySelector('.navbar').style.display = 'none';
+  document.querySelector('.navbar_not_logged_in').style.display = 'flex';
+}
 // Generate a random 7-digit Employee ID
 function generateEmployeeId() {
   return String(Math.floor(Math.random() * 9000000) + 1000000);
-}
-
+}   
 // Initialize Employee ID on page load
 window.addEventListener('DOMContentLoaded', function() {
   const employeeId = generateEmployeeId();
   document.getElementById('employeeId').value = employeeId;
+});
+
+// auto fill the name fields with test data for testing purpose only
+// get the names from a list of random names first name sand last names lists 
+// names with indian popculture references , south indian names , north indian names , famous indian personalities names
+
+const firstNames=["Vijay","Nirav","Mehul","Harshad","Ketan","Ramalinga","Gali","Janardhan","Mohammad","Mansoor","Parthasarathy","Rana","Subrata"];
+const lastNames=["Mallya","Modi","Choksi","Mehta","Parekh","Raju","Reddy","Khan","Kapoor","Roy"];
+
+window.addEventListener('DOMContentLoaded', function() {
+  const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+  const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+  document.getElementById('firstName').value = randomFirstName;
+  document.getElementById('lastName').value = randomLastName;
+});
+
+// autofill random email based on tthe selcted first name and last name
+window.addEventListener('DOMContentLoaded', function() {
+  const firstName = document.getElementById('firstName').value.toLowerCase();
+  const lastName = document.getElementById('lastName').value.toLowerCase();
+  const email = firstName + '.' + lastName + '@fincorebms.com';
+  document.getElementById('email').value = email;
+});
+
+/// fill password based on the policy 8 to 30 , aplhanumeric with uper lower and special
+window.addEventListener('DOMContentLoaded', function() {
+  const firstName = document.getElementById('firstName').value.toLowerCase();
+  const password = firstName + '@ABC1234';
+  document.getElementById('password').value = password;
+  document.getElementById('confirmPassword').value = password;
+});
+
+// gender auto select randomly
+window.addEventListener('DOMContentLoaded', function() {
+  const genders = ['Male', 'Female', 'Other'];
+  const randomGender = genders[Math.floor(Math.random() * genders.length)];
+  document.getElementById('emp_gender').value = randomGender;
+});
+
+// fill date of birth to make age 25 years
+window.addEventListener('DOMContentLoaded', function() {
+  const today = new Date(); 
+  const birthYear = today.getFullYear() - 25;
+  const birthMonth = String(today.getMonth() + 1).padStart(2, '0'); 
+  const birthDay = String(today.getDate()).padStart(2, '0'); 
+  const dob = `${birthYear}-${birthMonth}-${birthDay}`;
+  document.getElementById('emp_dob').value = dob;
+});
+
+// fill address with dummy data
+window.addEventListener('DOMContentLoaded', function() {
+  const addresses = [
+    '123 MG Road, Bangalore',
+    '456 Park Street, Kolkata',
+    '789 Marine Drive, Mumbai',
+    '321 Connaught Place, Delhi',
+    '654 Anna Salai, Chennai'
+  ];
+  const randomAddress = addresses[Math.floor(Math.random() * addresses.length)];
+  document.getElementById('address').value = randomAddress;
+}); 
+
+// fill aadhaar and pan with dummy data
+window.addEventListener('DOMContentLoaded', function() {
+  const randomAadhaar = String(Math.floor(100000000000 + Math.random() * 900000000000));
+  document.getElementById('emp_aadhaar').value = randomAadhaar; 
+  const randomPan = 'ABCDE' + String(Math.floor(1000 + Math.random() * 9000)) + 'F';
+  document.getElementById('emp_pan').value = randomPan;
+  const phoneNumber = String(Math.floor(1000000000 + Math.random() * 9000000000));
+  document.getElementById('contactNumber').value = phoneNumber;
 });
 
 // Form submission handler
@@ -634,6 +834,8 @@ document.getElementById('registrationForm').addEventListener('submit', function(
   const confirmPassword = document.getElementById('confirmPassword').value;
   const address = document.getElementById('address').value.trim();
   const contactNumber = document.getElementById('contactNumber').value.trim();
+  const gender = document.getElementById('emp_gender').value;
+  const empDob = document.getElementById('emp_dob').value;
 
   let isValid = true;
 
@@ -679,6 +881,36 @@ document.getElementById('registrationForm').addEventListener('submit', function(
   const phoneRegex = /^[0-9]{10}$/;
   if (!contactNumber || !phoneRegex.test(contactNumber)) {
     showError('contactNumber', 'Contact number must be exactly 10 digits');
+    isValid = false;
+  }
+
+  // Validate Gender
+  if (!gender || gender.trim() === '') {
+    showError('emp_gender', 'Please select a gender');
+    isValid = false;
+  }
+
+  // Validate DOB , error if age is less than 18
+  age = function(dob) {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+  if (!empDob || age(empDob) < 18) {
+    showError('emp_dob', 'Date of birth is required and age must be at least 18 years');
+    isValid = false;
+  }
+  if(age(empDob) < 0){
+    showError('emp_dob', 'Wow !! who invented time travel ? Future date not allowed');
+    isValid = false;
+  }
+  if(age(empDob) > 100){
+    showError('emp_dob', 'Too old to work here ! Age must be less than 100 years');
     isValid = false;
   }
 
@@ -766,6 +998,29 @@ document.getElementById('contactNumber').addEventListener('input', function(e) {
     e.target.closest('.form-group').classList.remove('error');
   }
 });
+
+// Real-time validation for gender dropdown
+document.getElementById('emp_gender').addEventListener('change', function(e) {
+  if (e.target.value && e.target.value.trim() !== '') {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// Real-time validation for DOB
+document.getElementById('emp_dob').addEventListener('input', function(e) {
+  if (e.target.value) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+// validate PAN number to be alphanumeric only , NNNNN1111N - N for alphabets and 1 for digits
+document.getElementById('emp_pan').addEventListener('input', function(e) {
+  const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/i;
+  if (panRegex.test(e.target.value)) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
 </script>
 
 </body>

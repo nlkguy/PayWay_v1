@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Deletion - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* FORM CONTAINER */
+.form-container {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-header h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.form-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* SEARCH SECTION */
+.search-section {
+  margin-bottom: 35px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.search-section h3 {
+  color: #1e3c72;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.search-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.search-group {
+  flex: 1;
+}
+
+.search-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.search-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.search-group input:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+}
+
+.search-btn {
+  padding: 12px 35px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* DELETE SECTION */
+.delete-section {
+  display: none;
+}
+
+.delete-section.visible {
+  display: block;
+}
+
+/* CUSTOMER DETAILS BOX */
+.customer-details {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border-left: 4px solid #2a5298;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* WARNING SECTION */
+.warning-section {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 25px 0;
+}
+
+.warning-icon {
+  display: inline-block;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.warning-text {
+  color: #856404;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* CONFIRMATION BUTTONS */
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.delete-btn {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(231, 76, 60, 0.4);
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #555;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  border-color: #1e3c72;
+  color: #1e3c72;
+  background: #f8f9fa;
+}
+
+/* ALERT MESSAGE */
+.alert {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  display: none;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.alert.visible {
+  display: block;
+}
+
+.alert.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.alert.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .form-container {
+    padding: 40px 25px;
+    margin-top: 100px;
+  }
+
+  .form-header h1 {
+    font-size: 24px;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row .search-group {
+    width: 100%;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .form-container {
+    padding: 30px 20px;
+    margin-top: 120px;
+  }
+
+  .form-header h1 {
+    font-size: 22px;
+  }
+
+  .warning-icon {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="landing_page.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="transaction-list.html">Transactions</a>
+    <a href="loan-request.html">Loans</a>
+  </div>
+  <a href="dashboard.html" class="back-btn">← Back</a>
+</div>
+
+<!-- FORM CONTAINER -->
+<div class="form-container">
+  <div class="form-header">
+    <h1>Customer Deletion</h1>
+    <p>Search a customer and delete their record</p>
+  </div>
+
+  <!-- SEARCH SECTION -->
+  <div class="search-section">
+    <h3>Step 1: Search Customer</h3>
+    <div class="search-row">
+      <div class="search-group">
+        <label for="searchSSN">Enter Customer SSN ID</label>
+        <input 
+          type="text" 
+          id="searchSSN" 
+          placeholder="Enter SSN ID to search"
+          maxlength="20"
+        >
+      </div>
+      <button class="search-btn" onclick="searchCustomer()">Search</button>
+    </div>
+    <div id="searchAlert" class="alert"></div>
+  </div>
+
+  <!-- DELETE SECTION -->
+  <div class="delete-section" id="deleteSection">
+    <h3 style="color: #1e3c72; font-weight: 700; margin-bottom: 20px;">Step 2: Review Customer Details</h3>
+
+    <!-- CUSTOMER READ-ONLY DETAILS -->
+    <div class="customer-details">
+      <div class="detail-item">
+        <span class="detail-label">SSN ID</span>
+        <span class="detail-value" id="detailSSN"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Customer Name</span>
+        <span class="detail-value" id="detailName"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Account Number</span>
+        <span class="detail-value" id="detailAccount"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Email</span>
+        <span class="detail-value" id="detailEmail"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Contact Number</span>
+        <span class="detail-value" id="detailContact"></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Account Balance</span>
+        <span class="detail-value" id="detailBalance"></span>
+      </div>
+    </div>
+
+    <!-- WARNING SECTION -->
+    <div class="warning-section">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-text">
+        <strong>Warning:</strong> Deleting this customer record is permanent and cannot be undone. This will remove all associated data from the system. Please confirm this action carefully.
+      </div>
+    </div>
+
+    <div id="deleteAlert" class="alert"></div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="button-group">
+      <button class="delete-btn" onclick="confirmDelete()">Delete Customer</button>
+      <button class="cancel-btn" onclick="cancelDelete()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Load customers from localStorage
+function loadCustomers() {
+  return JSON.parse(localStorage.getItem('bankCustomers')) || [];
+}
+
+let currentCustomer = null;
+let allCustomers = [];
+
+// Search for customer
+function searchCustomer() {
+  const ssn = document.getElementById('searchSSN').value.trim().toUpperCase();
+  const searchAlert = document.getElementById('searchAlert');
+  
+  // Clear previous alerts and section
+  searchAlert.classList.remove('visible', 'success', 'error');
+  document.getElementById('deleteSection').classList.remove('visible');
+
+  if (!ssn) {
+    showAlert(searchAlert, 'error', 'Please enter SSN ID to search');
+    return;
+  }
+
+  // Load customers from localStorage
+  allCustomers = loadCustomers();
+  const customer = allCustomers.find(c => c.ssn.toUpperCase() === ssn);
+
+  // Check if customer exists
+  if (customer) {
+    currentCustomer = customer;
+    populateCustomerDetails(currentCustomer);
+    document.getElementById('deleteSection').classList.add('visible');
+    showAlert(searchAlert, 'success', 'Customer found! Review the details below before proceeding with deletion.');
+  } else {
+    document.getElementById('deleteSection').classList.remove('visible');
+    showAlert(searchAlert, 'error', 'Customer not found. Please check the SSN ID and try again.');
+  }
+}
+
+// Populate customer details
+function populateCustomerDetails(customer) {
+  document.getElementById('detailSSN').textContent = customer.ssn;
+  document.getElementById('detailName').textContent = customer.name;
+  document.getElementById('detailAccount').textContent = customer.accountNumber;
+  document.getElementById('detailEmail').textContent = customer.email;
+  document.getElementById('detailContact').textContent = customer.contact;
+  document.getElementById('detailBalance').textContent = '₹' + parseFloat(customer.balance).toLocaleString('en-IN', {minimumFractionDigits: 2});
+}
+
+// Confirm deletion
+function confirmDelete() {
+  if (!currentCustomer) {
+    return;
+  }
+
+  const deleteAlert = document.getElementById('deleteAlert');
+  
+  // Remove customer from localStorage
+  const customers = loadCustomers();
+  const filteredCustomers = customers.filter(c => c.ssn !== currentCustomer.ssn);
+  localStorage.setItem('bankCustomers', JSON.stringify(filteredCustomers));
+  
+  // Show success message
+  showAlert(deleteAlert, 'success', `✓ Customer "${currentCustomer.name}" (${currentCustomer.ssn}) has been successfully deleted from the system.`);
+  
+  // Hide delete buttons and details after a delay, then redirect
+  setTimeout(() => {
+    window.location.href = 'customer-list.html';
+  }, 2000);
+}
+
+// Cancel deletion
+function cancelDelete() {
+  document.getElementById('deleteSection').classList.remove('visible');
+  document.getElementById('searchSSN').value = '';
+  currentCustomer = null;
+  const searchAlert = document.getElementById('searchAlert');
+  searchAlert.classList.remove('visible', 'success', 'error');
+}
+
+// Show alert message
+function showAlert(alertElement, type, message) {
+  alertElement.textContent = message;
+  alertElement.classList.add('visible', type);
+}
+
+// Allow Enter key in search
+document.getElementById('searchSSN').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    searchCustomer();
+  }
+});
+</script>
+
+</body>
+</html>

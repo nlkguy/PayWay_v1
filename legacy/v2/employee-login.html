@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Login - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* LOGIN CONTAINER */
+.login-container {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 450px;
+  width: 100%;
+  margin-top: 80px;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-header h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.login-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* FORM GROUP */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+  background-color: #f8f9fa;
+}
+
+.form-group input::placeholder {
+  color: #999;
+}
+
+/* ERROR MESSAGE */
+.error-message {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.form-group.error input {
+  border-color: #e74c3c;
+}
+
+.form-group.error .error-message {
+  display: block;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+/* REGISTER LINK */
+.register-link {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.register-link p {
+  color: #666;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #2a5298;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #1e3c72;
+}
+
+/* POPUP/MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 40px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  color: #27ae60;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.modal-body {
+  text-align: center;
+  color: #27ae60;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.modal-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .login-container {
+    padding: 40px 25px;
+    margin-top: 100px;
+  }
+
+  .login-header h1 {
+    font-size: 24px;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .login-container {
+    padding: 30px 20px;
+    margin-top: 120px;
+  }
+
+  .login-header h1 {
+    font-size: 22px;
+  }
+
+  .modal-content {
+    padding: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="landing_page.html">Home</a>
+    <a href="misc/pricing.html">Pricing</a>
+    <a href="misc/about-us.html">About</a>
+    <a href="misc/contact-us.html">Contact</a>
+    <a href="misc/privacy-policy.html">Privacy</a>
+    <a href="misc/security-policy.html">Security</a>
+    <a href="misc/terms-of-service.html">Terms</a>
+  </div>
+  <a href="landing_page.html" class="back-btn">← Back</a>
+</div>
+
+<!-- LOGIN CONTAINER -->
+<div class="login-container">
+  <div class="login-header">
+    <h1>Employee Login</h1>
+    <p>Access your Employee Dashboard</p>
+  </div>
+
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="employeeId">Employee ID</label>
+      <input 
+        type="number" 
+        id="employeeId" 
+        name="employeeId"
+        placeholder="Enter your 7-digit Employee ID"
+        maxlength="7"
+        required
+      >
+      <div class="error-message">Employee ID must be 7-10 characters</div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        id="password" 
+        name="password"
+        placeholder="Enter your password"
+        maxlength="30"
+        required
+      >
+      <div class="error-message">Password must be provided</div>
+    </div>
+
+    <button type="submit" class="login-btn">Login</button>
+  </form>
+
+  <div class="register-link">
+    <p>Don't have an account? <a href="employee-register.html">Register here</a></p>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-icon">✓</div>
+      <h2>Login Successful!</h2>
+    </div>
+    <div class="modal-body">
+      Employee Login successful.
+    </div>
+    <button class="modal-button" onclick="redirectHome()">Continue to Home</button>
+  </div>
+</div>
+
+<script>
+// Form submission handler
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Get form values
+  const employeeId = document.getElementById('employeeId').value.trim();
+  const password = document.getElementById('password').value;
+
+  // Clear previous error states
+  clearErrors();
+
+  // Validate Employee ID
+  if (employeeId.length < 7 ) {
+    showError('employeeId', 'Employee ID must be 7 characters');
+    return;
+  }
+
+  // Validate Password
+  if (!password || password.length === 0) {
+    showError('password', 'Password is required');
+    return;
+  }
+
+  if (password.length > 30) {
+    showError('password', 'Password must not exceed 30 characters');
+    return;
+  }
+
+  // If validation passes, redirect directly to the dashboard (no modal)
+  // store the logged in employee id so other pages (dashboard) can show it
+  try { localStorage.setItem('employeeId', employeeId); } catch(e) { /* ignore storage errors */ }
+  window.location.href = 'dashboard.html';
+});
+
+// Show error message
+function showError(fieldId, message) {
+  const formGroup = document.getElementById(fieldId).closest('.form-group');
+  formGroup.classList.add('error');
+  formGroup.querySelector('.error-message').textContent = message;
+}
+
+// Clear all errors
+function clearErrors() {
+  document.querySelectorAll('.form-group').forEach(group => {
+    group.classList.remove('error');
+  });
+}
+
+// Show success modal
+function showSuccessModal() {
+  document.getElementById('successModal').style.display = 'block';
+}
+
+// Close modal and redirect
+function redirectHome() {
+  document.getElementById('successModal').style.display = 'none';
+  setTimeout(() => {
+    // After successful employee login, go to the employee dashboard
+    window.location.href = 'dashboard.html';
+  }, 300);
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('successModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// Real-time validation
+document.getElementById('employeeId').addEventListener('input', function(e) {
+  if (e.target.value.trim().length >= 7) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+
+document.getElementById('password').addEventListener('input', function(e) {
+  if (e.target.value.length > 0) {
+    e.target.closest('.form-group').classList.remove('error');
+  }
+});
+</script>
+
+</body>
+</html>
