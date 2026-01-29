@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* FORM CONTAINER */
+.form-container {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 950px;
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-header h1 {
+  color: #1e3c72;
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.form-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* FORM STYLING */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #1e3c72;
+  box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #999;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+  display: none;
+}
+
+.form-group.error input,
+.form-group.error select {
+  border-color: #e74c3c;
+}
+
+.form-group.error .error-message {
+  display: block;
+}
+
+/* FORM ACTIONS */
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.submit-btn,
+.reset-btn {
+  padding: 14px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(30, 60, 114, 0.4);
+}
+
+.reset-btn {
+  background: white;
+  color: #1e3c72;
+  border: 2px solid #1e3c72;
+}
+
+.reset-btn:hover {
+  background: #f8f9fa;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 40px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.modal-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.modal-header h2 {
+  color: #27ae60;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.modal-body {
+  text-align: center;
+  color: #27ae60;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.modal-details {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border-left: 4px solid #27ae60;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #1e3c72;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.modal-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .form-container {
+    padding: 30px;
+    margin-top: 120px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .form-container {
+    padding: 25px;
+    margin-top: 140px;
+  }
+
+  .form-header h1 {
+    font-size: 22px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .submit-btn,
+  .reset-btn {
+    width: 100%;
+  }
+
+  .modal-content {
+    padding: 25px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detail-value {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="account-list.html">Accounts</a>
+  </div>
+  <a href="account-list.html" class="back-btn">← Back</a>
+</div>
+
+<!-- FORM CONTAINER -->
+<div class="form-container">
+  <div class="form-header">
+    <h1>Create Account</h1>
+    <p>Open a new bank account for a customer</p>
+  </div>
+
+  <form id="accountForm">
+    <!-- Row 1: Customer and Account Type -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="customerId">Select Customer</label>
+        <select id="customerId" name="customerId" required>
+          <option value="">-- Choose a customer --</option>
+        </select>
+        <div class="error-message">Please select a customer</div>
+      </div>
+
+      <div class="form-group">
+        <label for="accountType">Account Type</label>
+        <select id="accountType" name="accountType" required>
+          <option value="">-- Choose account type --</option>
+          <option value="Savings">Savings Account</option>
+          <option value="Current">Current Account</option>
+          <option value="Money Market">Money Market Account</option>
+          <option value="Student">Student Account</option>
+        </select>
+        <div class="error-message">Account type is required</div>
+      </div>
+    </div>
+
+    <!-- Row 2: Initial Balance and Currency -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="balance">Initial Balance</label>
+        <input 
+          type="number" 
+          id="balance" 
+          name="balance"
+          placeholder="Enter initial balance"
+          step="0.01"
+          min="0"
+          required
+        >
+        <div class="error-message">Balance is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="currency">Currency</label>
+        <select id="currency" name="currency" required>
+          <option value="">-- Choose currency --</option>
+          <option value="INR" selected>INR (Indian Rupee)</option>
+          <option value="USD">USD (US Dollar)</option>
+          <option value="EUR">EUR (Euro)</option>
+          <option value="GBP">GBP (British Pound)</option>
+        </select>
+        <div class="error-message">Currency is required</div>
+      </div>
+    </div>
+
+    <!-- FORM ACTIONS -->
+    <div class="form-actions">
+      <button type="submit" class="submit-btn">Create Account</button>
+      <button type="reset" class="reset-btn">Clear</button>
+    </div>
+  </form>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-icon">✓</div>
+      <h2>Account Created!</h2>
+    </div>
+
+    <div class="modal-body">
+      Account has been successfully created in the system.
+    </div>
+
+    <div class="modal-details">
+      <div class="detail-row">
+        <span class="detail-label">Account Number</span>
+        <span class="detail-value" id="detailAccountNumber">-</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Account Type</span>
+        <span class="detail-value" id="detailAccountType">-</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Opening Balance</span>
+        <span class="detail-value" id="detailBalance">-</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Status</span>
+        <span class="detail-value" id="detailStatus">-</span>
+      </div>
+    </div>
+
+    <button class="modal-btn" onclick="redirectToList()">View Account List</button>
+  </div>
+</div>
+
+<script>
+// Auto-generate account number
+function generateAccountNumber() {
+  const timestamp = Date.now();
+  const random = Math.floor(Math.random() * 1000);
+  return 'ACC' + timestamp.toString().slice(-8) + random.toString().padStart(3, '0');
+}
+
+// Load customers on page load
+function loadCustomers() {
+  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [];
+  const customerSelect = document.getElementById('customerId');
+  
+  customerSelect.innerHTML = '<option value="">-- Choose a customer --</option>';
+  
+  customers.forEach(customer => {
+    const option = document.createElement('option');
+    option.value = customer.cust_id;
+    option.textContent = `${customer.name} (${customer.cust_id})`;
+    customerSelect.appendChild(option);
+  });
+}
+
+// Validate form
+function validateForm(formData) {
+  const errors = {};
+  
+  if (!formData.customerId.trim()) {
+    errors.customerId = 'Please select a customer';
+  }
+  
+  if (!formData.accountType.trim()) {
+    errors.accountType = 'Account type is required';
+  }
+  
+  if (!formData.balance || parseFloat(formData.balance) < 0) {
+    errors.balance = 'Balance must be a positive number';
+  }
+  
+  if (!formData.currency.trim()) {
+    errors.currency = 'Currency is required';
+  }
+  
+  return errors;
+}
+
+// Show validation errors
+function showErrors(errors) {
+  // Clear all previous errors
+  document.querySelectorAll('.form-group').forEach(group => {
+    group.classList.remove('error');
+  });
+  
+  // Show new errors
+  Object.keys(errors).forEach(fieldName => {
+    const field = document.getElementById(fieldName);
+    if (field) {
+      const formGroup = field.closest('.form-group');
+      if (formGroup) {
+        formGroup.classList.add('error');
+      }
+    }
+  });
+}
+
+// Clear errors
+function clearErrors() {
+  document.querySelectorAll('.form-group').forEach(group => {
+    group.classList.remove('error');
+  });
+}
+
+// Handle form submission
+document.getElementById('accountForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const formData = {
+    customerId: document.getElementById('customerId').value,
+    accountType: document.getElementById('accountType').value,
+    balance: document.getElementById('balance').value,
+    currency: document.getElementById('currency').value
+  };
+  
+  const errors = validateForm(formData);
+  
+  if (Object.keys(errors).length > 0) {
+    showErrors(errors);
+    return;
+  }
+  
+  clearErrors();
+  
+  // Create account object
+  const accountNumber = generateAccountNumber();
+  const account = {
+    accountNumber: accountNumber,
+    custId: formData.customerId,
+    accountType: formData.accountType,
+    balance: parseFloat(formData.balance),
+    currency: formData.currency,
+    status: 'Active',
+    createdAt: new Date().toISOString(),
+    createdDate: new Date().toLocaleDateString('en-IN')
+  };
+  
+  // Save to localStorage
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  accounts.push(account);
+  localStorage.setItem('accounts', JSON.stringify(accounts));
+  
+  // Show success modal
+  document.getElementById('detailAccountNumber').textContent = accountNumber;
+  document.getElementById('detailAccountType').textContent = formData.accountType;
+  document.getElementById('detailBalance').textContent = formData.currency + ' ' + parseFloat(formData.balance).toLocaleString('en-IN', {minimumFractionDigits: 2});
+  document.getElementById('detailStatus').textContent = 'Active';
+  
+  document.getElementById('successModal').style.display = 'block';
+});
+
+// Redirect to account list
+function redirectToList() {
+  window.location.href = 'account-list.html';
+}
+
+// Load customers on page load
+window.addEventListener('DOMContentLoaded', loadCustomers);
+</script>
+
+</body>
+</html>

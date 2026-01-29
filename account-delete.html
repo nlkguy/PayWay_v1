@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Delete Employee - PayWay Solutions</title>
+<title>Delete Account - PayWay Solutions</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -178,6 +178,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 25px;
+  margin-bottom: 25px;
 }
 
 .info-item {
@@ -461,16 +462,16 @@ body {
   <div class="logo">PayWay Solutions</div>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="employee-list.html">Employees</a>
+    <a href="account-list.html">Accounts</a>
   </div>
-  <a href="employee-list.html" class="back-btn">← Back</a>
+  <a href="account-list.html" class="back-btn">← Back</a>
 </div>
 
 <!-- CONTAINER -->
 <div class="container">
   <div class="page-header">
-    <h1>Delete Employee</h1>
-    <p>Permanently remove employee record</p>
+    <h1>Delete Account</h1>
+    <p>Permanently remove account record</p>
   </div>
 
   <!-- DELETE CARD -->
@@ -481,9 +482,9 @@ body {
   <!-- ERROR STATE -->
   <div id="errorState" class="error-state" style="display: none;">
     <div class="error-state-icon">🔍</div>
-    <h3>Employee Not Found</h3>
-    <p>The employee you're trying to delete doesn't exist or has been deleted.</p>
-    <a href="employee-list.html" class="action-btn btn-cancel" style="margin-top: 20px;">← Back to Employee List</a>
+    <h3>Account Not Found</h3>
+    <p>The account you're trying to delete doesn't exist or has been deleted.</p>
+    <a href="account-list.html" class="action-btn btn-cancel" style="margin-top: 20px;">← Back to Account List</a>
   </div>
 </div>
 
@@ -492,7 +493,7 @@ body {
   <div class="modal-content">
     <div class="modal-icon">⚠️</div>
     <h3 class="modal-title">Confirm Deletion</h3>
-    <p class="modal-text">Are you absolutely sure you want to delete this employee record? This action cannot be undone.</p>
+    <p class="modal-text">Are you absolutely sure you want to delete this account? This action cannot be undone.</p>
     <div class="modal-actions">
       <button class="modal-btn-confirm" onclick="confirmDelete()">Yes, Delete</button>
       <button class="modal-btn-cancel" onclick="closeModal()">Cancel</button>
@@ -501,82 +502,86 @@ body {
 </div>
 
 <script>
-let currentEmployeeId = null;
+let currentAccountNumber = null;
 
-// Get employee ID from URL query parameter
-function getEmployeeIdFromUrl() {
+// Get account number from URL query parameter
+function getAccountNumberFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get('id');
 }
 
-// Load employee data
-function loadEmployeeDelete() {
-  currentEmployeeId = getEmployeeIdFromUrl();
+// Load account data
+function loadAccountDelete() {
+  currentAccountNumber = getAccountNumberFromUrl();
   
-  if (!currentEmployeeId) {
+  if (!currentAccountNumber) {
     showError();
     return;
   }
 
-  const employees = JSON.parse(localStorage.getItem('employees')) || [];
-  const employee = employees.find(e => e.employeeId === currentEmployeeId);
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  const account = accounts.find(a => a.accountNumber === currentAccountNumber);
 
-  if (!employee) {
+  if (!account) {
     showError();
     return;
   }
 
-  displayDeleteCard(employee);
+  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [];
+  const customer = customers.find(c => c.cust_id === account.custId);
+
+  displayDeleteCard(account, customer);
 }
 
-// Display employee delete card
-function displayDeleteCard(employee) {
+// Display account delete card
+function displayDeleteCard(account, customer) {
   const deleteContainer = document.getElementById('deleteContainer');
+  const customerName = customer ? customer.name : 'Unknown Customer';
   
   deleteContainer.innerHTML = `
     <div class="delete-card">
       <div class="delete-header">
         <div class="delete-warning-icon">⚠️</div>
-        <h2 class="delete-warning-title">Delete Employee Record</h2>
-        <p class="delete-warning-text">This action will permanently remove ${employee.firstName} ${employee.lastName} from the system.</p>
+        <h2 class="delete-warning-title">Delete Account</h2>
+        <p class="delete-warning-text">This action will permanently remove account ${account.accountNumber} from the system.</p>
       </div>
 
       <div class="delete-content">
-        <!-- EMPLOYEE INFORMATION -->
+        <!-- ACCOUNT INFORMATION -->
         <div class="section">
-          <h3 class="section-title">Employee Details</h3>
+          <h3 class="section-title">Account Details</h3>
           <div class="info-grid">
             <div class="info-item">
-              <span class="info-label">First Name</span>
-              <span class="info-value">${employee.firstName}</span>
+              <span class="info-label">Account Number</span>
+              <span class="info-value">${account.accountNumber}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Last Name</span>
-              <span class="info-value">${employee.lastName}</span>
+              <span class="info-label">Account Type</span>
+              <span class="info-value">${account.accountType}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Email Address</span>
-              <span class="info-value">${employee.email}</span>
+              <span class="info-label">Current Balance</span>
+              <span class="info-value">${account.currency} ${parseFloat(account.balance).toLocaleString('en-IN', {minimumFractionDigits: 2})}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Contact Number</span>
-              <span class="info-value">${employee.contactNumber}</span>
+              <span class="info-label">Status</span>
+              <span class="info-value">${account.status}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Employee ID</span>
-              <span class="info-value">${employee.employeeId}</span>
+              <span class="info-label">Customer Name</span>
+              <span class="info-value">${customerName}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Employee Role</span>
-              <span class="info-value">${employee.emp_role || 'Not Assigned'}</span>
+              <span class="info-label">Created Date</span>
+              <span class="info-value">${account.createdDate}</span>
             </div>
           </div>
         </div>
 
         <!-- ACTION BUTTONS -->
         <div class="delete-actions">
-          <button onclick="openConfirmModal()" class="action-btn btn-confirm-delete">🗑️ Delete Employee</button>
-          <a href="employee-profile.html?id=${employee.employeeId}" class="action-btn btn-cancel">← Cancel</a>
+          <button onclick="openConfirmModal()" class="action-btn btn-confirm-delete">🗑️ Delete Account</button>
+          <a href="account-details.html?id=${account.accountNumber}" class="action-btn btn-cancel">← Cancel</a>
         </div>
       </div>
     </div>
@@ -603,16 +608,21 @@ function closeModal() {
 
 // Confirm deletion
 function confirmDelete() {
-  const employees = JSON.parse(localStorage.getItem('employees')) || [];
-  const updatedEmployees = employees.filter(e => e.employeeId !== currentEmployeeId);
-  localStorage.setItem('employees', JSON.stringify(updatedEmployees));
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  const updatedAccounts = accounts.filter(a => a.accountNumber !== currentAccountNumber);
+  localStorage.setItem('accounts', JSON.stringify(updatedAccounts));
   
-  // Redirect to employee list
-  window.location.href = 'employee-list.html';
+  // Also remove associated transactions
+  const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+  const updatedTransactions = transactions.filter(t => t.accountNumber !== currentAccountNumber);
+  localStorage.setItem('transactions', JSON.stringify(updatedTransactions));
+  
+  // Redirect to account list
+  window.location.href = 'account-list.html';
 }
 
 // Load on page load
-window.addEventListener('DOMContentLoaded', loadEmployeeDelete);
+window.addEventListener('DOMContentLoaded', loadAccountDelete);
 
 // Close modal when clicking outside
 document.addEventListener('click', function(event) {

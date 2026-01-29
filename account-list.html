@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account List - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* ACTION BAR */
+.action-bar {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.action-bar .search-input {
+  flex: 1;
+  min-width: 250px;
+}
+
+.action-bar .search-input input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.action-bar .search-input input:focus {
+  outline: none;
+  border-color: #1e3c72;
+  box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+}
+
+.create-btn {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* TABLE SECTION */
+.table-section {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  font-weight: 600;
+}
+
+th {
+  padding: 18px 20px;
+  text-align: left;
+  font-size: 14px;
+  border: none;
+}
+
+td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+}
+
+tbody tr {
+  transition: all 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.account-number {
+  font-weight: 600;
+  color: #1e3c72;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  text-align: center;
+}
+
+.status-active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-closed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ACTION LINKS */
+.action-links {
+  display: flex;
+  gap: 10px;
+}
+
+.action-link {
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.link-view {
+  background: #e3f2fd;
+  color: #1e3c72;
+}
+
+.link-view:hover {
+  background: #bbdefb;
+}
+
+.link-edit {
+  background: #fff3e0;
+  color: #e67e22;
+}
+
+.link-edit:hover {
+  background: #ffe0b2;
+}
+
+.link-delete {
+  background: #ffebee;
+  color: #e74c3c;
+}
+
+.link-delete:hover {
+  background: #ffcdd2;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 60px 40px;
+  color: #666;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.3;
+}
+
+.empty-state h3 {
+  color: #1e3c72;
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .container {
+    margin-top: 120px;
+  }
+
+  .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-bar .search-input {
+    min-width: 100%;
+  }
+
+  .create-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 12px 10px;
+  }
+
+  .action-links {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .action-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .container {
+    margin-top: 140px;
+  }
+
+  .page-header h1 {
+    font-size: 22px;
+  }
+
+  table {
+    font-size: 11px;
+  }
+
+  th, td {
+    padding: 10px 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="customer-list.html">Customers</a>
+  </div>
+  <a href="index.html" class="back-btn">← Back</a>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+  <div class="page-header">
+    <h1>Account List</h1>
+    <p>View and manage all customer accounts</p>
+  </div>
+
+  <!-- ACTION BAR -->
+  <div class="action-bar">
+    <div class="search-input">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Search by account number or customer..."
+        onkeyup="filterAccounts()"
+      >
+    </div>
+    <a href="account-create.html" class="create-btn">+ New Account</a>
+  </div>
+
+  <!-- TABLE SECTION -->
+  <div class="table-section">
+    <div id="tableContainer">
+      <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <h3>No Accounts Found</h3>
+        <p>Create a new account to get started</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let allAccounts = [];
+
+// Load and display accounts
+function loadAccounts() {
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [];
+  
+  allAccounts = accounts.map(account => {
+    const customer = customers.find(c => c.cust_id === account.custId);
+    return {
+      ...account,
+      customerName: customer ? customer.name : 'Unknown'
+    };
+  });
+  
+  displayAccounts(allAccounts);
+}
+
+// Display accounts in table
+function displayAccounts(accountsToDisplay) {
+  const tableContainer = document.getElementById('tableContainer');
+  
+  if (accountsToDisplay.length === 0) {
+    tableContainer.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <h3>No Accounts Found</h3>
+        <p>Create a new account to get started</p>
+      </div>
+    `;
+    return;
+  }
+  
+  const tableHtml = `
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Account Number</th>
+            <th>Customer</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+            <th>Status</th>
+            <th>Created Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${accountsToDisplay.map(account => `
+            <tr>
+              <td><span class="account-number">${account.accountNumber}</span></td>
+              <td>${account.customerName}</td>
+              <td>${account.accountType}</td>
+              <td>${account.currency} ${parseFloat(account.balance).toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+              <td>
+                <span class="status-badge status-${account.status.toLowerCase()}">
+                  ${account.status}
+                </span>
+              </td>
+              <td>${account.createdDate}</td>
+              <td>
+                <div class="action-links">
+                  <a href="account-details.html?id=${account.accountNumber}" class="action-link link-view">View</a>
+                  <a href="account-update.html?id=${account.accountNumber}" class="action-link link-edit">Edit</a>
+                  <a href="account-delete.html?id=${account.accountNumber}" class="action-link link-delete">Delete</a>
+                </div>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+  
+  tableContainer.innerHTML = tableHtml;
+}
+
+// Filter accounts by search
+function filterAccounts() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  
+  const filtered = allAccounts.filter(account => 
+    account.accountNumber.toLowerCase().includes(searchTerm) ||
+    account.customerName.toLowerCase().includes(searchTerm)
+  );
+  
+  displayAccounts(filtered);
+}
+
+// Load accounts on page load
+window.addEventListener('DOMContentLoaded', loadAccounts);
+</script>
+
+</body>
+</html>

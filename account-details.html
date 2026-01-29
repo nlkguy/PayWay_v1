@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Employee Profile - PayWay Solutions</title>
+<title>Account Details - PayWay Solutions</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -379,16 +379,16 @@ body {
   <div class="logo">PayWay Solutions</div>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="employee-list.html">Employees</a>
+    <a href="account-list.html">Accounts</a>
   </div>
-  <a href="employee-list.html" class="back-btn">← Back</a>
+  <a href="account-list.html" class="back-btn">← Back</a>
 </div>
 
 <!-- CONTAINER -->
 <div class="container">
   <div class="page-header">
-    <h1>Employee Profile</h1>
-    <p>Employee information and details</p>
+    <h1>Account Details</h1>
+    <p>View account information</p>
   </div>
 
   <!-- PROFILE CARD -->
@@ -399,95 +399,113 @@ body {
   <!-- ERROR STATE -->
   <div id="errorState" class="error-state" style="display: none;">
     <div class="error-state-icon">🔍</div>
-    <h3>Employee Not Found</h3>
-    <p>The employee profile you're looking for doesn't exist or has been deleted.</p>
-    <a href="employee-list.html" class="action-btn btn-back" style="margin-top: 20px;">← Back to Employee List</a>
+    <h3>Account Not Found</h3>
+    <p>The account you're looking for doesn't exist or has been deleted.</p>
+    <a href="account-list.html" class="action-btn btn-back" style="margin-top: 20px;">← Back to Account List</a>
   </div>
 </div>
 
 <script>
-// Get employee ID from URL query parameter
-function getEmployeeIdFromUrl() {
+// Get account number from URL query parameter
+function getAccountNumberFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return params.get('id');
 }
 
-// Load employee data
-function loadEmployeeProfile() {
-  const employeeId = getEmployeeIdFromUrl();
+// Load account data
+function loadAccountDetails() {
+  const accountNumber = getAccountNumberFromUrl();
   
-  if (!employeeId) {
+  if (!accountNumber) {
     showError();
     return;
   }
 
-  const employees = JSON.parse(localStorage.getItem('employees')) || [];
-  const employee = employees.find(e => e.employeeId === employeeId);
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  const account = accounts.find(a => a.accountNumber === accountNumber);
 
-  if (!employee) {
+  if (!account) {
     showError();
     return;
   }
 
-  displayProfile(employee);
+  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [];
+  const customer = customers.find(c => c.cust_id === account.custId);
+
+  displayProfile(account, customer);
 }
 
-// Display employee profile
-function displayProfile(employee) {
+// Display account profile
+function displayProfile(account, customer) {
   const profileContainer = document.getElementById('profileContainer');
+  const customerName = customer ? customer.name : 'Unknown Customer';
+  const customerEmail = customer ? customer.email : '-';
+  const customerPhone = customer ? customer.contact : '-';
   
   profileContainer.innerHTML = `
     <div class="profile-card">
       <div class="profile-header">
-        <div class="profile-avatar">👤</div>
-        <h2 class="profile-name">${employee.firstName} ${employee.lastName}</h2>
-        <p class="profile-id">${employee.employeeId}</p>
+        <div class="profile-avatar">🏦</div>
+        <h2 class="profile-name">${account.accountNumber}</h2>
+        <p class="profile-id">${account.accountType}</p>
       </div>
 
       <div class="profile-content">
-        <!-- PERSONAL INFORMATION -->
+        <!-- ACCOUNT INFORMATION -->
         <div class="section">
-          <h3 class="section-title">Personal Information</h3>
+          <h3 class="section-title">Account Information</h3>
           <div class="info-grid">
             <div class="info-item">
-              <span class="info-label">First Name</span>
-              <span class="info-value">${employee.firstName}</span>
+              <span class="info-label">Account Number</span>
+              <span class="info-value">${account.accountNumber}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Last Name</span>
-              <span class="info-value">${employee.lastName}</span>
+              <span class="info-label">Account Type</span>
+              <span class="info-value">${account.accountType}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Email Address</span>
-              <span class="info-value">${employee.email}</span>
+              <span class="info-label">Balance</span>
+              <span class="info-value">${account.currency} ${parseFloat(account.balance).toLocaleString('en-IN', {minimumFractionDigits: 2})}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Contact Number</span>
-              <span class="info-value">${employee.contactNumber}</span>
+              <span class="info-label">Currency</span>
+              <span class="info-value">${account.currency}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Status</span>
+              <span class="info-value">${account.status}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Created Date</span>
+              <span class="info-value">${account.createdDate}</span>
             </div>
           </div>
         </div>
 
-        <!-- EMPLOYMENT INFORMATION -->
+        <!-- CUSTOMER INFORMATION -->
         <div class="section">
-          <h3 class="section-title">Employment Information</h3>
+          <h3 class="section-title">Customer Information</h3>
           <div class="info-grid">
             <div class="info-item">
-              <span class="info-label">Employee ID</span>
-              <span class="info-value">${employee.employeeId}</span>
+              <span class="info-label">Customer Name</span>
+              <span class="info-value">${customerName}</span>
             </div>
             <div class="info-item">
-              <span class="info-label">Employee Role</span>
-              <span class="info-value">${employee.emp_role || 'Not Assigned'}</span>
+              <span class="info-label">Customer Email</span>
+              <span class="info-value">${customerEmail}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Contact Number</span>
+              <span class="info-value">${customerPhone}</span>
             </div>
           </div>
         </div>
 
         <!-- ACTION BUTTONS -->
         <div class="action-buttons">
-          <a href="employee-update.html?id=${employee.employeeId}" class="action-btn btn-edit">✎ Edit Profile</a>
-          <a href="employee-delete.html?id=${employee.employeeId}" class="action-btn btn-delete">🗑️ Delete Employee</a>
-          <a href="employee-list.html" class="action-btn btn-back">← Back</a>
+          <a href="account-update.html?id=${account.accountNumber}" class="action-btn btn-edit">✎ Edit Account</a>
+          <a href="account-delete.html?id=${account.accountNumber}" class="action-btn btn-delete">🗑️ Delete Account</a>
+          <a href="account-list.html" class="action-btn btn-back">← Back</a>
         </div>
       </div>
     </div>
@@ -502,8 +520,8 @@ function showError() {
   document.getElementById('errorState').style.display = 'block';
 }
 
-// Load profile on page load
-window.addEventListener('DOMContentLoaded', loadEmployeeProfile);
+// Load details on page load
+window.addEventListener('DOMContentLoaded', loadAccountDetails);
 </script>
 
 </body>

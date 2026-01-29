@@ -39,20 +39,6 @@ body {
   z-index: 1000;
 }
 
-.navbar_not_logged_in {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 18px 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
-}
-
 .logo {
   font-size: 26px;
   font-weight: 800;
@@ -338,41 +324,6 @@ body {
   margin-bottom: 30px;
 }
 
-.modal-details {
-  background: #f8f9fa;
-  padding: 25px;
-  border-radius: 10px;
-  margin-bottom: 25px;
-  border-left: 4px solid #27ae60;
-}
-
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.detail-row:last-child {
-  border-bottom: none;
-}
-
-.detail-label {
-  color: #1e3c72;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.detail-value {
-  color: #27ae60;
-  font-weight: 600;
-  font-size: 14px;
-  word-break: break-word;
-  max-width: 200px;
-  text-align: right;
-}
-
 .modal-button {
   width: 100%;
   padding: 12px;
@@ -426,10 +377,6 @@ body {
     width: 90%;
     padding: 30px;
   }
-
-  .detail-value {
-    max-width: 120px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -454,17 +401,6 @@ body {
   .modal-content {
     padding: 25px;
   }
-
-  .detail-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .detail-value {
-    max-width: 100%;
-    text-align: left;
-  }
 }
 </style>
 </head>
@@ -473,16 +409,6 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">FinCoreBMS</div>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="transaction-list.html">Transactions</a>
-    <a href="loan-request.html">Loans</a>
-  </div>
-  <a href="index.html" class="back-btn">← Back</a>
-</div>
-<div class="navbar_not_logged_in">
   <div class="logo">FinCoreBMS</div>
   <div class="nav-links">
     <a href="index.html">Home</a>
@@ -525,7 +451,6 @@ body {
         <option value="Clerk">Clerk</option>
       </select>
     </div>
-
     </div>
 
     <!-- First Name and Last Name -->
@@ -599,51 +524,6 @@ body {
       </div>
     </div>
 
-
-    <!-- Gender and date of birth , select dropdwon for gender and  date seelcted for dob-->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="emp_gender">Gender</label>
-        <select id="emp_gender" name="emp_gender" required>
-          <option value="">Select gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-          <option value="Prefer not to say">Prefer not to say</option>
-        </select>
-        <div class="error-message">Please select a gender</div>
-      </div>
-
-      <div class="form-group">
-        <label for="emp_dob">Date of Birth</label>
-        <input 
-          type="date" 
-          id="emp_dob" 
-          name="emp_dob"
-          placeholder="Select date of birth"
-          dateformat="dd-mm-yyyy"
-          required
-        >
-        <div class="error-message">Date of birth is required</div>
-      </div>
-    </div>
-
-    
-
-    <!-- Address -->
-    <div class="form-group">
-      <label for="address">Address</label>
-      <textarea 
-        id="address" 
-        name="address"
-        placeholder="Enter street, city details"
-        maxlength="100"
-        rows="3"
-        required
-      ></textarea>
-      <div class="error-message">Address is required (max 100 characters)</div>
-    </div>
-
     <!-- Contact Number -->
     <div class="form-group">
       <label for="contactNumber">Contact Number</label>
@@ -657,40 +537,6 @@ body {
       >
       <div class="error-message">Contact number must be 10 digits</div>
     </div>
-
-    <!-- Aadhar and PAN-->
-    <div class="form-row">
-      <div class="form-group">
-        <label for="emp_aadhaar">Aadhaar Number</label>
-        <input 
-          type="number" 
-          id="emp_aadhaar" 
-          name="emp_aadhaar"
-          placeholder="12 digits"
-          maxlength="12"
-          minlength="12"
-          required
-        >
-        <div class="error-message">12 digit Aadhaar number is required</div>
-      </div>
-
-      <div class="form-group">
-        <label for="emp_pan">PAN Number</label>
-        <input 
-          type="text" 
-          id="emp_pan" 
-          name="emp_pan"
-          placeholder="10 characters"
-          maxlength="10"
-          minlength="10"
-          nospecialcharacters="true"
-          required
-        >
-        <div class="error-message">10 character PAN number is required, Alphanumeric , no special characters</div>
-      </div>
-    </div>
-
-    
 
     <button type="submit" class="register-btn">Register</button>
   </form>
@@ -709,20 +555,6 @@ body {
     </div>
     <div class="modal-body">
       Employee Registration successful.
-    </div>
-    <div class="modal-details">
-      <div class="detail-row">
-        <span class="detail-label">Employee ID</span>
-        <span class="detail-value" id="modalEmployeeId"></span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Customer Name</span>
-        <span class="detail-value" id="modalCustomerName"></span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Email</span>
-        <span class="detail-value" id="modalEmail"></span>
-      </div>
     </div>
     <button class="modal-button" onclick="redirectHome()">Continue to Home</button>
   </div>
@@ -871,12 +703,6 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     isValid = false;
   }
 
-  // Validate Address
-  if (!address || address.length === 0 || address.length > 100) {
-    showError('address', 'Address is required (max 100 characters)');
-    isValid = false;
-  }
-
   // Validate Contact Number (exactly 10 digits)
   const phoneRegex = /^[0-9]{10}$/;
   if (!contactNumber || !phoneRegex.test(contactNumber)) {
@@ -884,43 +710,28 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     isValid = false;
   }
 
-  // Validate Gender
-  if (!gender || gender.trim() === '') {
-    showError('emp_gender', 'Please select a gender');
-    isValid = false;
-  }
-
-  // Validate DOB , error if age is less than 18
-  age = function(dob) {
-    const birthDate = new Date(dob);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
-  }
-  if (!empDob || age(empDob) < 18) {
-    showError('emp_dob', 'Date of birth is required and age must be at least 18 years');
-    isValid = false;
-  }
-  if(age(empDob) < 0){
-    showError('emp_dob', 'Wow !! who invented time travel ? Future date not allowed');
-    isValid = false;
-  }
-  if(age(empDob) > 100){
-    showError('emp_dob', 'Too old to work here ! Age must be less than 100 years');
-    isValid = false;
-  }
-
   // If validation passes, show success modal
   if (isValid) {
     const fullName = firstName + ' ' + lastName;
-    document.getElementById('modalEmployeeId').textContent = employeeId;
-    document.getElementById('modalCustomerName').textContent = fullName;
-    document.getElementById('modalEmail').textContent = email;
     showSuccessModal();
+    
+    // save employee data to localStorage
+    const emp_role = document.getElementById('employeeRole').value;
+    const employeeData = {
+      employeeId,
+      firstName,
+      lastName,
+      email,
+      contactNumber,
+      emp_role
+    };
+    try {
+      const existing = JSON.parse(localStorage.getItem('employees') || '[]');
+      existing.push(employeeData);
+      localStorage.setItem('employees', JSON.stringify(existing));
+    } catch (e) {
+      console.error('Failed to persist employee data to localStorage', e);
+    }
   }
 });
 
@@ -984,39 +795,10 @@ document.getElementById('confirmPassword').addEventListener('input', function(e)
   }
 });
 
-// Real-time validation for address
-document.getElementById('address').addEventListener('input', function(e) {
-  if (e.target.value.trim().length > 0) {
-    e.target.closest('.form-group').classList.remove('error');
-  }
-});
-
 // Real-time validation for contact number
 document.getElementById('contactNumber').addEventListener('input', function(e) {
   const phoneRegex = /^[0-9]{10}$/;
   if (phoneRegex.test(e.target.value)) {
-    e.target.closest('.form-group').classList.remove('error');
-  }
-});
-
-// Real-time validation for gender dropdown
-document.getElementById('emp_gender').addEventListener('change', function(e) {
-  if (e.target.value && e.target.value.trim() !== '') {
-    e.target.closest('.form-group').classList.remove('error');
-  }
-});
-
-// Real-time validation for DOB
-document.getElementById('emp_dob').addEventListener('input', function(e) {
-  if (e.target.value) {
-    e.target.closest('.form-group').classList.remove('error');
-  }
-});
-
-// validate PAN number to be alphanumeric only , NNNNN1111N - N for alphabets and 1 for digits
-document.getElementById('emp_pan').addEventListener('input', function(e) {
-  const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/i;
-  if (panRegex.test(e.target.value)) {
     e.target.closest('.form-group').classList.remove('error');
   }
 });

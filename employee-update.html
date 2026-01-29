@@ -415,16 +415,6 @@ button {
             <label for="phone">Phone Number</label>
             <input type="tel" id="phone" value="+1 (555) 123-4567" placeholder="Enter phone number">
           </div>
-
-          <div class="form-group">
-            <label for="dob">Date of Birth</label>
-            <input type="text" id="dob" value="January 15, 1990" placeholder="Enter date of birth">
-          </div>
-
-          <div class="form-group">
-            <label for="nationality">Nationality</label>
-            <input type="text" id="nationality" value="American" placeholder="Enter nationality">
-          </div>
         </div>
       </div>
 
@@ -439,34 +429,8 @@ button {
           </div>
 
           <div class="form-group">
-            <label for="department">Department *</label>
-            <select id="department" required>
-              <option selected>Operations</option>
-              <option>Human Resources</option>
-              <option>Finance</option>
-              <option>Information Technology</option>
-              <option>Marketing</option>
-            </select>
-          </div>
-
-          <div class="form-group">
             <label for="designation">Designation *</label>
             <input type="text" id="designation" value="Senior Officer" placeholder="Enter designation" required>
-          </div>
-
-          <div class="form-group">
-            <label for="reportingTo">Reporting Manager *</label>
-            <select id="reportingTo" required>
-              <option selected>Sarah Johnson</option>
-              <option>Emma Wilson</option>
-              <option>Christopher White</option>
-              <option>David Martinez</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="joinDate">Join Date *</label>
-            <input type="text" id="joinDate" value="March 10, 2023" placeholder="Enter join date" required>
           </div>
 
           <div class="form-group">
@@ -489,68 +453,6 @@ button {
           <div class="form-group full">
             <label for="address">Address</label>
             <input type="text" id="address" value="123 Main Street, New York, NY 10001" placeholder="Enter full address">
-          </div>
-
-          <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" id="city" value="New York" placeholder="Enter city">
-          </div>
-
-          <div class="form-group">
-            <label for="state">State</label>
-            <input type="text" id="state" value="New York" placeholder="Enter state">
-          </div>
-
-          <div class="form-group">
-            <label for="zipCode">Zip Code</label>
-            <input type="text" id="zipCode" value="10001" placeholder="Enter zip code">
-          </div>
-
-          <div class="form-group">
-            <label for="emergencyContact">Emergency Contact</label>
-            <input type="text" id="emergencyContact" value="Jane Doe (Sister)" placeholder="Enter emergency contact">
-          </div>
-
-          <div class="form-group">
-            <label for="emergencyPhone">Emergency Phone</label>
-            <input type="tel" id="emergencyPhone" value="+1 (555) 987-6543" placeholder="Enter emergency contact phone">
-          </div>
-        </div>
-      </div>
-
-      <!-- ROLES & PERMISSIONS -->
-      <div class="form-section">
-        <h3>Roles & Permissions</h3>
-        
-        <div class="form-grid">
-          <div class="form-group full">
-            <label>Assign Roles</label>
-            <div class="checkbox-group">
-              <div class="checkbox-item">
-                <input type="checkbox" id="roleView" checked>
-                <label for="roleView">View Customer Records</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="roleCreate" checked>
-                <label for="roleCreate">Create Customer Accounts</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="roleEdit" checked>
-                <label for="roleEdit">Edit Customer Information</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="roleDelete">
-                <label for="roleDelete">Delete Customer Records</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="roleLoan" checked>
-                <label for="roleLoan">Manage Loan Requests</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="roleTransaction" checked>
-                <label for="roleTransaction">Process Transactions</label>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -594,19 +496,9 @@ function resetForm() {
   document.getElementById('lastName').value = 'Doe';
   document.getElementById('email').value = 'john.doe@payway.com';
   document.getElementById('phone').value = '+1 (555) 123-4567';
-  document.getElementById('dob').value = 'January 15, 1990';
-  document.getElementById('nationality').value = 'American';
-  document.getElementById('department').value = 'Operations';
   document.getElementById('designation').value = 'Senior Officer';
-  document.getElementById('reportingTo').value = 'Sarah Johnson';
-  document.getElementById('joinDate').value = 'March 10, 2023';
   document.getElementById('status').value = 'Active';
   document.getElementById('address').value = '123 Main Street, New York, NY 10001';
-  document.getElementById('city').value = 'New York';
-  document.getElementById('state').value = 'New York';
-  document.getElementById('zipCode').value = '10001';
-  document.getElementById('emergencyContact').value = 'Jane Doe (Sister)';
-  document.getElementById('emergencyPhone').value = '+1 (555) 987-6543';
 }
 </script>
 

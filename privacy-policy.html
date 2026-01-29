@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy - PayWay Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 18px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #1e3c72;
+}
+
+.back-btn {
+  padding: 12px 28px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+}
+
+/* CONTAINER */
+.container {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+}
+
+/* PAGE HEADER */
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* CONTENT CARD */
+.content-card {
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.policy-section {
+  margin-bottom: 30px;
+}
+
+.policy-section:last-child {
+  margin-bottom: 0;
+}
+
+.policy-section h2 {
+  color: #1e3c72;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.policy-section h3 {
+  color: #2a5298;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.policy-section p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.policy-section ul {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-left: 20px;
+  margin-bottom: 12px;
+}
+
+.policy-section ul li {
+  margin-bottom: 8px;
+}
+
+.last-updated {
+  background: #f8f9fa;
+  border-left: 4px solid #1e3c72;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    gap: 15px;
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .container {
+    margin-top: 120px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .content-card {
+    padding: 25px;
+  }
+
+  .policy-section h2 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    justify-content: center;
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .container {
+    margin-top: 130px;
+  }
+
+  .page-header h1 {
+    font-size: 20px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .content-card {
+    padding: 20px;
+  }
+
+  .policy-section h2 {
+    font-size: 16px;
+  }
+
+  .policy-section p,
+  .policy-section ul {
+    font-size: 13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">PayWay Solutions</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="security-policy.html">Security</a>
+  </div>
+  <a href="index.html" class="back-btn">← Back</a>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+  <div class="page-header">
+    <h1>Privacy Policy</h1>
+    <p>How we protect your personal information</p>
+  </div>
+
+  <!-- CONTENT CARD -->
+  <div class="content-card">
+    <div class="last-updated">
+      📅 <strong>Last Updated:</strong> January 2024
+    </div>
+
+    <!-- INTRODUCTION -->
+    <div class="policy-section">
+      <h2>1. Introduction</h2>
+      <p>PayWay Solutions ("Company", "we", "us", "our") operates the PayWay Solutions website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy.</p>
+    </div>
+
+    <!-- INFORMATION COLLECTION -->
+    <div class="policy-section">
+      <h2>2. Information Collection and Use</h2>
+      <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
+      <h3>Types of Information Collected:</h3>
+      <ul>
+        <li><strong>Personal Data:</strong> Personal identification information including but not limited to name, email address, phone number, and address</li>
+        <li><strong>Financial Information:</strong> Banking account details and transaction history necessary for service provision</li>
+        <li><strong>Device Information:</strong> Device identifiers, IP address, browser type, and operating system</li>
+        <li><strong>Usage Data:</strong> Information about how you interact with our Service</li>
+      </ul>
+    </div>
+
+    <!-- USE OF DATA -->
+    <div class="policy-section">
+      <h2>3. Use of Data</h2>
+      <p>PayWay Solutions uses the collected data for various purposes:</p>
+      <ul>
+        <li>To provide and maintain our Service</li>
+        <li>To notify you about changes to our Service</li>
+        <li>To provide customer support and respond to your requests</li>
+        <li>To gather analysis or valuable information so that we can improve our Service</li>
+        <li>To monitor the usage of our Service</li>
+        <li>To detect, prevent and address technical issues and fraudulent activity</li>
+      </ul>
+    </div>
+
+    <!-- SECURITY OF DATA -->
+    <div class="policy-section">
+      <h2>4. Security of Data</h2>
+      <p>The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+      <p>We implement the following security measures:</p>
+      <ul>
+        <li>SSL/TLS encryption for all data in transit</li>
+        <li>Role-based access control for employee access</li>
+        <li>Regular security audits and updates</li>
+        <li>Secure password policies and multi-factor authentication</li>
+      </ul>
+    </div>
+
+    <!-- THIRD PARTY SERVICES -->
+    <div class="policy-section">
+      <h2>5. Third-Party Services</h2>
+      <p>Our Service may contain links to other sites that are not operated by us. This Privacy Policy does not apply to third-party websites and we are not responsible for their privacy practices. We encourage you to review the privacy policies of any third-party sites before providing your personal information.</p>
+    </div>
+
+    <!-- CHILDREN'S PRIVACY -->
+    <div class="policy-section">
+      <h2>6. Children's Privacy</h2>
+      <p>Our Service does not address anyone under the age of 18 ("Children"). We do not knowingly collect personally identifiable information from anyone under the age of 18. If you are a parent or guardian and you are aware that your child has provided us with Personal Data, please contact us immediately. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove such information and terminate the child's account.</p>
+    </div>
+
+    <!-- CHANGES TO POLICY -->
+    <div class="policy-section">
+      <h2>7. Changes to This Privacy Policy</h2>
+      <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date at the top of this Privacy Policy. Your continued use of the Service following the posting of revised Privacy Policy means that you accept and agree to the changes.</p>
+    </div>
+
+    <!-- YOUR RIGHTS -->
+    <div class="policy-section">
+      <h2>8. Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Correct inaccurate data</li>
+        <li>Request deletion of your data</li>
+        <li>Object to processing of your data</li>
+        <li>Request restriction of processing</li>
+        <li>Data portability</li>
+      </ul>
+      <p>To exercise any of these rights, please contact us at privacy@payway.com</p>
+    </div>
+
+    <!-- CONTACT US -->
+    <div class="policy-section">
+      <h2>9. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please contact us:</p>
+      <ul>
+        <li><strong>Email:</strong> privacy@payway.com</li>
+        <li><strong>Address:</strong> 123 Banking Street, Financial District, NY 10005</li>
+        <li><strong>Phone:</strong> +1 (234) 567-8900</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

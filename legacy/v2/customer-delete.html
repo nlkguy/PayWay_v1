@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Customer Deletion - PayWay Solutions</title>
+<title>Delete Customer - PayWay Solutions</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -18,9 +18,6 @@
 body {
   background: linear-gradient(135deg, #1e3c72, #2a5298);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 20px;
 }
 
@@ -83,222 +80,321 @@ body {
   box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
 }
 
-/* FORM CONTAINER */
-.form-container {
-  background: white;
-  padding: 50px;
-  border-radius: 15px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  max-width: 600px;
-  width: 100%;
-  margin-top: 80px;
-  margin-bottom: 40px;
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
 }
 
-.form-header {
+.page-header {
   text-align: center;
   margin-bottom: 40px;
+  color: white;
 }
 
-.form-header h1 {
+.page-header h1 {
   font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* DELETE CARD */
+.delete-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.delete-header {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  padding: 40px;
+  text-align: center;
+  border-bottom: 5px solid #a93226;
+}
+
+.delete-warning-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.delete-warning-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.delete-warning-text {
+  font-size: 15px;
+  opacity: 0.95;
+  line-height: 1.5;
+}
+
+/* DELETE CONTENT */
+.delete-content {
+  padding: 40px;
+}
+
+.section {
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.section-title {
+  font-size: 18px;
+  color: #1e3c72;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title:before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  border-radius: 2px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  color: #999;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  color: #1e3c72;
+  font-size: 16px;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+/* ACCOUNTS LIST */
+.accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.account-item {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.account-item:hover {
+  background: #f0f1f3;
+  border-color: #1e3c72;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.account-number {
+  font-weight: 600;
+  color: #1e3c72;
+  font-size: 15px;
+}
+
+.account-balance {
+  font-size: 13px;
+  color: #666;
+}
+
+.account-status {
+  font-weight: 600;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.account-status.active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.account-status.closed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.close-account-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-account-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+}
+
+.close-account-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ACTION BUTTONS */
+.delete-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 30px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.action-btn {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-confirm-delete {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.btn-confirm-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(231, 76, 60, 0.4);
+}
+
+.btn-confirm-delete:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  background: white;
+  color: #1e3c72;
+  border: 2px solid #1e3c72;
+  box-shadow: none;
+}
+
+.btn-cancel:hover {
+  background: #f8f9fa;
+}
+
+/* ERROR STATE */
+.error-state {
+  background: white;
+  border-radius: 15px;
+  padding: 60px 40px;
+  text-align: center;
+  color: #666;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.error-state h3 {
+  font-size: 24px;
   color: #1e3c72;
   margin-bottom: 10px;
   font-weight: 700;
 }
 
-.form-header p {
-  color: #666;
+.error-state p {
   font-size: 15px;
-}
-
-/* SEARCH SECTION */
-.search-section {
-  margin-bottom: 35px;
-  padding-bottom: 30px;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-.search-section h3 {
-  color: #1e3c72;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-.search-row {
-  display: flex;
-  gap: 15px;
-  align-items: flex-end;
-}
-
-.search-group {
-  flex: 1;
-}
-
-.search-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #1e3c72;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.search-group input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 15px;
-  font-family: 'Poppins', sans-serif;
-  transition: all 0.3s ease;
-}
-
-.search-group input:focus {
-  outline: none;
-  border-color: #2a5298;
-  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
-}
-
-.search-btn {
-  padding: 12px 35px;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
-}
-
-.search-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
-}
-
-/* DELETE SECTION */
-.delete-section {
-  display: none;
-}
-
-.delete-section.visible {
-  display: block;
-}
-
-/* CUSTOMER DETAILS BOX */
-.customer-details {
-  background: #f8f9fa;
-  padding: 25px;
-  border-radius: 10px;
-  margin-bottom: 30px;
-  border-left: 4px solid #2a5298;
-}
-
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.detail-item:last-child {
-  border-bottom: none;
-}
-
-.detail-label {
-  color: #1e3c72;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.detail-value {
-  color: #555;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-/* WARNING SECTION */
-.warning-section {
-  background: #fff3cd;
-  border: 2px solid #ffc107;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 25px 0;
-}
-
-.warning-icon {
-  display: inline-block;
-  font-size: 24px;
-  margin-right: 10px;
-}
-
-.warning-text {
-  color: #856404;
-  font-weight: 500;
-  line-height: 1.6;
-}
-
-/* CONFIRMATION BUTTONS */
-.button-group {
-  display: flex;
-  gap: 15px;
-  margin-top: 25px;
-}
-
-.delete-btn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-}
-
-.delete-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(231, 76, 60, 0.4);
-}
-
-.cancel-btn {
-  flex: 1;
-  padding: 14px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  background: white;
-  color: #555;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.cancel-btn:hover {
-  border-color: #1e3c72;
-  color: #1e3c72;
-  background: #f8f9fa;
-}
-
-/* ALERT MESSAGE */
-.alert {
-  padding: 15px 20px;
-  border-radius: 8px;
   margin-bottom: 20px;
-  font-weight: 500;
-  display: none;
-  animation: slideIn 0.3s ease;
 }
 
-@keyframes slideIn {
+.error-state-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  opacity: 0.3;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
   from {
-    transform: translateY(-10px);
+    transform: translateY(50px);
     opacity: 0;
   }
   to {
@@ -307,20 +403,59 @@ body {
   }
 }
 
-.alert.visible {
-  display: block;
+.modal-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
 }
 
-.alert.error {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+.modal-title {
+  font-size: 22px;
+  color: #1e3c72;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-.alert.success {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+.modal-text {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-btn-confirm {
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+}
+
+.modal-btn-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.modal-btn-cancel {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.modal-btn-cancel:hover {
+  background: #e0e0e0;
 }
 
 /* RESPONSIVE */
@@ -337,39 +472,39 @@ body {
     margin-top: 15px;
   }
 
-  .logo {
+  .container {
+    margin-top: 120px;
+  }
+
+  .delete-header {
+    padding: 30px;
+  }
+
+  .delete-warning-title {
     font-size: 22px;
   }
 
-  .form-container {
-    padding: 40px 25px;
-    margin-top: 100px;
+  .delete-content {
+    padding: 30px;
   }
 
-  .form-header h1 {
-    font-size: 24px;
+  .info-grid {
+    grid-template-columns: 1fr;
   }
 
-  .search-row {
-    flex-direction: column;
-  }
-
-  .search-row .search-group {
-    width: 100%;
-  }
-
-  .search-btn {
-    width: 100%;
-  }
-
-  .button-group {
-    flex-direction: column;
-  }
-
-  .detail-item {
+  .account-item {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 15px;
+  }
+
+  .delete-actions {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -383,18 +518,28 @@ body {
     width: 100%;
   }
 
-  .form-container {
-    padding: 30px 20px;
-    margin-top: 120px;
+  .container {
+    margin-top: 140px;
   }
 
-  .form-header h1 {
+  .page-header h1 {
     font-size: 22px;
   }
 
-  .warning-icon {
-    display: block;
-    margin-bottom: 10px;
+  .delete-header {
+    padding: 25px;
+  }
+
+  .delete-content {
+    padding: 25px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .info-value {
+    font-size: 14px;
   }
 }
 </style>
@@ -406,179 +551,250 @@ body {
 <div class="navbar">
   <div class="logo">PayWay Solutions</div>
   <div class="nav-links">
-    <a href="landing_page.html">Home</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="transaction-list.html">Transactions</a>
-    <a href="loan-request.html">Loans</a>
+    <a href="index.html">Home</a>
+    <a href="customer-list.html">Customers</a>
   </div>
-  <a href="dashboard.html" class="back-btn">← Back</a>
+  <a href="customer-list.html" class="back-btn">← Back</a>
 </div>
 
-<!-- FORM CONTAINER -->
-<div class="form-container">
-  <div class="form-header">
-    <h1>Customer Deletion</h1>
-    <p>Search a customer and delete their record</p>
+<!-- CONTAINER -->
+<div class="container">
+  <div class="page-header">
+    <h1>Delete Customer</h1>
+    <p>Permanently remove customer record</p>
   </div>
 
-  <!-- SEARCH SECTION -->
-  <div class="search-section">
-    <h3>Step 1: Search Customer</h3>
-    <div class="search-row">
-      <div class="search-group">
-        <label for="searchSSN">Enter Customer SSN ID</label>
-        <input 
-          type="text" 
-          id="searchSSN" 
-          placeholder="Enter SSN ID to search"
-          maxlength="20"
-        >
-      </div>
-      <button class="search-btn" onclick="searchCustomer()">Search</button>
-    </div>
-    <div id="searchAlert" class="alert"></div>
+  <!-- DELETE CARD -->
+  <div id="deleteContainer">
+    <!-- Delete card will be loaded here -->
   </div>
 
-  <!-- DELETE SECTION -->
-  <div class="delete-section" id="deleteSection">
-    <h3 style="color: #1e3c72; font-weight: 700; margin-bottom: 20px;">Step 2: Review Customer Details</h3>
+  <!-- ERROR STATE -->
+  <div id="errorState" class="error-state" style="display: none;">
+    <div class="error-state-icon">🔍</div>
+    <h3>Customer Not Found</h3>
+    <p>The customer you're trying to delete doesn't exist or has been deleted.</p>
+    <a href="customer-list.html" class="action-btn btn-cancel" style="margin-top: 20px;">← Back to Customer List</a>
+  </div>
+</div>
 
-    <!-- CUSTOMER READ-ONLY DETAILS -->
-    <div class="customer-details">
-      <div class="detail-item">
-        <span class="detail-label">SSN ID</span>
-        <span class="detail-value" id="detailSSN"></span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Customer Name</span>
-        <span class="detail-value" id="detailName"></span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Account Number</span>
-        <span class="detail-value" id="detailAccount"></span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Email</span>
-        <span class="detail-value" id="detailEmail"></span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Contact Number</span>
-        <span class="detail-value" id="detailContact"></span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Account Balance</span>
-        <span class="detail-value" id="detailBalance"></span>
-      </div>
+<!-- CONFIRMATION MODAL -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-icon">⚠️</div>
+    <h3 class="modal-title">Confirm Deletion</h3>
+    <p class="modal-text">Are you absolutely sure you want to delete this customer record? This action cannot be undone and will remove all associated accounts and data.</p>
+    <div class="modal-actions">
+      <button class="modal-btn-confirm" onclick="confirmDelete()">Yes, Delete</button>
+      <button class="modal-btn-cancel" onclick="closeModal()">Cancel</button>
     </div>
+  </div>
+</div>
 
-    <!-- WARNING SECTION -->
-    <div class="warning-section">
-      <div class="warning-icon">⚠️</div>
-      <div class="warning-text">
-        <strong>Warning:</strong> Deleting this customer record is permanent and cannot be undone. This will remove all associated data from the system. Please confirm this action carefully.
-      </div>
-    </div>
-
-    <div id="deleteAlert" class="alert"></div>
-
-    <!-- ACTION BUTTONS -->
-    <div class="button-group">
-      <button class="delete-btn" onclick="confirmDelete()">Delete Customer</button>
-      <button class="cancel-btn" onclick="cancelDelete()">Cancel</button>
+<!-- ACCOUNT CLOSING MODAL -->
+<div id="accountClosingModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-icon">📋</div>
+    <h3 class="modal-title">Account Closing Report</h3>
+    <p class="modal-text">Account <span id="closingAccountNumber"></span> has been successfully closed.</p>
+    <div class="modal-actions">
+      <button class="modal-btn-confirm" onclick="closeAccountClosingModal()">OK</button>
     </div>
   </div>
 </div>
 
 <script>
-// Load customers from localStorage
-function loadCustomers() {
-  return JSON.parse(localStorage.getItem('bankCustomers')) || [];
+let currentCustomerId = null;
+let accountsToClose = [];
+
+// Get customer ID from URL query parameter
+function getCustomerIdFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('id');
 }
 
-let currentCustomer = null;
-let allCustomers = [];
-
-// Search for customer
-function searchCustomer() {
-  const ssn = document.getElementById('searchSSN').value.trim().toUpperCase();
-  const searchAlert = document.getElementById('searchAlert');
+// Load customer data
+function loadCustomerDelete() {
+  currentCustomerId = getCustomerIdFromUrl();
   
-  // Clear previous alerts and section
-  searchAlert.classList.remove('visible', 'success', 'error');
-  document.getElementById('deleteSection').classList.remove('visible');
-
-  if (!ssn) {
-    showAlert(searchAlert, 'error', 'Please enter SSN ID to search');
+  if (!currentCustomerId) {
+    showError();
     return;
   }
 
-  // Load customers from localStorage
-  allCustomers = loadCustomers();
-  const customer = allCustomers.find(c => c.ssn.toUpperCase() === ssn);
+  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [];
+  const customer = customers.find(c => c.cust_id === currentCustomerId);
 
-  // Check if customer exists
-  if (customer) {
-    currentCustomer = customer;
-    populateCustomerDetails(currentCustomer);
-    document.getElementById('deleteSection').classList.add('visible');
-    showAlert(searchAlert, 'success', 'Customer found! Review the details below before proceeding with deletion.');
-  } else {
-    document.getElementById('deleteSection').classList.remove('visible');
-    showAlert(searchAlert, 'error', 'Customer not found. Please check the SSN ID and try again.');
+  if (!customer) {
+    showError();
+    return;
+  }
+
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  const customerAccounts = accounts.filter(a => a.custId === currentCustomerId);
+
+  displayDeleteCard(customer, customerAccounts);
+}
+
+// Display customer delete card with accounts
+function displayDeleteCard(customer, accounts) {
+  const deleteContainer = document.getElementById('deleteContainer');
+  accountsToClose = accounts;
+
+  let accountsHtml = '';
+  if (accounts.length > 0) {
+    accountsHtml = '<div class="accounts-list">';
+    accounts.forEach(account => {
+      const isActive = account.status === 'Active';
+      accountsHtml += `
+        <div class="account-item">
+          <div class="account-info">
+            <div class="account-number">Account: ${account.accountNumber}</div>
+            <div class="account-balance">Balance: ₹${parseFloat(account.balance).toLocaleString('en-IN', {minimumFractionDigits: 2})}</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="account-status ${isActive ? 'active' : 'closed'}">${account.status}</span>
+            <button class="close-account-btn" onclick="closeAccount('${account.accountNumber}')" ${!isActive ? 'disabled' : ''}>
+              ${isActive ? 'Close Account' : 'Already Closed'}
+            </button>
+          </div>
+        </div>
+      `;
+    });
+    accountsHtml += '</div>';
+  }
+
+  deleteContainer.innerHTML = `
+    <div class="delete-card">
+      <div class="delete-header">
+        <div class="delete-warning-icon">⚠️</div>
+        <h2 class="delete-warning-title">Delete Customer Record</h2>
+        <p class="delete-warning-text">This action will permanently remove ${customer.name} from the system.</p>
+      </div>
+
+      <div class="delete-content">
+        <!-- CUSTOMER INFORMATION -->
+        <div class="section">
+          <h3 class="section-title">Customer Details</h3>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Customer Name</span>
+              <span class="info-value">${customer.name}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Customer ID</span>
+              <span class="info-value">${customer.cust_id}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Email Address</span>
+              <span class="info-value">${customer.email}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Contact Number</span>
+              <span class="info-value">${customer.contact}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCOUNTS SECTION -->
+        ${accounts.length > 0 ? `
+        <div class="section">
+          <h3 class="section-title">Associated Accounts</h3>
+          ${accountsHtml}
+          <p style="font-size: 13px; color: #999; margin-top: 15px; text-align: center;">Close all accounts before deleting customer record</p>
+        </div>
+        ` : ''}
+
+        <!-- ACTION BUTTONS -->
+        <div class="delete-actions">
+          <button onclick="openConfirmModal()" class="action-btn btn-confirm-delete" id="deleteBtn" ${accounts.some(a => a.status === 'Active') ? 'disabled' : ''}>
+            🗑️ Delete Customer
+          </button>
+          <a href="customer-profile.html?id=${customer.cust_id}" class="action-btn btn-cancel">← Cancel</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('errorState').style.display = 'none';
+}
+
+// Show error state
+function showError() {
+  document.getElementById('deleteContainer').style.display = 'none';
+  document.getElementById('errorState').style.display = 'block';
+}
+
+// Close account
+function closeAccount(accountNumber) {
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  const account = accounts.find(a => a.accountNumber === accountNumber);
+  
+  if (account) {
+    account.status = 'Closed';
+    localStorage.setItem('accounts', JSON.stringify(accounts));
+    
+    // Show account closing modal
+    document.getElementById('closingAccountNumber').textContent = accountNumber;
+    document.getElementById('accountClosingModal').classList.add('active');
+    
+    // Reload the page after modal closes
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
 }
 
-// Populate customer details
-function populateCustomerDetails(customer) {
-  document.getElementById('detailSSN').textContent = customer.ssn;
-  document.getElementById('detailName').textContent = customer.name;
-  document.getElementById('detailAccount').textContent = customer.accountNumber;
-  document.getElementById('detailEmail').textContent = customer.email;
-  document.getElementById('detailContact').textContent = customer.contact;
-  document.getElementById('detailBalance').textContent = '₹' + parseFloat(customer.balance).toLocaleString('en-IN', {minimumFractionDigits: 2});
+// Close account closing modal
+function closeAccountClosingModal() {
+  document.getElementById('accountClosingModal').classList.remove('active');
+}
+
+// Open confirmation modal
+function openConfirmModal() {
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  const activeAccounts = accounts.filter(a => a.custId === currentCustomerId && a.status === 'Active');
+  
+  if (activeAccounts.length > 0) {
+    alert('Please close all accounts before deleting the customer record.');
+    return;
+  }
+  
+  document.getElementById('confirmModal').classList.add('active');
+}
+
+// Close modal
+function closeModal() {
+  document.getElementById('confirmModal').classList.remove('active');
 }
 
 // Confirm deletion
 function confirmDelete() {
-  if (!currentCustomer) {
-    return;
+  const customers = JSON.parse(localStorage.getItem('bankCustomers')) || [];
+  const updatedCustomers = customers.filter(c => c.cust_id !== currentCustomerId);
+  localStorage.setItem('bankCustomers', JSON.stringify(updatedCustomers));
+  
+  // Also remove associated accounts
+  const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  const updatedAccounts = accounts.filter(a => a.custId !== currentCustomerId);
+  localStorage.setItem('accounts', JSON.stringify(updatedAccounts));
+  
+  // Redirect to customer list
+  window.location.href = 'customer-list.html';
+}
+
+// Load on page load
+window.addEventListener('DOMContentLoaded', loadCustomerDelete);
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+  const modal = document.getElementById('confirmModal');
+  const accountModal = document.getElementById('accountClosingModal');
+  if (event.target === modal) {
+    closeModal();
   }
-
-  const deleteAlert = document.getElementById('deleteAlert');
-  
-  // Remove customer from localStorage
-  const customers = loadCustomers();
-  const filteredCustomers = customers.filter(c => c.ssn !== currentCustomer.ssn);
-  localStorage.setItem('bankCustomers', JSON.stringify(filteredCustomers));
-  
-  // Show success message
-  showAlert(deleteAlert, 'success', `✓ Customer "${currentCustomer.name}" (${currentCustomer.ssn}) has been successfully deleted from the system.`);
-  
-  // Hide delete buttons and details after a delay, then redirect
-  setTimeout(() => {
-    window.location.href = 'customer-list.html';
-  }, 2000);
-}
-
-// Cancel deletion
-function cancelDelete() {
-  document.getElementById('deleteSection').classList.remove('visible');
-  document.getElementById('searchSSN').value = '';
-  currentCustomer = null;
-  const searchAlert = document.getElementById('searchAlert');
-  searchAlert.classList.remove('visible', 'success', 'error');
-}
-
-// Show alert message
-function showAlert(alertElement, type, message) {
-  alertElement.textContent = message;
-  alertElement.classList.add('visible', type);
-}
-
-// Allow Enter key in search
-document.getElementById('searchSSN').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    searchCustomer();
+  if (event.target === accountModal) {
+    closeAccountClosingModal();
   }
 });
 </script>
